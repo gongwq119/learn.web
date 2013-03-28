@@ -13,23 +13,27 @@ class DataAccess {
 	 * 
 	 */
 	function __construct($host, $user, $pwd, $dbname) {
-		$this->db = mysql_pconnect($host, $user, $pwd);
-		mysql_select_db($dbname);
+		$this->db = new mysqli($host, $user, $pwd, $dbname);
 	}
 	
 	/**
 	 * Execute the sql statment of fetching.
 	 * @param unknown $sql_sta
 	 */
-	function fetch($sql_sta) {
-		$this->query = mysql_unbuffered_query($sql_sta, $this->db);
+	private function fetch($sql_sta) {
+		$this->db->select_db('users');
+// 		$this->query = $this->db->query($this->db, $query);
+		return $this->db->query($sql_sta);
 	}
 	
-	function getRow() {
-		if ($row = mysql_fetch_array($this->query, MYSQL_ASSOC)) {
-			return $row;
-		} else {
-			return false;
-		}
+	function getRow($sql_sta) {
+// 		if ($row = mysql_fetch_array($this->query, MYSQL_ASSOC)) {
+// 			return $row;
+// 		} else {
+// 			return false;
+// 		}
+		$result = $this->fetch($sql_sta);
+		$num_results = $result->num_rows;
+		echo $num_results;
 	}
 }

@@ -1,12 +1,9 @@
 <?php
 require '../controller/demoContr.php';
-require '../controller/simpleContr.php';
-require '../db/DataAccess.ph';
-echo '<h1>hello world<h1>';
-echo '<br/>';
-echo '<br/>';
+require '../db/DataAccess.php';
+echo 'hello world';
 echo '<br/>';
 // $demoController = new demoContr();
 // $demoController->index();
-$dbInstance = new DataAccess($host, $user, $pwd, $dbname)
-$controller = new simpleContr($dao);
+$db = new DataAccess('localhost', 'root', '1', 'php');
+$db->getRow("select * from `php`.`users`");
