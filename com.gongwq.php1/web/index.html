@@ -7,9 +7,28 @@
 <script language="JavaScript" src="/js/jquery-1.9.1.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+	
+	//Get size of images, how many there are, then determin the size of the image reel.
+	var imageWidth = $(".active_frame").width();
+	var imageSum = $(".active_frame img").size();
+	var imageReelWidth = imageWidth * imageSum;
+	
+	$(".active_frame").css({'width' : imageReelWidth});
+	
+	//Paging + Slider Function
+	rotate = function(){	
+		var triggerID = 1; //Get number of times to slide
+		var image_reelPosition = triggerID * imageWidth; //Determines the distance the image reel needs to slide
+	
+		//Slider Animation
+		$(".active_frame").animate({ 
+			left: -image_reelPosition
+		}, 500 );
+	}; 
+
 	$("div.header").css("background-color", "red");
   	$("button").click(function() {
-  		$(this).hide();
+  		rotate();
 	});
 });
 </script>
@@ -45,7 +64,14 @@ $(document).ready(function() {
 		<!-- Begin of the container -->
 		<div class="container">
 			<div class="active_frame">
-				<img alt="1" src="image/1.jpg">
+				<a href="#"><img alt="" src="image/1.jpg"></a>
+				<a href="#"><img alt="" src="image/2.jpg"></a>
+				<a href="#"><img alt="" src="image/3.jpg"></a>
+			</div>
+			<div class="active_bottons">
+				<a href="#"></a>
+				<a href="#"></a>
+				<a href="#"></a>
 			</div>
 		</div>
 		<!-- Begin of the container -->
