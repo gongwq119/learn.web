@@ -52,15 +52,24 @@ a.menu {
 }
 a.menu:hover { text-decoration:none;color: #696969
 }
-.active_frame {
+.window{
 	height:531px;	
 	width: 974px;
-	overflow: hidden; /*--Hides anything outside of the set width/height--*/
+	overflow: hidden;
 	position: relative;
+}
+.active_frame {
+	position: absolute;
 	padding: 0px;
 	margin: 0px;
 }
 .active_frame img {
 	float: left;
+}
+.active_bottons {
+	position: relative;
+	top: 20;
+	left: 20;
+	z-index: 100;
 }
 	
