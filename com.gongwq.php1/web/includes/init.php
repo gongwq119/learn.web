@@ -15,7 +15,7 @@ if (!defined('FROM_INDEX'))
 }
 
 //确定根目录
-define('ROOT', str_replace($search, $replace, $subject))
+define('ROOT', str_replace($search, $replace, $subject));
 
 //初始化PHP engine 变量
 @ini_set('memory_limit',          '64M');
@@ -36,6 +36,14 @@ define('ROOT', str_replace($search, $replace, $subject))
 //加载系统配置
 
 //初始化smarty对象
+require('/opt/lampp/lib/php/Smarty/Smarty.class.php');
+$smarty = new Smarty();
 
+$smarty->setTemplateDir('./smarty/templates');
+$smarty->setCompileDir('./smarty/templates_c');
+$smarty->setCacheDir('./smarty/cache');
+$smarty->setConfigDir('./smarty/configs');
+$smarty->left_delimiter = '<{';
+$smarty->right_delimiter = '}>';
 
 ?>
