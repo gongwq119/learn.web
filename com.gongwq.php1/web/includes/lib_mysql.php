@@ -4,41 +4,47 @@
  * mysql 连接
  * 
  */
-
-if (!defined('FROM_INDEX'))
-{
-	die('Hacking attempt');
-}
-
 class lib_mysql {
+
+	private $db;
+	private $query;
 	
-	var $settings   = array();
-	
-	function __construct($dbhost, $dbuser, $dbpw, $dbname = '', $charset = 'gbk', $pconnect = 0, $quiet = 0) {
-		;
+	/**
+	 * The DataAccess construtor
+	 * @param $host the db server address
+	 * @param $user the user name
+	 * @param $pwd the password
+	 * @param $dbname the db name
+	 *
+	 */
+	function __construct($host, $user, $pwd, $dbname) {
+		$this->db = new mysqli($host, $user, $pwd, $dbname);
 	}
 	
-	function lib_mysql($dbhost, $dbuser, $dbpw, $dbname = '', $charset = 'gbk', $pconnect = 0, $quiet = 0) {
-		if (defined('ROOT_PATH') && !$this->root_path)
-		{
-			$this->root_path = ROOT_PATH;
-		}
-		
-		if ($quiet)
-		{
-			$this->connect($dbhost, $dbuser, $dbpw, $dbname, $charset, $pconnect, $quiet);
-		}
-		else
-		{
-			$this->settings = array(
-					'dbhost'   => $dbhost,
-					'dbuser'   => $dbuser,
-					'dbpw'     => $dbpw,
-					'dbname'   => $dbname,
-					'charset'  => $charset,
-					'pconnect' => $pconnect
-			);
-		}
+	/**
+	 * Execute the sql statment of fetching.
+	 * @param unknown $sql_sta
+	 */
+	private function execute($sql_sta) {
+		$this->db->select_db('mydb');
+		// 		$this->query = $this->db->query($this->db, $query);
+		return $this->db->query($sql_sta);
+	}
+	
+	function getRowNumber($sql_sta) {
+		// 		if ($row = mysql_fetch_array($this->query, MYSQL_ASSOC)) {
+		// 			return $row;
+		// 		} else {
+		// 			return false;
+		// 		}
+		$result = $this->execute($sql_sta);
+		$num_results = $result->num_rows;
+		echo $num_results;
+	}
+	
+	function getItem($item_id) {
+		$sql = 'SELECT * FROM mydb.items WHERE id=' . $item_id;
+		return $this->execute($sql);
 	}
 }
 

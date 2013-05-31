@@ -1,6 +1,5 @@
 <?php
 /*
- * 
  * 初始化平台
  * 1.加载库文件
  * 2.设定常量
@@ -9,13 +8,17 @@
  * 
  */
 
-if (!defined('FROM_INDEX'))
-{
-	die('Hacking attempt');
-}
+// if (!defined('FROM_INDEX'))
+// {
+// 	die('Hacking attempt');
+// }
 
 //确定根目录
-define('ROOT', str_replace($search, $replace, $subject));
+if (__FILE__ == '')
+{
+	die('Fatal error code: 0');
+}
+define('ROOT_PATH', str_replace('includes/init.php', '', str_replace('\\', '/', __FILE__)));
 
 //初始化PHP engine 变量
 @ini_set('memory_limit',          '64M');
@@ -26,6 +29,8 @@ define('ROOT', str_replace($search, $replace, $subject));
 @ini_set('display_errors',        1);
 
 //加载库文件
+require (ROOT_PATH . '/includes/lib_mysql.php');
+require ('/opt/lampp/lib/php/Smarty/Smarty.class.php');
 
 //创建log对象
 
@@ -35,8 +40,10 @@ define('ROOT', str_replace($search, $replace, $subject));
 
 //加载系统配置
 
+//配置数据库
+$db = new lib_mysql('localhost', 'root', 'passw0rd', 'mydb');
+
 //初始化smarty对象
-require('/opt/lampp/lib/php/Smarty/Smarty.class.php');
 $smarty = new Smarty();
 
 $smarty->setTemplateDir('./smarty/templates');
