@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Smarty</title>
+    <title>intems</title>
   </head>
   <body>
     Hello, <{$name}>!

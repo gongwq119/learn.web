@@ -11,11 +11,17 @@ require './includes/init.php';
 //URL参数id
 $item_id = isset($_REQUEST['id'])  ? intval($_REQUEST['id']) : 0;
 
+
 //read from db
 $result = $db->getItem($item_id);
 $rows = $result->fetch_assoc();
+
 //配置smarty,并输出
-$smarty->assgin('name', $item_id); 
+$smarty->assign('name', 'test'); 
+
+$smarty->display(ROOT_PATH . '/smarty/templates/index.tpl');
+
+?>
 
 
 

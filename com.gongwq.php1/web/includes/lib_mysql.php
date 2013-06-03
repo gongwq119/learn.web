@@ -22,6 +22,12 @@ class lib_mysql {
 	}
 	
 	/**
+	 * 
+	 */
+	public function setCharset() {
+		$this->db->set_charset('utf8');
+	} 
+	/**
 	 * Execute the sql statment of fetching.
 	 * @param unknown $sql_sta
 	 */

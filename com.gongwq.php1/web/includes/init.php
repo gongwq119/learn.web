@@ -42,6 +42,7 @@ require ('/opt/lampp/lib/php/Smarty/Smarty.class.php');
 
 //配置数据库
 $db = new lib_mysql('localhost', 'root', 'passw0rd', 'mydb');
+$db->setCharset();
 
 //初始化smarty对象
 $smarty = new Smarty();
