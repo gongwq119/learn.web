@@ -27,30 +27,44 @@ class lib_mysql {
 	public function setCharset() {
 		$this->db->set_charset('utf8');
 	} 
-	/**
-	 * Execute the sql statment of fetching.
-	 * @param unknown $sql_sta
-	 */
+	
 	private function execute($sql_sta) {
 		$this->db->select_db('mydb');
-		// 		$this->query = $this->db->query($this->db, $query);
 		return $this->db->query($sql_sta);
 	}
 	
+	/**
+	 * 
+	 * @param unknown $sql_sta
+	 */
 	function getRowNumber($sql_sta) {
-		// 		if ($row = mysql_fetch_array($this->query, MYSQL_ASSOC)) {
-		// 			return $row;
-		// 		} else {
-		// 			return false;
-		// 		}
 		$result = $this->execute($sql_sta);
 		$num_results = $result->num_rows;
 		echo $num_results;
 	}
 	
+	/**
+	 * 
+	 * @param unknown $item_id
+	 * @return mixed
+	 */
 	function getItem($item_id) {
 		$sql = 'SELECT * FROM mydb.items WHERE id=' . $item_id;
 		return $this->execute($sql);
+	}
+	
+	/**
+	 * Select the number of items from db
+	 * @param unknown $sql_sta
+	 * @param unknown $amount
+	 */
+	function selectLimit($sql_sta, $amount, $start_page = 0) {
+		if ($start_page == 0) {
+			$sql_sta .= 'LIMIT ' . $amount;
+		} else {
+			$sql_sta .= 'LIMIT ' . $start_page . ', ' . $amount;
+		}
+		return $this->execute($sql_sta);
 	}
 }
 

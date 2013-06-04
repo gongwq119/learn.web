@@ -16,5 +16,5 @@ require './includes/init.php';
 //判断ajax 请求
 
 //设置smarty内容，先判断是否有对应的缓存页面
-
+echo '<p>Hello world Index</p>';
 

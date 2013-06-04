@@ -19,7 +19,7 @@ $rows = $result->fetch_assoc();
 //配置smarty,并输出
 $smarty->assign('name', 'test'); 
 
-$smarty->display(ROOT_PATH . '/smarty/templates/index.tpl');
+$smarty->display(ROOT_PATH . '/smarty/templates/items.tpl');
 
 ?>
 
