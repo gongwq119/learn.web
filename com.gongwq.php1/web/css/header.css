@@ -1,0 +1,43 @@
+@CHARSET "UTF-8";
+.header {
+	margin: 0;
+	padding: 0;
+	width: 970px;
+	height: 47px;
+	float: left;
+	background: url("../image/top_blue.png") repeat-x 0 0
+}
+.logo {
+	position: relative;
+	left: 30px;
+	top: 10px;
+	font: normal 20px arial,sans-serif;
+	color: #ffffff;
+	text-align: left;
+	width: 120px;
+	height: 20px;
+	float: left;
+}
+ul.option {
+	margin: 0px;
+	position: relative;
+	right: -120px;
+	float: left;
+	top: 13px;
+}
+.option li {
+	float: left;
+	font: normal 5px arial,sans-serif; 
+	list-style-type:none;
+	cursor：hand;
+}
+.option a{
+	color: #393939;
+	padding: 1px 12px 0;
+	display: table-cell;
+	font-size: 12px;
+	height: 20px;
+	text-align: center;
+	vertical-align: middle;
+}
+.option a:hover { text-decoration:none;color: #696969}
