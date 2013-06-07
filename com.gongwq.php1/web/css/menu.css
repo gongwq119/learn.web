@@ -1,11 +1,17 @@
 @CHARSET "UTF-8";
+.navigation {
+	margin: 0;
+	padding: 0;
+	width: 970px;
+	height: 46px;
+}
 ul.menu {
 	float: left;
 	margin: 0px;
+	padding: 0px;
 	width: 970px;
 	position: relative;
 	background: #fff;
-	*z-index: 1;
 	background:url("../image/menu.png") repeat-y 0 0 
 }
 .menu li { 
@@ -23,4 +29,7 @@ a.menu {
 	text-align: center;
 	vertical-align: middle;
 }
-a.menu:hover { text-decoration:none;color: #696969}
+a.menu:hover { 
+	text-decoration:none;
+	color: #696969
+	}

@@ -1,0 +1,21 @@
+@CHARSET "UTF-8";
+.window{
+	height:531px;	
+	width: 970px;
+	overflow: hidden;
+	position: relative;
+}
+.active_frame {
+	position: absolute;
+	padding: 0px;
+	margin: 0px;
+}
+.active_frame img {
+	float: left;
+}
+.active_bottons {
+	position: relative;
+	top: 20;
+	left: 20;
+	z-index: 100;
+}

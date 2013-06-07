@@ -1,0 +1,30 @@
+@CHARSET "UTF-8";
+.item_intro {
+	height: 350px;
+	width: 970px;
+	position: relative;
+}
+.item_preview {
+	margin: 0;
+	padding: 0;
+	float: left;
+	width: 300px;
+	height: 350px;
+	border:solid 1px gray;
+}
+.item_info {
+	margin: 0;
+	padding: 0;
+	float: right;
+	width: 620px;
+	height: 350px;
+}
+.item_name {
+	margin: 0;
+	padding: 20;
+}
+.item_summary {
+	margin: 10px 0px 0px 0px;
+	padding: 0;
+	border-top: dashed 1px gray;
+}

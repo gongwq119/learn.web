@@ -5,35 +5,6 @@
 <title>HHH</title>
 <link href="css/mainpage.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="/js/jquery-1.9.1.js"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-	
-	//Get size of images, how many there are, then determin the size of the image frame.
-	var imageWidth = $(".window").width();
-	var imageSum = $(".active_frame img").size();
-	var imageFrameWidth = imageWidth * imageSum;
-	
-	//Paging + Slider Function
-	rotate = function(position){	
-		var image_framePosition = (position - 1) * imageWidth; //Determines the distance the image frame needs to slide
-		//Slider Animation
-		$(".active_frame").animate({ 
-			left: -image_framePosition
-		}, 500 );
-	}; 
-
-	$(".active_frame").css({'width' : imageFrameWidth});
-  	$(".btn1").click(function() {
-  		rotate(1);
-	});
-  	$(".btn2").click(function() {
-  		rotate(2);
-	});
-  	$(".btn3").click(function() {
-  		rotate(3);
-	});
-});
-</script>
 </head>
 <body>
 	<div class="homepage">
@@ -53,6 +24,7 @@ $(document).ready(function() {
 			</ul>
 		</div>
 		<!-- End of the header -->
+		
 		<!-- Begin of the navigation -->
 		<div class="navigation">
 			<ul class="menu">
@@ -83,10 +55,9 @@ $(document).ready(function() {
 			</ul>
 		</div>
 		<!-- End of the navigation -->
+		
 		<!-- Begin of the container -->
 		<div class="container">
-		</div>
-		<!-- Begin of the container -->
 			<!-- Begin of the breadcurmb -->
 			<div class="breadcurmb">
 				<div class="bd_content">
@@ -96,19 +67,64 @@ $(document).ready(function() {
 					</span>
 				</div>
 			</div>
+			<!-- End of the breadcurmb-->
+			<!-- Begin of the item introduction -->
 			<div class="item_intro">
+				<div class="item_info">
+					<div class="item_name"><h1>蓝光主板BL2000</h1></div>
+					<div class="item_summary">
+					<ul>
+						<li><p>商品编号</p></li>
+						<li><p>商品价格</p></li>
+						<li><p>当前库存</p></li>	
+					</ul>
+					</div>
+				</div>
+				<div class="item_preview">
+				</div>
 			</div>
+			<!-- End of the item introduction -->
 			<div class="main_part">
 				<div class="main_right">
+					<div class="sf_t"><h2>详细描述</h2></div>
+					<div class="sf_c">...</div>
 				</div>
 				<div class="main_left">
+					<div class="related_sort">
+						<div class="sf_t"><h2>相关分类</h2></div>
+						<div class="sf_c">
+							<ul>
+								<li>电梯主板</li>
+								<li>按钮系列</li>
+								<li>电器系列</li>
+								<li>轮系列</li>
+								<li>导靴靴衬</li>
+							</ul>
+						</div>
+					</div>
+					<div class="other_brand">
+						<div class="sf_t"><h2>其他品牌</h2></div>
+						<div class="sf_c">
+							<ul>
+								<li>三菱</li>
+								<li>OTIS</li>
+								<li>通力</li>
+								<li>讯达</li>
+								<li>富士达</li>
+							</ul>
+						</div>
+					</div>
 				</div>
 			</div>
-			<!-- End of the breadcurmb-->
+			
+		</div>
+		<!-- End of the container -->
+
 		<!-- Begin of the links -->
 		<div class="links">
 		</div>
 		<!-- End of the links -->
+		
 		<!-- Begin of the footer -->
 		<div class="footer">
 		</div>
