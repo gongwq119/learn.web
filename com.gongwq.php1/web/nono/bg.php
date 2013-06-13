@@ -11,7 +11,7 @@ require(dirname(__FILE__) . '/includes/init.php');
 /*------------------------------------------------------ */
 //-- 框架
 /*------------------------------------------------------ */
-if ($_REQUEST['do'] == '')
+if (@$_REQUEST['do'] == '')
 {
 //     $smarty->assign('shop_url', urlencode($ecs->url()));
     $smarty->display('index.tpl');

@@ -13,12 +13,14 @@
 // 	die('Hacking attempt');
 // }
 
+error_reporting(E_ALL);
+
 //确定根目录
 if (__FILE__ == '')
 {
 	die('Fatal error code: 0');
 }
-define('ROOT_PATH', str_replace('includes/init.php', '', str_replace('\\', '/', __FILE__)));
+define('BG_PATH', str_replace('includes/init.php', '', str_replace('\\', '/', __FILE__)));
 
 //初始化PHP engine 变量
 @ini_set('memory_limit',          '64M');
