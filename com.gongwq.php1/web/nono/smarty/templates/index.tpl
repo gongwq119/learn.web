@@ -3,16 +3,10 @@
 <head>
 <title>xxx</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-<frameset rows="76,*" framespacing="0" border="0">
-  <frame src="bg.php?do=top" id="header-frame" name="header-frame" frameborder="no" scrolling="no">
-  <frameset cols="180, 10, *" framespacing="0" border="0" id="frame-body">
-    <frame src="bg.php?do=menu" id="menu-frame" name="menu-frame" frameborder="no" scrolling="yes">
-    <frame src="bg.php?do=drag" id="drag-frame" name="drag-frame" frameborder="no" scrolling="no">
-    <frame src="bg.php?do=main" id="main-frame" name="main-frame" frameborder="no" scrolling="yes">
-  </frameset>
-</frameset>
 </head>
 <body>
+<p><{$hello}></p>
+<p>this is the admin index page</p>
+
 </body>
 </html>

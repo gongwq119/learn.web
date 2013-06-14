@@ -1,83 +1,63 @@
 <?php
 
 /**
- * ECSHOP 管理员信息以及权限管理程序
- * ============================================================================
- * 版权所有 2005-2010 上海商派网络科技有限公司，并保留所有权利。
- * 网站地址: http://www.ecshop.com；
- * ----------------------------------------------------------------------------
- * 这不是一个自由软件！您只能在不用于商业目的的前提下对程序代码进行修改和
- * 使用；不允许对程序代码以任何形式任何目的的再发布。
- * ============================================================================
- * $Author: liuhui $
- * $Id: privilege.php 17063 2010-03-25 06:35:46Z liuhui $
-*/
-
-define('IN_ECS', true);
+ * 验证用户入口
+ *  
+ */
 
 require(dirname(__FILE__) . '/includes/init.php');
 
-/* act操作项的初始化 */
-if (empty($_REQUEST['act']))
+//
+if (empty($_REQUEST['do']))
 {
-    $_REQUEST['act'] = 'login';
+    $_REQUEST['do'] = 'login';
 }
 else
 {
-    $_REQUEST['act'] = trim($_REQUEST['act']);
+    $_REQUEST['do'] = trim($_REQUEST['do']);
 }
 
 /* 初始化 $exc 对象 */
 $exc = new exchange($ecs->table("admin_user"), $db, 'user_id', 'user_name');
 
-/*------------------------------------------------------ */
-//-- 退出登录
-/*------------------------------------------------------ */
-if ($_REQUEST['act'] == 'logout')
-{
-    /* 清除cookie */
-    setcookie('ECSCP[admin_id]',   '', 1);
-    setcookie('ECSCP[admin_pass]', '', 1);
-
-    $sess->destroy_session();
-
-    $_REQUEST['act'] = 'login';
-}
 
 /*------------------------------------------------------ */
 //-- 登陆界面
 /*------------------------------------------------------ */
-if ($_REQUEST['act'] == 'login')
+if ($_REQUEST['do'] == 'login')
 {
-    header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-    header("Cache-Control: no-cache, must-revalidate");
-    header("Pragma: no-cache");
-
-    if ((intval($_CFG['captcha']) & CAPTCHA_ADMIN) && gd_version() > 0)
-    {
-        $smarty->assign('gd_version', gd_version());
-        $smarty->assign('random',     mt_rand());
-    }
-
-    $smarty->display('login.htm');
+	header("Location: http://localhost/nono/login.html");
 }
 
-/*------------------------------------------------------ */
-//-- 验证登陆信息
-/*------------------------------------------------------ */
-elseif ($_REQUEST['act'] == 'signin')
-{
-    if (!empty($_SESSION['captcha_word']) && (intval($_CFG['captcha']) & CAPTCHA_ADMIN))
-    {
-        include_once(ROOT_PATH . 'includes/cls_captcha.php');
 
-        /* 检查验证码是否正确 */
-        $validator = new captcha();
-        if (!empty($_POST['captcha']) && !$validator->check_word($_POST['captcha']))
-        {
-            sys_msg($_LANG['captcha_error'], 1);
-        }
-    }
+/*------------------------------------------------------ */
+//-- 退出登录
+/*------------------------------------------------------ */
+if ($_REQUEST['do'] == 'logout')
+{
+	/* 清除cookie */
+	setcookie('ECSCP[admin_id]',   '', 1);
+	setcookie('ECSCP[admin_pass]', '', 1);
+
+	$sess->destroy_session();
+
+	$_REQUEST['do'] = 'login';
+}
+
+//验证用户名和密码
+elseif ($_REQUEST['do'] == 'validate')
+{
+//     if (!empty($_SESSION['captcha_word']) && (intval($_CFG['captcha']) & CAPTCHA_ADMIN))
+//     {
+//         include_once(ROOT_PATH . 'includes/cls_captcha.php');
+
+//         /* 检查验证码是否正确 */
+//         $validator = new captcha();
+//         if (!empty($_POST['captcha']) && !$validator->check_word($_POST['captcha']))
+//         {
+//             sys_msg($_LANG['captcha_error'], 1);
+//         }
+//     }
 
     $_POST['username'] = isset($_POST['username']) ? trim($_POST['username']) : '';
     $_POST['password'] = isset($_POST['password']) ? trim($_POST['password']) : '';
@@ -90,16 +70,6 @@ elseif ($_REQUEST['act'] == 'signin')
 
     if ($row)
     {
-        // 检查是否为供货商的管理员 所属供货商是否有效
-        if (!empty($row['suppliers_id']))
-        {
-            $supplier_is_check = suppliers_list_info(' is_check = 1 AND suppliers_id = ' . $row['suppliers_id']);
-            if (empty($supplier_is_check))
-            {
-                sys_msg($_LANG['login_disable'], 1);
-            }
-        }
-
         // 登录成功
         set_admin_session($row['user_id'], $row['user_name'], $row['action_list'], $row['last_login']);
         $_SESSION['suppliers_id'] = $row['suppliers_id'];
@@ -137,7 +107,7 @@ elseif ($_REQUEST['act'] == 'signin')
 /*------------------------------------------------------ */
 //-- 管理员列表页面
 /*------------------------------------------------------ */
-elseif ($_REQUEST['act'] == 'list')
+elseif ($_REQUEST['do'] == 'list')
 {
     /* 模板赋值 */
     $smarty->assign('ur_here',     $_LANG['admin_list']);
@@ -153,7 +123,7 @@ elseif ($_REQUEST['act'] == 'list')
 /*------------------------------------------------------ */
 //-- 查询
 /*------------------------------------------------------ */
-elseif ($_REQUEST['act'] == 'query')
+elseif ($_REQUEST['do'] == 'query')
 {
     $smarty->assign('admin_list',  get_admin_userlist());
 
@@ -163,7 +133,7 @@ elseif ($_REQUEST['act'] == 'query')
 /*------------------------------------------------------ */
 //-- 添加管理员页面
 /*------------------------------------------------------ */
-elseif ($_REQUEST['act'] == 'add')
+elseif ($_REQUEST['do'] == 'add')
 {
     /* 检查权限 */
     admin_priv('admin_manage');
@@ -183,7 +153,7 @@ elseif ($_REQUEST['act'] == 'add')
 /*------------------------------------------------------ */
 //-- 添加管理员的处理
 /*------------------------------------------------------ */
-elseif ($_REQUEST['act'] == 'insert')
+elseif ($_REQUEST['do'] == 'insert')
 {
     admin_priv('admin_manage');
 
@@ -250,7 +220,7 @@ elseif ($_REQUEST['act'] == 'insert')
 /*------------------------------------------------------ */
 //-- 编辑管理员信息
 /*------------------------------------------------------ */
-elseif ($_REQUEST['act'] == 'edit')
+elseif ($_REQUEST['do'] == 'edit')
 {
     /* 不能编辑demo这个管理员 */
     if ($_SESSION['admin_name'] == 'demo')
@@ -303,7 +273,7 @@ elseif ($_REQUEST['act'] == 'edit')
 /*------------------------------------------------------ */
 //-- 更新管理员信息
 /*------------------------------------------------------ */
-elseif ($_REQUEST['act'] == 'update' || $_REQUEST['act'] == 'update_self')
+elseif ($_REQUEST['do'] == 'update' || $_REQUEST['do'] == 'update_self')
 {
 
     /* 变量初始化 */
@@ -312,7 +282,7 @@ elseif ($_REQUEST['act'] == 'update' || $_REQUEST['act'] == 'update_self')
     $admin_email = !empty($_REQUEST['email'])     ? trim($_REQUEST['email'])     : '';
 
     $password = !empty($_POST['new_password']) ? ", password = '".md5($_POST['new_password'])."'"    : '';
-    if ($_REQUEST['act'] == 'update')
+    if ($_REQUEST['do'] == 'update')
     {
         /* 查看是否有权限编辑其他管理员的信息 */
         if ($_SESSION['admin_id'] != $_REQUEST['id'])
@@ -399,7 +369,7 @@ elseif ($_REQUEST['act'] == 'update' || $_REQUEST['act'] == 'update_self')
    admin_log($_POST['user_name'], 'edit', 'privilege');
 
    /* 如果修改了密码，则需要将session中该管理员的数据清空 */
-   if ($pwd_modified && $_REQUEST['act'] == 'update_self')
+   if ($pwd_modified && $_REQUEST['do'] == 'update_self')
    {
        $sess->delete_spec_admin_session($_SESSION['admin_id']);
        $msg = $_LANG['edit_password_succeed'];
@@ -418,7 +388,7 @@ elseif ($_REQUEST['act'] == 'update' || $_REQUEST['act'] == 'update_self')
 /*------------------------------------------------------ */
 //-- 编辑个人资料
 /*------------------------------------------------------ */
-elseif ($_REQUEST['act'] == 'modif')
+elseif ($_REQUEST['do'] == 'modif')
 {
     /* 不能编辑demo这个管理员 */
     if ($_SESSION['admin_name'] == 'demo')
@@ -503,7 +473,7 @@ elseif ($_REQUEST['act'] == 'modif')
 /*------------------------------------------------------ */
 //-- 为管理员分配权限
 /*------------------------------------------------------ */
-elseif ($_REQUEST['act'] == 'allot')
+elseif ($_REQUEST['do'] == 'allot')
 {
     include_once(ROOT_PATH . 'languages/' .$_CFG['lang']. '/admin/priv_action.php');
 
@@ -568,7 +538,7 @@ elseif ($_REQUEST['act'] == 'allot')
 /*------------------------------------------------------ */
 //-- 更新管理员的权限
 /*------------------------------------------------------ */
-elseif ($_REQUEST['act'] == 'update_allot')
+elseif ($_REQUEST['do'] == 'update_allot')
 {
     admin_priv('admin_manage');
 
@@ -599,7 +569,7 @@ elseif ($_REQUEST['act'] == 'update_allot')
 /*------------------------------------------------------ */
 //-- 删除一个管理员
 /*------------------------------------------------------ */
-elseif ($_REQUEST['act'] == 'remove')
+elseif ($_REQUEST['do'] == 'remove')
 {
     check_authz_json('admin_drop');
 

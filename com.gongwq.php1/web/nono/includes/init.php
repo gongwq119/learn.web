@@ -13,7 +13,6 @@
 // 	die('Hacking attempt');
 // }
 
-error_reporting(E_ALL);
 
 //确定根目录
 if (__FILE__ == '')
@@ -31,7 +30,7 @@ define('BG_PATH', str_replace('includes/init.php', '', str_replace('\\', '/', __
 @ini_set('display_errors',        1);
 
 //加载库文件
-require (ROOT_PATH . '/includes/lib_mysql.php');
+require (BG_PATH . '/includes/lib_mysql.php');
 require ('/opt/lampp/lib/php/Smarty/Smarty.class.php');
 
 //创建log对象
@@ -45,6 +44,13 @@ require ('/opt/lampp/lib/php/Smarty/Smarty.class.php');
 //配置数据库
 $db = new lib_mysql('localhost', 'root', 'passw0rd', 'mydb');
 $db->setCharset();
+
+//Session 初始化
+session_start();
+
+if (!isset($_SESSION['admin_id']) || intval($_SESSION['admin_id']) <= 0) {
+	header("Location: http://localhost/privilege.php?do=login");
+}
 
 //初始化smarty对象
 $smarty = new Smarty();
