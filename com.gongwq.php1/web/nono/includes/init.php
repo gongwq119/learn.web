@@ -19,7 +19,11 @@ if (__FILE__ == '')
 {
 	die('Fatal error code: 0');
 }
-define('BG_PATH', str_replace('includes/init.php', '', str_replace('\\', '/', __FILE__)));
+if(!defined('ADMIN_PATH_NAME'))
+{
+	define('ADMIN_PATH_NAME','nono');
+}
+define('ROOT_PATH', str_replace(ADMIN_PATH_NAME . '/includes/init.php', '', str_replace('\\', '/', __FILE__)));
 
 //初始化PHP engine 变量
 @ini_set('memory_limit',          '64M');
@@ -30,7 +34,7 @@ define('BG_PATH', str_replace('includes/init.php', '', str_replace('\\', '/', __
 @ini_set('display_errors',        1);
 
 //加载库文件
-require (BG_PATH . '/includes/lib_mysql.php');
+require (ROOT_PATH . '/includes/lib_mysql.php');
 require ('/opt/lampp/lib/php/Smarty/Smarty.class.php');
 
 //创建log对象
@@ -41,15 +45,23 @@ require ('/opt/lampp/lib/php/Smarty/Smarty.class.php');
 
 //加载系统配置
 
+//初始化 do
+if (!isset($_REQUEST['do']))
+{
+	$_REQUEST['do'] = '';
+}
+
 //配置数据库
 $db = new lib_mysql('localhost', 'root', 'passw0rd', 'mydb');
 $db->setCharset();
 
-//Session 初始化
+//Session 初始化,
 session_start();
-
-if (!isset($_SESSION['admin_id']) || intval($_SESSION['admin_id']) <= 0) {
-	header("Location: http://localhost/privilege.php?do=login");
+if (!isset($_SESSION['admin_on'])) {
+	$_SESSION['admin_on'] = false;
+}
+if ($_SESSION['admin_on'] == false) {
+	header("Location: http://localhost/nono/privilege.php?do=login");
 }
 
 //初始化smarty对象

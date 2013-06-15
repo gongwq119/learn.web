@@ -17,16 +17,12 @@ else
     $_REQUEST['do'] = trim($_REQUEST['do']);
 }
 
-/* 初始化 $exc 对象 */
-$exc = new exchange($ecs->table("admin_user"), $db, 'user_id', 'user_name');
-
-
 /*------------------------------------------------------ */
 //-- 登陆界面
 /*------------------------------------------------------ */
 if ($_REQUEST['do'] == 'login')
 {
-	header("Location: http://localhost/nono/login.html");
+	$smarty->display("login.tpl");
 }
 
 
@@ -47,18 +43,6 @@ if ($_REQUEST['do'] == 'logout')
 //验证用户名和密码
 elseif ($_REQUEST['do'] == 'validate')
 {
-//     if (!empty($_SESSION['captcha_word']) && (intval($_CFG['captcha']) & CAPTCHA_ADMIN))
-//     {
-//         include_once(ROOT_PATH . 'includes/cls_captcha.php');
-
-//         /* 检查验证码是否正确 */
-//         $validator = new captcha();
-//         if (!empty($_POST['captcha']) && !$validator->check_word($_POST['captcha']))
-//         {
-//             sys_msg($_LANG['captcha_error'], 1);
-//         }
-//     }
-
     $_POST['username'] = isset($_POST['username']) ? trim($_POST['username']) : '';
     $_POST['password'] = isset($_POST['password']) ? trim($_POST['password']) : '';
 
