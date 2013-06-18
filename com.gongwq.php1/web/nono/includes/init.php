@@ -55,15 +55,6 @@ if (!isset($_REQUEST['do']))
 $db = new lib_mysql('localhost', 'root', 'passw0rd', 'mydb');
 $db->setCharset();
 
-//Session 初始化,
-session_start();
-if (!isset($_SESSION['admin_on'])) {
-	$_SESSION['admin_on'] = false;
-}
-if ($_SESSION['admin_on'] == false) {
-	header("Location: http://localhost/nono/privilege.php?do=login");
-}
-
 //初始化smarty对象
 $smarty = new Smarty();
 
@@ -73,5 +64,19 @@ $smarty->setCacheDir('./smarty/cache');
 $smarty->setConfigDir('./smarty/configs');
 $smarty->left_delimiter = '<{';
 $smarty->right_delimiter = '}>';
+
+
+//Session 初始化,
+session_start();
+if (!isset($_SESSION['admin_on'])) {
+	$_SESSION['admin_on'] = false;
+	return;
+}
+if ($_SERVER['PHP_SELF'] == '/nono/privilege.php') {
+	return;
+}
+if ($_SESSION['admin_on'] == false) {
+	header("Location: http://localhost/nono/privilege.php?do=login");
+}
 
 ?>

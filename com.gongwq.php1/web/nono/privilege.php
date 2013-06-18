@@ -47,44 +47,22 @@ elseif ($_REQUEST['do'] == 'validate')
     $_POST['password'] = isset($_POST['password']) ? trim($_POST['password']) : '';
 
     /* 检查密码是否正确 */
-    $sql = "SELECT user_id, user_name, password, last_login, action_list, last_login, suppliers_id".
-            " FROM " . $ecs->table('admin_user') .
-            " WHERE user_name = '" . $_POST['username']. "' AND password = '" . md5($_POST['password']) . "'";
-    $row = $db->getRow($sql);
+    $sql = 'SELECT user_id FROM mydb.admin_user WHERE user_name=' . $_POST['username'] . ' AND ' . 'password=' . md5($_POST['password']);
+    $row = $db->execute($sql);
 
     if ($row)
     {
-        // 登录成功
-        set_admin_session($row['user_id'], $row['user_name'], $row['action_list'], $row['last_login']);
-        $_SESSION['suppliers_id'] = $row['suppliers_id'];
-
-        if($row['action_list'] == 'all' && empty($row['last_login']))
-        {
-            $_SESSION['shop_guide'] = true;
-        }
+    	$result = $row->fetch_assoc();
+    	
+        // 登录成功,修改session
+        $_SESSION['admin_id'] = $result['user_id'];
+        $_SESSION['admin_on'] = false;
 
         // 更新最后登录时间和IP
-        $db->query("UPDATE " .$ecs->table('admin_user').
-                 " SET last_login='" . gmtime() . "', last_ip='" . real_ip() . "'".
-                 " WHERE user_id='$_SESSION[admin_id]'");
-
-        if (isset($_POST['remember']))
-        {
-            $time = gmtime() + 3600 * 24 * 365;
-            setcookie('ECSCP[admin_id]',   $row['user_id'],                            $time);
-            setcookie('ECSCP[admin_pass]', md5($row['password'] . $_CFG['hash_code']), $time);
-        }
 
         // 清除购物车中过期的数据
-        clear_cart();
-
-        ecs_header("Location: ./index.php\n");
 
         exit;
-    }
-    else
-    {
-        sys_msg($_LANG['login_faild'], 1);
     }
 }
 
