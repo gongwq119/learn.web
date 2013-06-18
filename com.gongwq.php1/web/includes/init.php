@@ -30,7 +30,7 @@ define('ROOT_PATH', str_replace('includes/init.php', '', str_replace('\\', '/', 
 
 //加载库文件
 require (ROOT_PATH . '/includes/lib_mysql.php');
-require ('/opt/lampp/lib/php/Smarty/Smarty.class.php');
+require (ROOT_PATH . '/smarty/libs/Smarty.class.php');
 
 //创建log对象
 
