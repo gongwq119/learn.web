@@ -65,18 +65,24 @@ $smarty->setConfigDir('./smarty/configs');
 $smarty->left_delimiter = '<{';
 $smarty->right_delimiter = '}>';
 
+//如果是privilege,直接跳过，不检查session
+if ($_SERVER['PHP_SELF'] == '/nono/privilege.php') {
+	return;
+}
 
 //Session 初始化,
 session_start();
 if (!isset($_SESSION['admin_on'])) {
 	$_SESSION['admin_on'] = false;
-	return;
-}
-if ($_SERVER['PHP_SELF'] == '/nono/privilege.php') {
+	header("Location: http://localhost/nono/privilege.php?do=login");
 	return;
 }
 if ($_SESSION['admin_on'] == false) {
 	header("Location: http://localhost/nono/privilege.php?do=login");
+	return;
+}
+if ($_SESSION['admin_on'] == true) {
+	return;
 }
 
 ?>

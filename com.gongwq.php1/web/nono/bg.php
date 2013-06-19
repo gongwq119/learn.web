@@ -13,7 +13,6 @@ require(dirname(__FILE__) . '/includes/init.php');
 /*------------------------------------------------------ */
 if ($_REQUEST['do'] == '')
 {
-//     $smarty->assign('shop_url', urlencode($ecs->url()));
 	$smarty->assign('hello','hello world');
     $smarty->display('index.tpl');
 }
@@ -23,7 +22,10 @@ if ($_REQUEST['do'] == '')
 /*------------------------------------------------------ */
 elseif ($_REQUEST['do'] == 'top')
 {
-	
+	$nav_list = array();
+	$nav_list['/items.php?do=list'] = '商品列表';
+	$smarty->assign('nav_list', $nav_list);
+	$smarty->display('top.tpl');
 }
 
 
@@ -32,6 +34,7 @@ elseif ($_REQUEST['do'] == 'top')
 /*------------------------------------------------------ */
 elseif ($_REQUEST['do'] == 'menu')
 {
+	$smarty->display('menu.tpl');
 }
 
 
@@ -39,9 +42,10 @@ elseif ($_REQUEST['do'] == 'menu')
 //-- 主窗口，起始页
 /*------------------------------------------------------ */
 elseif ($_REQUEST['do'] == 'main')
-{}
-elseif ($_REQUEST['do'] == 'main_api')
-{}
+{
+	
+	$smarty->display('items_list.tpl');
+}
 
 /*------------------------------------------------------ */
 //-- 拖动的帧

@@ -47,21 +47,22 @@ elseif ($_REQUEST['do'] == 'validate')
     $_POST['password'] = isset($_POST['password']) ? trim($_POST['password']) : '';
 
     /* 检查密码是否正确 */
-    $sql = 'SELECT user_id FROM mydb.admin_user WHERE user_name=' . $_POST['username'] . ' AND ' . 'password=' . md5($_POST['password']);
-    $row = $db->execute($sql);
+    $row = $db->getAdminUserId($_POST['username'], $_POST['password']);
 
     if ($row)
     {
+    	echo "ok";
     	$result = $row->fetch_assoc();
     	
         // 登录成功,修改session
+        session_start();
         $_SESSION['admin_id'] = $result['user_id'];
-        $_SESSION['admin_on'] = false;
+        $_SESSION['admin_on'] = true;
 
         // 更新最后登录时间和IP
 
         // 清除购物车中过期的数据
-
+		header("Location: http://localhost/nono/bg.php");
         exit;
     }
 }

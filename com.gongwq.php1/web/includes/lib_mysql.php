@@ -66,6 +66,16 @@ class lib_mysql {
 		}
 		return $this->execute($sql_sta);
 	}
+	
+	/**
+	 * 
+	 * @param unknown $username
+	 * @param unknown $passw0rd
+	 */
+	function getAdminUserId($username, $password) {
+		$sql = 'SELECT user_id FROM mydb.admin_user WHERE user_name=\'' . $username . '\' AND ' . 'password=\'' . md5($password) . '\'';
+		return $this->execute($sql);
+	}
 }
 
 ?>

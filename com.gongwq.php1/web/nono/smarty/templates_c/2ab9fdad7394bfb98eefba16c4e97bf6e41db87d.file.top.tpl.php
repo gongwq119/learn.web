@@ -1,4 +1,31 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php /* Smarty version Smarty-3.1.13, created on 2013-06-19 10:42:45
+         compiled from "./smarty/templates/top.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:120530094551c16afdc87801-41328396%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '2ab9fdad7394bfb98eefba16c4e97bf6e41db87d' => 
+    array (
+      0 => './smarty/templates/top.tpl',
+      1 => 1371631360,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '120530094551c16afdc87801-41328396',
+  'function' => 
+  array (
+  ),
+  'version' => 'Smarty-3.1.13',
+  'unifunc' => 'content_51c16afdcc2434_25189319',
+  'variables' => 
+  array (
+    'nav_list' => 0,
+    'key' => 0,
+    'value' => 0,
+  ),
+  'has_nocache_code' => false,
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_51c16afdcc2434_25189319')) {function content_51c16afdcc2434_25189319($_smarty_tpl) {?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>{$app_name}</title>
@@ -115,12 +142,20 @@
   <ul>
     <li class="fix-spacel">&nbsp;</li>
     <li><a href="index.php?act=main" target="main-frame">起始页</a></li>
-    <{foreach $nav_list as $key=>$value}>
-    <li><a href="<{$key}>" target="main-frame"><{$value}></a></li>
-    <{/foreach}>
+    <?php  $_smarty_tpl->tpl_vars['value'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['value']->_loop = false;
+ $_smarty_tpl->tpl_vars['key'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['nav_list']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['value']->key => $_smarty_tpl->tpl_vars['value']->value){
+$_smarty_tpl->tpl_vars['value']->_loop = true;
+ $_smarty_tpl->tpl_vars['key']->value = $_smarty_tpl->tpl_vars['value']->key;
+?>
+    <li><a href="<?php echo $_smarty_tpl->tpl_vars['key']->value;?>
+" target="main-frame"><?php echo $_smarty_tpl->tpl_vars['value']->value;?>
+</a></li>
+    <?php } ?>
     <li class="fix-spacer">&nbsp;</li>
   </ul>
   <br class="clear" />
 </div>
 </body>
-</html>
+</html><?php }} ?>
