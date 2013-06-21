@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-06-08 11:31:47
+<?php /* Smarty version Smarty-3.1.13, created on 2013-06-21 05:31:36
          compiled from "./smarty/templates/menu.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:84655718651b2fa03e906f1-56493951%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '7b65456ad2701ce3f0da6b5d364880a34a27975e' => 
     array (
       0 => './smarty/templates/menu.tpl',
-      1 => 1273052864,
+      1 => 1371785494,
       2 => 'file',
     ),
   ),
@@ -15,23 +15,25 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
-  'has_nocache_code' => false,
   'version' => 'Smarty-3.1.13',
   'unifunc' => 'content_51b2fa03ed2428_32910620',
+  'variables' => 
+  array (
+    'menus' => 0,
+    'menu' => 0,
+    'k' => 0,
+    'child' => 0,
+  ),
+  'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_51b2fa03ed2428_32910620')) {function content_51b2fa03ed2428_32910620($_smarty_tpl) {?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>ECSHOP Menu</title>
+<title>tree tree tree</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="styles/general.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript">
-<!--
-var noHelp   = "<p align='center' style='color: #666'>{$lang.no_help}</p>";
-var helpLang = "{$help_lang}";
-//-->
 </script>
-{literal}
 <style type="text/css">
 body {
   background: #80BDCB;
@@ -134,34 +136,50 @@ body {
   color: #000099;
 }
 </style>
-{/literal}
 </head>
 <body>
 <div id="tabbar-div">
 <p><span style="float:right; padding: 3px 5px;" ><a href="javascript:toggleCollapse();"><img id="toggleImg" src="images/menu_minus.gif" width="9" height="9" border="0" alt="{$lang.collapse_all}" /></a></span>
-  <span class="tab-front" id="menu-tab">{$lang.menu}</span>
+  <span class="tab-front" id="menu-tab">tree</span>
 </p>
 </div>
 <div id="main-div">
 <div id="menu-list">
 <ul>
-{foreach from=$menus item=menu key=k}
-{if $menu.action}
-  <li class="explode"><a href="{$menu.action}" target="main-frame">{$menu.label}</a></li>
-{else}
-  <li class="explode" key="{$k}" name="menu">
-    {$menu.label}
-    {if $menu.children}
+<?php  $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['k']->_loop = false;
+ $_smarty_tpl->tpl_vars['menu'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['menus']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['k']->key => $_smarty_tpl->tpl_vars['k']->value){
+$_smarty_tpl->tpl_vars['k']->_loop = true;
+ $_smarty_tpl->tpl_vars['menu']->value = $_smarty_tpl->tpl_vars['k']->key;
+?>
+<p><?php echo $_smarty_tpl->tpl_vars['menu']->value['action'];?>
+</p>
+<?php if ($_smarty_tpl->tpl_vars['menu']->value['action']){?>
+  <li class="explode"><a href="<?php echo $_smarty_tpl->tpl_vars['menu']->value['action'];?>
+" target="main-frame"><?php echo $_smarty_tpl->tpl_vars['menu']->value['label'];?>
+</a></li>
+<?php }else{ ?>
+  <li class="explode" key="<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+" name="menu">
+    <?php echo $_smarty_tpl->tpl_vars['menu']->value['label'];?>
+
+    <?php if ($_smarty_tpl->tpl_vars['menu']->value['children']){?>
     <ul>
-    {foreach from=$menu.children item=child}
-      <li class="menu-item"><a href="{$child.action}" target="main-frame">{$child.label}</a></li>
-    {/foreach}
+    <?php  $_smarty_tpl->tpl_vars['child'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['child']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['menu']->value['children']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['child']->key => $_smarty_tpl->tpl_vars['child']->value){
+$_smarty_tpl->tpl_vars['child']->_loop = true;
+?>
+      <li class="menu-item"><a href="<?php echo $_smarty_tpl->tpl_vars['child']->value['action'];?>
+" target="main-frame"><?php echo $_smarty_tpl->tpl_vars['child']->value['label'];?>
+</a></li>
+    <?php } ?>
     </ul>
-    {/if}
+    <?php }?>
   </li>
-{/if}
-{/foreach}
-  <script language="JavaScript" src="http://api.ecshop.com/menu_ext.php?charset={$charset}&lang={$help_lang}"></script>
+<?php }?>
+<?php } ?>
 </ul>
 </div>
 <div id="help-div" style="display:none">
@@ -169,13 +187,14 @@ body {
 <div id="help-content"></div>
 </div>
 </div>
-{insert_scripts files="../js/global.js,../js/utils.js,../js/transport.js"}
+<script src="../js/global.js"></script>
+<script src="../js/utils.js"></script>
+<script src="../js/transport.js"></script>
 <script language="JavaScript">
 <!--
 var collapse_all = "{$lang.collapse_all}";
 var expand_all = "{$lang.expand_all}";
 var collapse = true;
-{literal}
 function toggleCollapse()
 {
   var items = document.getElementsByTagName('LI');
@@ -422,7 +441,6 @@ Object.extend(ToggleHanlder ,{
     document.getElementById('toggleImg').alt = collapse ? collapse_all : expand_all;
   }
 });
-{/literal}
 ToggleHanlder.CookieName += "_{$admin_id}";
 //初始化菜单状态
 ToggleHanlder.Load();

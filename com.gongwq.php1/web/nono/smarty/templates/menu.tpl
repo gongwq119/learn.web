@@ -1,16 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>ECSHOP Menu</title>
+<title>tree tree tree</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="styles/general.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript">
-<!--
-var noHelp   = "<p align='center' style='color: #666'>{$lang.no_help}</p>";
-var helpLang = "{$help_lang}";
-//-->
 </script>
-{literal}
 <style type="text/css">
 body {
   background: #80BDCB;
@@ -113,34 +108,33 @@ body {
   color: #000099;
 }
 </style>
-{/literal}
 </head>
 <body>
 <div id="tabbar-div">
 <p><span style="float:right; padding: 3px 5px;" ><a href="javascript:toggleCollapse();"><img id="toggleImg" src="images/menu_minus.gif" width="9" height="9" border="0" alt="{$lang.collapse_all}" /></a></span>
-  <span class="tab-front" id="menu-tab">{$lang.menu}</span>
+  <span class="tab-front" id="menu-tab">tree</span>
 </p>
 </div>
 <div id="main-div">
 <div id="menu-list">
 <ul>
-{foreach from=$menus item=menu key=k}
-{if $menu.action}
-  <li class="explode"><a href="{$menu.action}" target="main-frame">{$menu.label}</a></li>
-{else}
-  <li class="explode" key="{$k}" name="menu">
-    {$menu.label}
-    {if $menu.children}
+<{foreach $menus as $menu=>$k}>
+<p><{$menu.action}></p>
+<{if $menu.action}>
+  <li class="explode"><a href="<{$menu.action}>" target="main-frame"><{$menu.label}></a></li>
+<{else}>
+  <li class="explode" key="<{$k}>" name="menu">
+    <{$menu.label}>
+    <{if $menu.children}>
     <ul>
-    {foreach from=$menu.children item=child}
-      <li class="menu-item"><a href="{$child.action}" target="main-frame">{$child.label}</a></li>
-    {/foreach}
+    <{foreach $menu.children as $child}>
+      <li class="menu-item"><a href="<{$child.action}>" target="main-frame"><{$child.label}></a></li>
+    <{/foreach}>
     </ul>
-    {/if}
+    <{/if}>
   </li>
-{/if}
-{/foreach}
-  <script language="JavaScript" src="http://api.ecshop.com/menu_ext.php?charset={$charset}&lang={$help_lang}"></script>
+<{/if}>
+<{/foreach}>
 </ul>
 </div>
 <div id="help-div" style="display:none">
@@ -148,13 +142,14 @@ body {
 <div id="help-content"></div>
 </div>
 </div>
-{insert_scripts files="../js/global.js,../js/utils.js,../js/transport.js"}
+<script src="../js/global.js"></script>
+<script src="../js/utils.js"></script>
+<script src="../js/transport.js"></script>
 <script language="JavaScript">
 <!--
 var collapse_all = "{$lang.collapse_all}";
 var expand_all = "{$lang.expand_all}";
 var collapse = true;
-{literal}
 function toggleCollapse()
 {
   var items = document.getElementsByTagName('LI');
@@ -401,7 +396,6 @@ Object.extend(ToggleHanlder ,{
     document.getElementById('toggleImg').alt = collapse ? collapse_all : expand_all;
   }
 });
-{/literal}
 ToggleHanlder.CookieName += "_{$admin_id}";
 //初始化菜单状态
 ToggleHanlder.Load();

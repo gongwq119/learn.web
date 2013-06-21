@@ -62,7 +62,7 @@ elseif ($_REQUEST['do'] == 'validate')
         // 更新最后登录时间和IP
 
         // 清除购物车中过期的数据
-		header("Location: http://localhost/nono/bg.php");
+		header('Location: ' . $_SESSION['previous_page']);
         exit;
     }
 }

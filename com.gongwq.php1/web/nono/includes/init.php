@@ -45,6 +45,11 @@ require (ROOT_PATH . '/smarty/libs/Smarty.class.php');
 
 //加载系统配置
 
+//加载语言包
+require(ROOT_PATH . 'languages/' . 'zh_cn' . '/admin/common.php');
+require(ROOT_PATH . 'languages/' . 'zh_cn' . '/admin/log_action.php');
+
+
 //初始化 do
 if (!isset($_REQUEST['do']))
 {
@@ -74,10 +79,12 @@ if ($_SERVER['PHP_SELF'] == '/nono/privilege.php') {
 session_start();
 if (!isset($_SESSION['admin_on'])) {
 	$_SESSION['admin_on'] = false;
+	$_SESSION['previous_page'] = 'http://' . $_SERVER['HTTP_HOST'] .  $_SERVER['REQUEST_URI'];
 	header("Location: http://localhost/nono/privilege.php?do=login");
 	return;
 }
 if ($_SESSION['admin_on'] == false) {
+	$_SESSION['previous_page'] = 'http://' . $_SERVER['HTTP_HOST'] .  $_SERVER['REQUEST_URI'];
 	header("Location: http://localhost/nono/privilege.php?do=login");
 	return;
 }

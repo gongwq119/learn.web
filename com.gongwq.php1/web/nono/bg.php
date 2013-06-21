@@ -34,8 +34,42 @@ elseif ($_REQUEST['do'] == 'top')
 /*------------------------------------------------------ */
 elseif ($_REQUEST['do'] == 'menu')
 {
-	$smarty->display('menu.tpl');
-}
+	//载入tree菜单，并整理格式
+	include_once('includes/inc_menu.php');
+	foreach ($modules AS $key => $value)
+	{
+		ksort($modules[$key]);
+	}
+	ksort($modules);
+	
+	foreach ($modules AS $key => $val)
+	{
+		$menus[$key]['label'] = $_LANG[$key];
+		if (!is_array($val)) {
+			$menus[$key]['action'] = $val;
+		}
+		else {
+			foreach ($val AS $k => $v)
+			{
+				$menus[$key]['children'][$k]['label']  = $_LANG[$k];
+				$menus[$key]['children'][$k]['action'] = $v;
+			}
+		}
+		
+		// 如果children的子元素长度为0则删除该组
+		if(empty($menus[$key]['children']))
+		{
+			unset($menus[$key]);
+		}
+		
+	}
+	
+    $smarty->assign('menus',     $menus);
+    $smarty->assign('no_help',   '暂时还没有该部分内容');
+    $smarty->assign('help_lang', 'zh_cn');
+    $smarty->assign('charset', 'utf8');
+    $smarty->assign('admin_id', $_SESSION['admin_id']);
+    $smarty->display('menu.tpl');}
 
 
 /*------------------------------------------------------ */

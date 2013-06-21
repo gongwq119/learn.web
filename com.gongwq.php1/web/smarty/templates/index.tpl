@@ -5,6 +5,9 @@
   </head>
   <body>
   	<!-- html 注释 -->
-    Hello, <{$name}>!
+    <p>Hello, <{$name}> !<p>
+    <{if $no}>
+    	<p>you you you </P>
+    <{/if}>
   </body>
 </html>
