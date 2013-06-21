@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-06-08 11:31:47
+<?php /* Smarty version Smarty-3.1.13, created on 2013-06-21 09:34:35
          compiled from "./smarty/templates/drag.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:50597345851b2fa03ea2804-37023441%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'f42fbce6031637daafd38fabd820f45a02f35c9f' => 
     array (
       0 => './smarty/templates/drag.tpl',
-      1 => 1273052864,
+      1 => 1371628587,
       2 => 'file',
     ),
   ),
@@ -15,16 +15,16 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
-  'has_nocache_code' => false,
   'version' => 'Smarty-3.1.13',
   'unifunc' => 'content_51b2fa03f0fd77_71163267',
+  'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_51b2fa03f0fd77_71163267')) {function content_51b2fa03f0fd77_71163267($_smarty_tpl) {?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <!-- $Id: drag.htm 14216 2008-03-10 02:27:21Z testyang $ -->
 <html>
 <head>
 <title></title>
-{literal}
+
 <style type="text/css">
 body {
   margin: 0;
@@ -94,7 +94,7 @@ Utils.fixEvent = function(e)
 }
 //-->
 </script>
-{/literal}
+
 </head>
 <body onselect="return false;">
 <table height="100%" cellspacing="0" cellpadding="0" id="tbl">

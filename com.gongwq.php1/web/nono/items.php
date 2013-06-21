@@ -1,7 +1,5 @@
 <?php
 
-define('IN_ECS', true);
-
 require(dirname(__FILE__) . '/includes/init.php');
 require_once(ROOT_PATH . '/' . ADMIN_PATH . '/includes/lib_goods.php');
 include_once(ROOT_PATH . '/includes/cls_image.php');
@@ -12,7 +10,7 @@ $exc = new exchange($ecs->table('goods'), $db, 'goods_id', 'goods_name');
 //-- 商品列表，商品回收站
 /*------------------------------------------------------ */
 
-if ($_REQUEST['act'] == 'list' || $_REQUEST['act'] == 'trash')
+if ($_REQUEST['do'] == 'list' || $_REQUEST['do'] == 'trash')
 {
     admin_priv('goods_manage');
 

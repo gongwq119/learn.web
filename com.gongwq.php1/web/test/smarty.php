@@ -13,10 +13,10 @@ $smarty->right_delimiter = '}>';
 
 $smarty->assign('name', 'gongwq');
 $no = array();
-$no['k1'] = 'k1_v';
-$no['k2'] = 'k2_v';
-$no['k3'] = 'k3_v';
-$smarty->assign('no', '');
+$no['a1']['b1']['c1'] = 'k1_v';
+$no['a2']['b2']['c2'] = 'k2_v';
+$no['a3']['b3']['c3'] = 'k3_v';
+$smarty->assign('no', $no);
 $smarty->display('index.tpl');
 // $smarty->testInstall();
 

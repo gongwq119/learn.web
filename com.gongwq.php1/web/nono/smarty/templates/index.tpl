@@ -3,8 +3,6 @@
 <head>
 <title>后台后台后台</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-</head>
-<body>
 <frameset rows="76,*" framespacing="0" border="0">
   <frame src="bg.php?do=top" id="header-frame" name="header-frame" frameborder="no" scrolling="no">
   <frameset cols="180, 10, *" framespacing="0" border="0" id="frame-body">
@@ -13,5 +11,8 @@
     <frame src="bg.php?do=main" id="main-frame" name="main-frame" frameborder="no" scrolling="yes">
   </frameset>
 </frameset>
+</head>
+<body>
+
 </body>
 </html>

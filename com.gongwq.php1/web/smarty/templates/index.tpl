@@ -6,8 +6,12 @@
   <body>
   	<!-- html 注释 -->
     <p>Hello, <{$name}> !<p>
-    <{if $no}>
+    <{foreach $no as $key=>$val}>
+    	<p><{$key}></p>
+        <{if $key}>
     	<p>you you you </P>
-    <{/if}>
+   		<{/if}>
+    <{/foreach}>
+
   </body>
 </html>

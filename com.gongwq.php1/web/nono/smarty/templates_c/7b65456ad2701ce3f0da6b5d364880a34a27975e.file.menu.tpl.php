@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-06-21 05:31:36
+<?php /* Smarty version Smarty-3.1.13, created on 2013-06-21 09:10:31
          compiled from "./smarty/templates/menu.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:84655718651b2fa03e906f1-56493951%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '7b65456ad2701ce3f0da6b5d364880a34a27975e' => 
     array (
       0 => './smarty/templates/menu.tpl',
-      1 => 1371785494,
+      1 => 1371798629,
       2 => 'file',
     ),
   ),
@@ -153,8 +153,6 @@ foreach ($_from as $_smarty_tpl->tpl_vars['k']->key => $_smarty_tpl->tpl_vars['k
 $_smarty_tpl->tpl_vars['k']->_loop = true;
  $_smarty_tpl->tpl_vars['menu']->value = $_smarty_tpl->tpl_vars['k']->key;
 ?>
-<p><?php echo $_smarty_tpl->tpl_vars['menu']->value['action'];?>
-</p>
 <?php if ($_smarty_tpl->tpl_vars['menu']->value['action']){?>
   <li class="explode"><a href="<?php echo $_smarty_tpl->tpl_vars['menu']->value['action'];?>
 " target="main-frame"><?php echo $_smarty_tpl->tpl_vars['menu']->value['label'];?>
@@ -162,12 +160,12 @@ $_smarty_tpl->tpl_vars['k']->_loop = true;
 <?php }else{ ?>
   <li class="explode" key="<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
 " name="menu">
-    <?php echo $_smarty_tpl->tpl_vars['menu']->value['label'];?>
+    <?php echo $_smarty_tpl->tpl_vars['k']->value['label'];?>
 
-    <?php if ($_smarty_tpl->tpl_vars['menu']->value['children']){?>
+    <?php if ($_smarty_tpl->tpl_vars['k']->value['children']){?>
     <ul>
     <?php  $_smarty_tpl->tpl_vars['child'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['child']->_loop = false;
- $_from = $_smarty_tpl->tpl_vars['menu']->value['children']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+ $_from = $_smarty_tpl->tpl_vars['k']->value['children']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['child']->key => $_smarty_tpl->tpl_vars['child']->value){
 $_smarty_tpl->tpl_vars['child']->_loop = true;
 ?>

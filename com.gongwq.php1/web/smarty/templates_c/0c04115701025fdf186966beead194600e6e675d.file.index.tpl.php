@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-06-21 05:53:19
+<?php /* Smarty version Smarty-3.1.13, created on 2013-06-21 08:47:01
          compiled from "../smarty/templates/index.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:154267837651c3cbde087ef3-68510751%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '0c04115701025fdf186966beead194600e6e675d' => 
     array (
       0 => '../smarty/templates/index.tpl',
-      1 => 1371786779,
+      1 => 1371797219,
       2 => 'file',
     ),
   ),
@@ -21,6 +21,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   array (
     'name' => 0,
     'no' => 0,
+    'key' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
@@ -33,8 +34,22 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   	<!-- html 注释 -->
     <p>Hello, <?php echo $_smarty_tpl->tpl_vars['name']->value;?>
  !<p>
-    <?php if ($_smarty_tpl->tpl_vars['no']->value){?>
+    <?php  $_smarty_tpl->tpl_vars['val'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['val']->_loop = false;
+ $_smarty_tpl->tpl_vars['key'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['no']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['val']->key => $_smarty_tpl->tpl_vars['val']->value){
+$_smarty_tpl->tpl_vars['val']->_loop = true;
+ $_smarty_tpl->tpl_vars['key']->value = $_smarty_tpl->tpl_vars['val']->key;
+?>
+    	<p><?php echo $_smarty_tpl->tpl_vars['key']->value;?>
+</p>
+        <?php if ($_smarty_tpl->tpl_vars['key']->value){?>
     	<p>you you you </P>
-    <?php }?>
+   		<?php }?>
+    <?php } ?>
+
+	<?php if (1){?>
+		<p>wo kao</p>
+	<?php }?>
   </body>
 </html><?php }} ?>
