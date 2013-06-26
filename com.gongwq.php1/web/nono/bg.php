@@ -77,8 +77,7 @@ elseif ($_REQUEST['do'] == 'menu')
 /*------------------------------------------------------ */
 elseif ($_REQUEST['do'] == 'main')
 {
-	echo "haha";
-// 	$smarty->display('items_list.tpl');
+	header("Location: http://localhost/nono/items.php?do=list");
 }
 
 /*------------------------------------------------------ */

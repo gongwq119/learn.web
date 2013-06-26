@@ -1,8 +1,36 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<?php /* Smarty version Smarty-3.1.13, created on 2013-06-26 11:35:52
+         compiled from "./smarty/templates/items_list.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:199860974051caa6f3e73214-76270737%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '15b2ee76cca03445bbaee1cfbc1ea7e9ac3cfc93' => 
+    array (
+      0 => './smarty/templates/items_list.tpl',
+      1 => 1372236518,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '199860974051caa6f3e73214-76270737',
+  'function' => 
+  array (
+  ),
+  'version' => 'Smarty-3.1.13',
+  'unifunc' => 'content_51caa6f3ec97f8_38359868',
+  'variables' => 
+  array (
+    'none' => 0,
+    'items' => 0,
+    'item' => 0,
+  ),
+  'has_nocache_code' => false,
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_51caa6f3ec97f8_38359868')) {function content_51caa6f3ec97f8_38359868($_smarty_tpl) {?><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>admin items example</title>
+<title><?php echo $_smarty_tpl->tpl_vars['none']->value;?>
+</title>
 <style type="text/css">
 body {
 	background:#DDEEF2;
@@ -86,9 +114,6 @@ function delSelected() {
 function hideSelected() {
 	$("input:checked").hide();
 }
-function run() {
-	
-}
 </script>
 </head>
 <body>
@@ -111,24 +136,28 @@ function run() {
 	<tr id="tou">
 		<th><input type="checkbox" name="select_all">全选</th>
 		<th class="c1">商品名称</th>
-		<th>商品货号</th>
+		<th>商品序号</th>
 		<th>商品价格</th>
 		<th>商品库存</th>
 	</tr>
+	<?php  $_smarty_tpl->tpl_vars['item'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['item']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['items']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['item']->key => $_smarty_tpl->tpl_vars['item']->value){
+$_smarty_tpl->tpl_vars['item']->_loop = true;
+?>
 	<tr>
 		<td><input type="checkbox" name="select"></td>
-		<td class="c1">三菱主板</td>
-		<td>i00001</td>
-		<td>1980</td>
-		<td>5</td>
+		<td class="<?php echo $_smarty_tpl->tpl_vars['item']->value['id'];?>
+"><?php echo $_smarty_tpl->tpl_vars['item']->value['name'];?>
+</td>
+		<td><?php echo $_smarty_tpl->tpl_vars['item']->value['sn'];?>
+</td>
+		<td><?php echo $_smarty_tpl->tpl_vars['item']->value['price'];?>
+</td>
+		<td><?php echo $_smarty_tpl->tpl_vars['item']->value['quantity'];?>
+</td>
 	</tr>
-	<tr>
-		<td><input type="checkbox" name="select"></td>
-		<td class="c1">通力按钮</td>
-		<td>i001002</td>
-		<td>29.8</td>
-		<td>100</td>
-	</tr>
+	<?php } ?>
 	<tr>
 		<td colspan="5">
 		<div class="page_navi">	
@@ -144,4 +173,4 @@ function run() {
 </div>
 
 </body>
-</html>
+</html><?php }} ?>

@@ -1,10 +1,6 @@
 <?php
 
 require(dirname(__FILE__) . '/includes/init.php');
-require_once(ROOT_PATH . '/' . ADMIN_PATH . '/includes/lib_goods.php');
-include_once(ROOT_PATH . '/includes/cls_image.php');
-$image = new cls_image($_CFG['bgcolor']);
-$exc = new exchange($ecs->table('goods'), $db, 'goods_id', 'goods_name');
 
 /*------------------------------------------------------ */
 //-- 商品列表，商品回收站
@@ -12,75 +8,23 @@ $exc = new exchange($ecs->table('goods'), $db, 'goods_id', 'goods_name');
 
 if ($_REQUEST['do'] == 'list' || $_REQUEST['do'] == 'trash')
 {
-    admin_priv('goods_manage');
-
-    $cat_id = empty($_REQUEST['cat_id']) ? 0 : intval($_REQUEST['cat_id']);
-    $code   = empty($_REQUEST['extension_code']) ? '' : trim($_REQUEST['extension_code']);
-    $suppliers_id = isset($_REQUEST['suppliers_id']) ? (empty($_REQUEST['suppliers_id']) ? '' : trim($_REQUEST['suppliers_id'])) : '';
-    $is_on_sale = isset($_REQUEST['is_on_sale']) ? ((empty($_REQUEST['is_on_sale']) && $_REQUEST['is_on_sale'] === 0) ? '' : trim($_REQUEST['is_on_sale'])) : '';
-
-    $handler_list = array();
-    $handler_list['virtual_card'][] = array('url'=>'virtual_card.php?act=card', 'title'=>$_LANG['card'], 'img'=>'icon_send_bonus.gif');
-    $handler_list['virtual_card'][] = array('url'=>'virtual_card.php?act=replenish', 'title'=>$_LANG['replenish'], 'img'=>'icon_add.gif');
-    $handler_list['virtual_card'][] = array('url'=>'virtual_card.php?act=batch_card_add', 'title'=>$_LANG['batch_card_add'], 'img'=>'icon_output.gif');
-
-    if ($_REQUEST['act'] == 'list' && isset($handler_list[$code]))
-    {
-        $smarty->assign('add_handler',      $handler_list[$code]);
-    }
-
-    /* 供货商名 */
-    $suppliers_list_name = suppliers_list_name();
-    $suppliers_exists = 1;
-    if (empty($suppliers_list_name))
-    {
-        $suppliers_exists = 0;
-    }
-    $smarty->assign('is_on_sale', $is_on_sale);
-    $smarty->assign('suppliers_id', $suppliers_id);
-    $smarty->assign('suppliers_exists', $suppliers_exists);
-    $smarty->assign('suppliers_list_name', $suppliers_list_name);
-    unset($suppliers_list_name, $suppliers_exists);
-
-    /* 模板赋值 */
-    $goods_ur = array('' => $_LANG['01_goods_list'], 'virtual_card'=>$_LANG['50_virtual_card_list']);
-    $ur_here = ($_REQUEST['act'] == 'list') ? $goods_ur[$code] : $_LANG['11_goods_trash'];
-    $smarty->assign('ur_here', $ur_here);
-
-    $action_link = ($_REQUEST['act'] == 'list') ? add_link($code) : array('href' => 'goods.php?act=list', 'text' => $_LANG['01_goods_list']);
-    $smarty->assign('action_link',  $action_link);
-    $smarty->assign('code',     $code);
-    $smarty->assign('cat_list',     cat_list(0, $cat_id));
-    $smarty->assign('brand_list',   get_brand_list());
-    $smarty->assign('intro_list',   get_intro_list());
-    $smarty->assign('lang',         $_LANG);
-    $smarty->assign('list_type',    $_REQUEST['act'] == 'list' ? 'goods' : 'trash');
-    $smarty->assign('use_storage',  empty($_CFG['use_storage']) ? 0 : 1);
-
-    $suppliers_list = suppliers_list_info(' is_check = 1 ');
-    $suppliers_list_count = count($suppliers_list);
-    $smarty->assign('suppliers_list', ($suppliers_list_count == 0 ? 0 : $suppliers_list)); // 取供货商列表
-
-    $goods_list = goods_list($_REQUEST['act'] == 'list' ? 0 : 1, ($_REQUEST['act'] == 'list') ? (($code == '') ? 1 : 0) : -1);
-    $smarty->assign('goods_list',   $goods_list['goods']);
-    $smarty->assign('filter',       $goods_list['filter']);
-    $smarty->assign('record_count', $goods_list['record_count']);
-    $smarty->assign('page_count',   $goods_list['page_count']);
-    $smarty->assign('full_page',    1);
-
-    /* 排序标记 */
-    $sort_flag  = sort_flag($goods_list['filter']);
-    $smarty->assign($sort_flag['tag'], $sort_flag['img']);
-
-    /* 获取商品类型存在规格的类型 */
-    $specifications = get_goods_type_specifications();
-    $smarty->assign('specifications', $specifications);
-
-    /* 显示商品列表页面 */
-    assign_query_info();
-    $htm_file = ($_REQUEST['act'] == 'list') ?
-        'goods_list.htm' : (($_REQUEST['act'] == 'trash') ? 'goods_trash.htm' : 'group_list.htm');
-    $smarty->display($htm_file);
+	//解析参数，page等，默认值是第一页
+	$page = 0;
+	$amount = 10;
+	
+	//读取数据库
+// 	$count = $db->getRowNumber($sql_sta);
+	$sql = 'SELECT i.id, i.name, i.sn, i.price, i.quantity FROM mydb.items AS i ';
+	$result = $db->selectLimit($sql, $amount, $page);
+	$items = array();
+	// $result->num_rows;
+	for ($i = 0; $i < $result->num_rows; $i++) {
+		$tem = $result->fetch_assoc();
+		$items[$i] = $tem;
+	}
+	$smarty->assign('title', 'admin page');
+	$smarty->assign('items', $items);
+	$smarty->display('items_list.tpl');
 }
 
 /*------------------------------------------------------ */

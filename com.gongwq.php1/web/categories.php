@@ -43,7 +43,7 @@ $result = $db->selectLimit($sql, $amount, $page);
 // $result->num_rows;
 for ($i = 0; $i < $result->num_rows; $i++) {
 	$tem = $result->fetch_assoc();
-	$name[$i] = $tem[''];
+	$name[$i] = $tem['name'];
 }
 
 $smarty->assign('items',$name);
