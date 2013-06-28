@@ -6,7 +6,9 @@
 
 $modules['02_cat_and_goods']['01_goods_list']       = 'items.php?do=list';         // 商品列表
 $modules['02_cat_and_goods']['02_goods_add']        = 'items.php?do=add';          // 添加商品
-// $modules['02_cat_and_goods']['03_category_list']    = 'category.php?act=list';
+$modules['02_cat_and_goods']['03_category_list']    = 'categories.php?do=list';
+$modules['02_cat_and_goods']['04_category_add']    = 'categories.php?do=add';
+
 // $modules['02_cat_and_goods']['05_comment_manage']   = 'comment_manage.php?act=list';
 // $modules['02_cat_and_goods']['06_goods_brand_list'] = 'brand.php?act=list';
 // $modules['02_cat_and_goods']['08_goods_type']       = 'goods_type.php?act=manage';
