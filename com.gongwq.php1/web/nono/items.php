@@ -34,12 +34,19 @@ if ($_REQUEST['do'] == 'list' || $_REQUEST['do'] == 'trash')
 //添加或者编辑页面
 elseif ($_REQUEST['do'] == 'add' || $_REQUEST['do'] == 'edit' || $_REQUEST['act'] == 'copy')
 {
-
-	//AAA 检查权限
+	//初始化变量
+	$is_add = $_REQUEST['do'] == 'add';
+	
+	//检查权限
+	
+	//读取商品信息
+	
 }
 
 //处理插入或者更新动作
 elseif ($_REQUEST['do'] == 'insert' || $_REQUEST['do'] == 'update')
 {
+	//处理图片流程
+	
 
 }
