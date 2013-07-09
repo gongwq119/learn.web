@@ -32,7 +32,7 @@ if ($_REQUEST['do'] == 'list' || $_REQUEST['do'] == 'trash')
 /*------------------------------------------------------ */
 
 //添加或者编辑页面
-elseif ($_REQUEST['do'] == 'add' || $_REQUEST['do'] == 'edit' || $_REQUEST['act'] == 'copy')
+elseif ($_REQUEST['do'] == 'add' || $_REQUEST['do'] == 'edit' || $_REQUEST['do'] == 'copy')
 {
 	//初始化变量
 	$is_add = $_REQUEST['do'] == 'add';
@@ -40,13 +40,35 @@ elseif ($_REQUEST['do'] == 'add' || $_REQUEST['do'] == 'edit' || $_REQUEST['act'
 	//检查权限
 	
 	//读取商品信息
+	if ($is_add)
+	{
+		$item = array(
+				'sn' => '',
+				'name' => '',
+				'price' => 0,
+				'description' => '',
+				'cat_id' => 0,
+				'brand_id' => 0,
+				'quantity' => 0
+		);
+	}
+	
+	//模版赋值
+	$smarty -> assign('item', $item);
+	$smarty -> display("items_info.tpl");
 	
 }
 
 //处理插入或者更新动作
 elseif ($_REQUEST['do'] == 'insert' || $_REQUEST['do'] == 'update')
 {
-	//处理图片流程
+	//验证字段
+	
+	//处理图片
+	
+	//插入数据库
+	
+	$smarty -> display("ok.tpl");
 	
 
 }

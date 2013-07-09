@@ -71,16 +71,28 @@ function validate() {
     <li><a href="#tabs-2">详细描述</a></li>
     <li><a href="#tabs-3">物品相册</a></li>
   </ul>
-  <form enctype="multipart/form-data" action="" method="post" name="theForm" onsubmit="return validate();">
- <input type="hidden" name="do" value="insert">
+  <form enctype="multipart/form-data" action="" method="post" name="theForm" >
+  <input type="hidden" name="do" value="insert">
   <div id="tabs-1">
   	<table>
   		<tr>
   			<td>商品名称:&nbsp;&nbsp;&nbsp;</td>
-  			<td><input type="text" /></td>
+  			<td><input type="text" value=""/></td>
   		</tr>
   		<tr>
   			<td>商品价格:&nbsp;&nbsp;&nbsp;</td>
+  			<td><input type="text" value="<{$item.price}>" /></td>
+  		</tr>
+  		<tr>
+  			<td>商品序列号:&nbsp;&nbsp;&nbsp;</td>
+  			<td><input type="text" /></td>
+  		</tr>
+  		<tr>
+  			<td>商品分类:&nbsp;&nbsp;&nbsp;</td>
+  			<td><input type="text" /></td>
+  		</tr>
+  		<tr>
+  			<td>商品品牌:&nbsp;&nbsp;&nbsp;</td>
   			<td><input type="text" /></td>
   		</tr>
   		
