@@ -40,7 +40,7 @@ $(document).ready(function() {
 	var imageQuant = 1;
 	$("button[name='addImage']").click(function() {
 		if (imageQuant < maxImageQuant) {
-			$(".firstImage").after('<input type="file" name="image" /><br/>');
+			$(".firstImage").after('<input type="file" name="uploadImages[]" /><br/>');
 			imageQuant ++;
 		}
 		else {
@@ -107,7 +107,7 @@ function validate() {
   </div>
   <div id="tabs-3">
   	<button type="button" name="addImage">添加图片</button><h1>总共最多上传3张图片</h1><br/>
-  	<input type="file" name="image" /><br class="firstImage"/>
+  	<input type="file" name="uploadImages[]" /><br class="firstImage"/>
   </div>
   <div>
   	<input type="submit" value="确认"/><input type="button" value="重置"/>

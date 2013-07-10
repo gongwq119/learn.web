@@ -1,6 +1,9 @@
 <?php
 
 require(dirname(__FILE__) . '/includes/init.php');
+require_once(ROOT_PATH . '/includes/cls_image.php');
+
+$imageUtil = new cls_image('#FFFFFF');
 
 /*------------------------------------------------------ */
 //-- 商品列表，商品回收站
@@ -65,7 +68,17 @@ elseif ($_REQUEST['do'] == 'insert' || $_REQUEST['do'] == 'update')
 	//验证字段
 	
 	//处理图片
-	
+	$max_images = 3;
+	//处理标准图片，略缩图片
+	//上传图片
+	if (isset($_FILES['uploadImages'])) {
+		for ($i = 0; $i < $max_images; $i++) {
+			if ($_FILES['uploadImages']['error'][$i] > 0) {
+				die("上传图片错误");
+			}
+		}
+	}
+	$imageUtil->upload_image($_FILES['uploadImages']);
 	//插入数据库
 	
 	$smarty -> display("ok.tpl");

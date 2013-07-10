@@ -36,6 +36,9 @@ define('ROOT_PATH', str_replace(ADMIN_PATH_NAME . '/includes/init.php', '', str_
 //加载库文件
 require (ROOT_PATH . '/includes/lib_mysql.php');
 require (ROOT_PATH . '/smarty/libs/Smarty.class.php');
+require(ROOT_PATH . '/includes/lib_base.php');
+require(ROOT_PATH . '/includes/lib_common.php');
+require(ROOT_PATH . '/includes/lib_time.php');
 
 //创建log对象
 

@@ -61,12 +61,22 @@ DROP TABLE IF EXISTS `categories`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `categories` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
-  `description` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`,`name`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `cat_id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `cat_name` varchar(90) NOT NULL DEFAULT '',
+  `keywords` varchar(255) NOT NULL DEFAULT '',
+  `cat_desc` varchar(255) NOT NULL DEFAULT '',
+  `parent_id` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `sort_order` tinyint(1) unsigned NOT NULL DEFAULT '50',
+  `template_file` varchar(50) NOT NULL DEFAULT '',
+  `measure_unit` varchar(15) NOT NULL DEFAULT '',
+  `show_in_nav` tinyint(1) NOT NULL DEFAULT '0',
+  `style` varchar(150) NOT NULL,
+  `is_show` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `grade` tinyint(4) NOT NULL DEFAULT '0',
+  `filter_attr` varchar(255) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`cat_id`),
+  KEY `parent_id` (`parent_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -75,7 +85,7 @@ CREATE TABLE `categories` (
 
 LOCK TABLES `categories` WRITE;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
-INSERT INTO `categories` VALUES (1,'主板类','电梯主板，电梯主板，电梯主板'),(2,'按钮类','外招按钮，外招按钮，外招按钮');
+INSERT INTO `categories` VALUES (6,'电梯主板','主板','',0,50,'','',0,'',1,0,'0'),(7,'外招按钮','按钮','',0,50,'','',0,'',1,0,'0');
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,6 +120,32 @@ LOCK TABLES `items` WRITE;
 INSERT INTO `items` VALUES (1,'000001','不锈钢按钮',3,'按钮按钮',1,0,0,0),(2,'000002','控制主板',1990,'三菱主板',2,0,0,0),(3,'000003','压克力按钮',3,'按钮按钮',1,0,0,0),(4,'','苹果',1,'ffff',2,0,0,0),(5,'','鸭梨',2,'ffff',1,0,0,0),(6,'','鼠标',3,'ffff',2,0,0,0),(7,'','键盘',234,'ffff',1,0,0,0),(8,'','水杯',56,'ffff',2,0,0,0),(9,'','卫生纸',78,'ffff',1,0,0,0),(10,'','激光测距仪',1223,'ffff',2,0,0,0),(11,'','油笔',1,'ffff',1,0,0,0),(12,'','笔记本',0,'ffff',2,0,0,0),(13,'','',0,'ffff',1,0,0,0),(14,'','苹果',1,'ffff',2,0,0,0),(15,'','鸭梨',2,'ffff',1,0,0,0),(16,'','鼠标',3,'ffff',2,0,0,0),(17,'','键盘',234,'ffff',1,0,0,0),(18,'','水杯',56,'ffff',2,0,0,0),(19,'','卫生纸',78,'ffff',1,0,0,0),(20,'','激光测距仪',1223,'ffff',2,0,0,0),(21,'','油笔',1,'ffff',1,0,0,0),(22,'','笔记本',0,'ffff',2,0,0,0),(23,'','',0,'ffff',1,0,0,0),(24,'000003','苹果',1,'ffff',2,0,0,0),(25,'','鼠标',3,'ffff',2,0,0,0),(26,'','键盘',234,'ffff',1,0,0,0),(27,'','水杯',56,'ffff',2,0,0,0),(28,'','卫生纸',78,'ffff',1,0,0,0),(29,'','激光测距仪',1223,'ffff',2,0,0,0),(30,'','油笔',1,'ffff',1,0,0,0),(31,'','笔记本',0,'ffff',2,0,0,0),(32,'','你没',12,'ffff',1,0,0,0),(33,'','haohao',190,'ffff',2,0,0,0),(34,'000003','苹果',1,'ffff',2,0,0,0),(35,'000005','鼠标',3,'ffff',2,0,0,0),(36,'000006','键盘',234,'ffff',1,0,0,0),(37,'000007','水杯',56,'ffff',2,0,0,0),(38,'000008','卫生纸',78,'ffff',1,0,0,0),(39,'000009','激光测距仪',1223,'ffff',2,0,0,0),(40,'000010','油笔',1,'ffff',1,0,0,0),(41,'000011','笔记本',0,'ffff',2,0,0,0),(42,'000012','你没',12,'ffff',1,0,0,0),(43,'','haohao',190,'ffff',2,0,0,0);
 /*!40000 ALTER TABLE `items` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `items_images`
+--
+
+DROP TABLE IF EXISTS `items_images`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `items_images` (
+  `img_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `item_id` mediumint(8) unsigned NOT NULL,
+  `stand_url` varchar(255) NOT NULL DEFAULT '',
+  `thumb_url` varchar(255) NOT NULL DEFAULT '',
+  `original_url` varchar(255) NOT NULL,
+  PRIMARY KEY (`img_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `items_images`
+--
+
+LOCK TABLES `items_images` WRITE;
+/*!40000 ALTER TABLE `items_images` DISABLE KEYS */;
+/*!40000 ALTER TABLE `items_images` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -120,4 +156,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-06-26 18:13:20
+-- Dump completed on 2013-07-10 16:12:56
