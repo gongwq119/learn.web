@@ -33,6 +33,7 @@ class lib_mysql {
 		return $this->db->query($sql_sta);
 	}
 	
+	
 	/**
 	 * 
 	 * @param unknown $sql_sta
@@ -75,6 +76,26 @@ class lib_mysql {
 	function getAdminUserId($username, $password) {
 		$sql = 'SELECT user_id FROM mydb.admin_user WHERE user_name=\'' . $username . '\' AND ' . 'password=\'' . md5($password) . '\'';
 		return $this->execute($sql);
+	}
+	
+	/**
+	 * 
+	 * @param unknown $table
+	 * @param unknown $array
+	 */
+	function insertRow($table, $array) {
+		$sql = 'INSERT INTO ' .  $table . ' ';
+		$key_string = '(';
+		$value_string = 'VALUES (';
+		foreach ($array as $k=>$v) {
+			$key_string = $key_string . $k . ', ';
+			$value_string = $value_string . "'$v', ";
+		}
+		$key_string = substr($key_string, 0, strlen($key_string)-2) . ') ';
+		$value_string = substr($value_string, 0, strlen($value_string)-2) . ')';
+		$sql = $sql . $key_string . $value_string;
+		$this->execute($sql);
+		return $this->db->insert_id;
 	}
 }
 

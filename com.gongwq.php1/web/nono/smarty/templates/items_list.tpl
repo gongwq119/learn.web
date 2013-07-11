@@ -115,10 +115,10 @@ function hideSelected() {
 	<{foreach $items as $item}>
 	<tr>
 		<td><input type="checkbox" name="select"></td>
-		<td class="<{$item.id}>"><{$item.name}></td>
-		<td><{$item.sn}></td>
-		<td><{$item.price}></td>
-		<td><{$item.quantity}></td>
+		<td class="<{$item.it_id}>"><{$item.it_name}></td>
+		<td><{$item.it_sn}></td>
+		<td><{$item.it_price}></td>
+		<td><{$item.it_quant}></td>
 	</tr>
 	<{/foreach}>
 	<tr>

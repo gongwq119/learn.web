@@ -21,6 +21,9 @@ class cls_image
     var $data_dir    = '/user_files';
     var $bgcolor     = '';
     var $type_maping = array(1 => 'image/gif', 2 => 'image/jpeg', 3 => 'image/png');
+    public static $stand_size = 350;
+    public static $thumb_size = 50;
+    public static $large_size = 800;
 
     function __construct($bgcolor='')
     {
@@ -99,51 +102,94 @@ class cls_image
         	}
         }
         return $images_target;
-
-
-//         /* 允许上传的文件类型 */
-//         $allow_file_types = '|GIF|JPG|JEPG|PNG|BMP|';
-//         if (!check_file_type($upload['tmp_name'], $img_name, $allow_file_types))
-//         {
-//             $this->error_msg = 'invalid_upload_image_type';
-//             $this->error_no  =  0;
-//             return false;
-//         }
-
-        if ($this->move_file($upload, $img_name))
-        {
-            return str_replace(ROOT_PATH, '', $img_name);
-        }
-        else
-        {
-            $this->error_msg = 'upload_failure';
-            $this->error_no  = 0;
-
-            return false;
-        }
     }
 
+    /**
+     * 
+     * @param resource $img_res
+     * @param string $dir
+     * @param string $img_name
+     */
+    function upload_image_source($img_res, $dir_prefix = '') {
+    	
+    	$dir = ROOT_PATH . $this->images_dir . '/' . date('Ym').'/';
+    	//创建当月目录 
+    	if (!empty($dir_prefix))
+    	{
+    		$dir = ROOT_PATH . $this->images_dir . '/' . date('Ym').'/' . $dir_prefix . '/';
+    	}
+    	
+    	if (!file_exists($dir))
+    	{
+    		if (!make_dir($dir))
+    		{
+    			$this->error_msg = 'directory_readonly';
+    			$this->error_no  = 0;
+    			return false;
+    		}
+    	}
+    	
+    	/* 如果文件名为空，生成不重名随机文件名 */
+    	$filename = $this->unique_name($dir);
+    	
+    	/* 生成文件 */
+    	if (function_exists('imagejpeg'))
+    	{
+    		$filename .= '.jpg';
+    		imagejpeg($img_res, $dir . $filename);
+    	}
+    	elseif (function_exists('imagegif'))
+    	{
+    		$filename .= '.gif';
+    		imagegif($img_res, $dir . $filename);
+    	}
+    	elseif (function_exists('imagepng'))
+    	{
+    		$filename .= '.png';
+    		imagepng($img_res, $dir . $filename);
+    	}
+    	else
+    	{
+    		$this->error_msg = 'creating_failure';
+    		return false;
+    	}
+    	//销毁资源
+    	imagedestroy($img_res);
+    	
+    	//确认文件是否生成
+    	if (file_exists($dir . $filename))
+    	{
+    		return str_replace(ROOT_PATH, '', $dir) . $filename;
+    	}
+    	else
+    	{
+    		$this->error_msg = 'writting_failure';
+    		return false;
+    	}
+    	
+    }
+    
     /**
      * 创建图片的缩略图
      *
      * @access  public
      * @param   string      $img    原始图片的路径
-     * @param   int         $thumb_width  缩略图宽度
-     * @param   int         $thumb_height 缩略图高度
+     * @param   int         $width  图宽度
+     * @param   int         $height 图高度
      * @param   strint      $path         指定生成图片的目录名
-     * @return  mix         如果成功返回缩略图的路径，失败则返回false
+     * @return  mix         如果成功返回图片的路径，失败则返回false
      */
-    function make_thumb($img, $thumb_width = 0, $thumb_height = 0, $path = '', $bgcolor='')
+    function make_image($img, $width = 0, $height = 0, $bgcolor='')
     {
          $gd = $this->gd_version(); //获取 GD 版本。0 表示没有 GD 库，1 表示 GD 1.x，2 表示 GD 2.x
          if ($gd == 0)
          {
-             $this->error_msg = $GLOBALS['_LANG']['missing_gd'];
+             $this->error_msg = 'No GD,check the phpinfo';
              return false;
          }
 
-        /* 检查缩略图宽度和高度是否合法 */
-        if ($thumb_width == 0 && $thumb_height == 0)
+        /* 检查新图宽度和高度是否合法 */
+        if ($width == 0 && $height == 0)
         {
             return str_replace(ROOT_PATH, '', str_replace('\\', '/', realpath($img)));
         }
@@ -152,42 +198,39 @@ class cls_image
         $org_info = @getimagesize($img);
         if (!$org_info)
         {
-            $this->error_msg = sprintf($GLOBALS['_LANG']['missing_orgin_image'], $img);
-            $this->error_no  = ERR_IMAGE_NOT_EXISTS;
-
+            $this->error_msg = 'missing_orgin_image';
             return false;
         }
 
         if (!$this->check_img_function($org_info[2]))
         {
-            $this->error_msg = sprintf($GLOBALS['_LANG']['nonsupport_type'], $this->type_maping[$org_info[2]]);
-            $this->error_no  =  ERR_NO_GD;
+            $this->error_msg = 'nonsupport_type';
 
             return false;
         }
 
         $img_org = $this->img_resource($img, $org_info[2]);
 
-        /* 原始图片以及缩略图的尺寸比例 */
+        /* 原始图片以及新图的尺寸比例 */
         $scale_org      = $org_info[0] / $org_info[1];
-        /* 处理只有缩略图宽和高有一个为0的情况，这时背景和缩略图一样大 */
-        if ($thumb_width == 0)
+        /* 处理只有新图宽和高有一个为0的情况，这时背景和新图一样大 */
+        if ($width == 0)
         {
-            $thumb_width = $thumb_height * $scale_org;
+            $width = $height * $scale_org;
         }
-        if ($thumb_height == 0)
+        if ($height == 0)
         {
-            $thumb_height = $thumb_width / $scale_org;
+            $height = $width / $scale_org;
         }
 
-        /* 创建缩略图的标志符 */
+        /* 创建新图的标志符 */
         if ($gd == 2)
         {
-            $img_thumb  = imagecreatetruecolor($thumb_width, $thumb_height);
+            $img_result  = imagecreatetruecolor($width, $height);
         }
         else
         {
-            $img_thumb  = imagecreate($thumb_width, $thumb_height);
+            $img_result  = imagecreate($width, $height);
         }
 
         /* 背景颜色 */
@@ -197,99 +240,41 @@ class cls_image
         }
         $bgcolor = trim($bgcolor,"#");
         sscanf($bgcolor, "%2x%2x%2x", $red, $green, $blue);
-        $clr = imagecolorallocate($img_thumb, $red, $green, $blue);
-        imagefilledrectangle($img_thumb, 0, 0, $thumb_width, $thumb_height, $clr);
+        $clo = imagecolorallocate($img_result, $red, $green, $blue);
+        imagefilledrectangle($img_result, 0, 0, $width, $height, $clo);
 
-        if ($org_info[0] / $thumb_width > $org_info[1] / $thumb_height)
+        if ($org_info[0] / $width > $org_info[1] / $height)
         {
-            $lessen_width  = $thumb_width;
-            $lessen_height  = $thumb_width / $scale_org;
+            $lessen_width  = $width;
+            $lessen_height  = $width / $scale_org;
         }
         else
         {
             /* 原始图片比较高，则以高度为准 */
-            $lessen_width  = $thumb_height * $scale_org;
-            $lessen_height = $thumb_height;
+            $lessen_width  = $height * $scale_org;
+            $lessen_height = $height;
         }
 
-        $dst_x = ($thumb_width  - $lessen_width)  / 2;
-        $dst_y = ($thumb_height - $lessen_height) / 2;
+        $dst_x = ($width  - $lessen_width)  / 2;
+        $dst_y = ($height - $lessen_height) / 2;
 
         /* 将原始图片进行缩放处理 */
         if ($gd == 2)
         {
-            imagecopyresampled($img_thumb, $img_org, $dst_x, $dst_y, 0, 0, $lessen_width, $lessen_height, $org_info[0], $org_info[1]);
+            imagecopyresampled($img_result, $img_org, $dst_x, $dst_y, 0, 0, $lessen_width, $lessen_height, $org_info[0], $org_info[1]);
         }
         else
         {
-            imagecopyresized($img_thumb, $img_org, $dst_x, $dst_y, 0, 0, $lessen_width, $lessen_height, $org_info[0], $org_info[1]);
+            imagecopyresized($img_result, $img_org, $dst_x, $dst_y, 0, 0, $lessen_width, $lessen_height, $org_info[0], $org_info[1]);
         }
-
-        /* 创建当月目录 */
-        if (empty($path))
-        {
-            $dir = ROOT_PATH . $this->images_dir . '/' . date('Ym').'/';
-        }
-        else
-        {
-            $dir = $path;
-        }
+        return $img_result;
 
 
-        /* 如果目标目录不存在，则创建它 */
-        if (!file_exists($dir))
-        {
-            if (!make_dir($dir))
-            {
-                /* 创建目录失败 */
-                $this->error_msg  = sprintf($GLOBALS['_LANG']['directory_readonly'], $dir);
-                $this->error_no   = ERR_DIRECTORY_READONLY;
-                return false;
-            }
-        }
 
-        /* 如果文件名为空，生成不重名随机文件名 */
-        $filename = $this->unique_name($dir);
 
-        /* 生成文件 */
-        if (function_exists('imagejpeg'))
-        {
-            $filename .= '.jpg';
-            imagejpeg($img_thumb, $dir . $filename);
-        }
-        elseif (function_exists('imagegif'))
-        {
-            $filename .= '.gif';
-            imagegif($img_thumb, $dir . $filename);
-        }
-        elseif (function_exists('imagepng'))
-        {
-            $filename .= '.png';
-            imagepng($img_thumb, $dir . $filename);
-        }
-        else
-        {
-            $this->error_msg = $GLOBALS['_LANG']['creating_failure'];
-            $this->error_no  =  ERR_NO_GD;
 
-            return false;
-        }
 
-        imagedestroy($img_thumb);
-        imagedestroy($img_org);
 
-        //确认文件是否生成
-        if (file_exists($dir . $filename))
-        {
-            return str_replace(ROOT_PATH, '', $dir) . $filename;
-        }
-        else
-        {
-            $this->error_msg = $GLOBALS['_LANG']['writting_failure'];
-            $this->error_no   = ERR_DIRECTORY_READONLY;
-
-            return false;
-        }
     }
 
     /**

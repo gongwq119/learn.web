@@ -77,23 +77,23 @@ function validate() {
   	<table>
   		<tr>
   			<td>商品名称:&nbsp;&nbsp;&nbsp;</td>
-  			<td><input type="text" value=""/></td>
+  			<td><input type="text" value="" name='it_name'/></td>
   		</tr>
   		<tr>
   			<td>商品价格:&nbsp;&nbsp;&nbsp;</td>
-  			<td><input type="text" value="<{$item.price}>" /></td>
+  			<td><input type="text" value="" name='it_price' /></td>
   		</tr>
   		<tr>
   			<td>商品序列号:&nbsp;&nbsp;&nbsp;</td>
-  			<td><input type="text" /></td>
+  			<td><input type="text" name='it_sn' /></td>
   		</tr>
   		<tr>
   			<td>商品分类:&nbsp;&nbsp;&nbsp;</td>
-  			<td><input type="text" /></td>
+  			<td><input type="text" name='cat_id' /></td>
   		</tr>
   		<tr>
   			<td>商品品牌:&nbsp;&nbsp;&nbsp;</td>
-  			<td><input type="text" /></td>
+  			<td><input type="text" name='brand_id' /></td>
   		</tr>
   		
   	</table>

@@ -21,7 +21,7 @@ if (__FILE__ == '')
 }
 if(!defined('ADMIN_PATH_NAME'))
 {
-	define('ADMIN_PATH_NAME','nono');
+	define('ADMIN_PATH_NAME','/nono');
 }
 define('ROOT_PATH', str_replace(ADMIN_PATH_NAME . '/includes/init.php', '', str_replace('\\', '/', __FILE__)));
 
@@ -49,8 +49,8 @@ require(ROOT_PATH . '/includes/lib_time.php');
 //加载系统配置
 
 //加载语言包
-require(ROOT_PATH . 'languages/' . 'zh_cn' . '/admin/common.php');
-require(ROOT_PATH . 'languages/' . 'zh_cn' . '/admin/log_action.php');
+require(ROOT_PATH . '/languages/' . 'zh_cn' . '/admin/common.php');
+require(ROOT_PATH . '/languages/' . 'zh_cn' . '/admin/log_action.php');
 
 
 //初始化 do
