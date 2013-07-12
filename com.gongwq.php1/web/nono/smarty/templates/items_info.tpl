@@ -48,6 +48,7 @@ $(document).ready(function() {
 		}
 		
 	});
+	
 });
 </script>
 <script type="text/javascript">
@@ -61,7 +62,7 @@ function validate() {
 <body>
 <div id="w1">
 <div class="title">
-嘉海配件管理中心->编辑物品
+嘉海配件管理中心->物品信息
 </div>
 </div>
 <div id="w2">
@@ -80,20 +81,36 @@ function validate() {
   			<td><input type="text" value="" name='it_name'/></td>
   		</tr>
   		<tr>
+  			<td>商品序列号:&nbsp;&nbsp;&nbsp;</td>
+  			<td><input type="text" value="" name='it_sn' /></td>
+  		</tr>
+  		<tr>
+  			<td>商品分类:&nbsp;&nbsp;&nbsp;</td>
+  			<td>
+	  		<select name="cat_id">
+	  			<{foreach $cats as $cat}>
+				<option value="<{$cat.cat_id}>"><{$cat.cat_name}></option>
+				<{/foreach}>
+			</select>
+  			</td>
+  		</tr>
+  		<tr>
+  			<td>商品品牌:&nbsp;&nbsp;&nbsp;</td>
+  			<td>
+  			<select name="brand_id">
+				<{foreach $brands as $brand}>
+				<option value="<{$brand.brand_id}>"><{$brand.brand_name}></option>
+				<{/foreach}>
+			</select>
+  			</td>
+  		</tr>
+  		<tr>
   			<td>商品价格:&nbsp;&nbsp;&nbsp;</td>
   			<td><input type="text" value="" name='it_price' /></td>
   		</tr>
   		<tr>
-  			<td>商品序列号:&nbsp;&nbsp;&nbsp;</td>
-  			<td><input type="text" name='it_sn' /></td>
-  		</tr>
-  		<tr>
-  			<td>商品分类:&nbsp;&nbsp;&nbsp;</td>
-  			<td><input type="text" name='cat_id' /></td>
-  		</tr>
-  		<tr>
-  			<td>商品品牌:&nbsp;&nbsp;&nbsp;</td>
-  			<td><input type="text" name='brand_id' /></td>
+  			<td>商品数量:&nbsp;&nbsp;&nbsp;</td>
+  			<td><input type="text" value="" name='it_price' /></td>
   		</tr>
   		
   	</table>

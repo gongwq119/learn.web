@@ -70,6 +70,32 @@ class lib_mysql {
 	
 	/**
 	 * 
+	 * @param unknown $table
+	 * @param string $field
+	 */
+	function selectAll($table, $field = '') {
+		$param = func_get_args();
+		$table = $param[0];
+		$ab = substr($table, 0, 1);
+		$fields_max_index = func_num_args();
+		
+		if ($fields_max_index > 1) {
+			$sql = 'SELECT ';
+			for ($i = 1; $i < $fields_max_index; $i++) {
+				$sql = $sql . $ab . ".$param[$i], "; 
+			}
+			
+			$sql = substr($sql, 0, strlen($sql)-2) . ' FROM mydb.' . $table . ' AS ' . $ab;
+		} 
+		else
+		{
+			$sql = 'SELECT * FROM mydb.' . $table . ' AS ' . $ab;
+		}
+		return $this->execute($sql);
+	}
+	
+	/**
+	 * 
 	 * @param unknown $username
 	 * @param unknown $passw0rd
 	 */

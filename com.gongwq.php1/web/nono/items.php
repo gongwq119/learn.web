@@ -4,6 +4,9 @@ require(dirname(__FILE__) . '/includes/init.php');
 require_once(ROOT_PATH . '/includes/cls_image.php');
 
 $imageUtil = new cls_image('#FFFFFF');
+$it_db_name = 'items';
+$cat_db_name = 'categories';
+$brand_db_name = 'brands';
 
 
 /*------------------------------------------------------ */
@@ -56,11 +59,25 @@ elseif ($_REQUEST['do'] == 'add' || $_REQUEST['do'] == 'edit' || $_REQUEST['do']
 				'it_quant' => 0
 		);
 	}
+	//读取商品类别，商品品牌
+	$cat_array = array();
+	$result = $db->selectAll($cat_db_name, 'cat_id', 'cat_name');
+	for ($i = 0; $i < $result->num_rows; $i++) {
+		$tem = $result->fetch_assoc();
+		$cat_array[$i] = $tem;
+	}
+	$brand_array = array();
+	$result = $db->selectAll($brand_db_name, 'brand_id', 'brand_name');
+	for ($i = 0; $i < $result->num_rows; $i++) {
+		$tem = $result->fetch_assoc();
+		$brand_array[$i] = $tem;
+	}
 	
 	//模版赋值
-	$smarty -> assign('item', $item);
-	$smarty -> display("items_info.tpl");
-	
+	$smarty->assign('cats',$cat_array);
+	$smarty->assign('brands',$brand_array);
+	$smarty->assign('item', $item);
+	$smarty->display("items_info.tpl");
 }
 
 //处理插入或者更新动作
