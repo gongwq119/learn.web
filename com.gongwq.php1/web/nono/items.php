@@ -43,34 +43,53 @@ elseif ($_REQUEST['do'] == 'add' || $_REQUEST['do'] == 'edit' || $_REQUEST['do']
 {
 	//初始化变量
 	$is_add = $_REQUEST['do'] == 'add';
-	
+
 	//检查权限
 	
-	//读取商品信息
-	if ($is_add)
-	{
-		$item = array(
-				'it_sn' => '',
-				'it_name' => '',
-				'price' => 0,
-				'it_desc' => '',
-				'cat_id' => 0,
-				'brand_id' => 0,
-				'it_quant' => 0
-		);
-	}
-	//读取商品类别，商品品牌
+	//读取商品类别，商品品牌列表
 	$cat_array = array();
 	$result = $db->selectAll($cat_db_name, 'cat_id', 'cat_name');
 	for ($i = 0; $i < $result->num_rows; $i++) {
 		$tem = $result->fetch_assoc();
 		$cat_array[$i] = $tem;
 	}
+	array_push($cat_array, array('cat_id'=>'0', 'cat_name'=>'未选择'));
+	
 	$brand_array = array();
 	$result = $db->selectAll($brand_db_name, 'brand_id', 'brand_name');
 	for ($i = 0; $i < $result->num_rows; $i++) {
 		$tem = $result->fetch_assoc();
 		$brand_array[$i] = $tem;
+	}
+	array_push($brand_array, array('brand_id'=>'0', 'brand_name'=>'未选择'));
+	
+	//新建空商品信息，或者读取商品信息
+	if ($is_add)
+	{
+		$item = array(
+				'it_sn' => '',
+				'it_name' => '',
+				'it_price' => 0,
+				'it_desc' => '请编辑商品描述',
+				'cat_id' => 0,
+				'brand_id' => 0,
+				'it_quant' => 0
+		);
+	}
+	else
+	{
+		$item = array();
+		$result = $db->getItem($_GET['item_id']);
+		$tem = $result->fetch_assoc();
+		$item = array(
+				'it_sn' => $tem['it_sn'],
+				'it_name' => $tem['it_name'],
+				'it_price' => $tem['it_price'],
+				'it_desc' => $tem['it_desc'],
+				'cat_id' => $tem['cat_id'],
+				'brand_id' => $tem['brand_id'],
+				'it_quant' => $tem['it_quant']
+		);
 	}
 	
 	//模版赋值

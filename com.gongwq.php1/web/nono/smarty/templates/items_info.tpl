@@ -46,8 +46,11 @@ $(document).ready(function() {
 		else {
 			alert("最多一次上传三张图片");
 		}
-		
 	});
+	//初始化cat,brand值
+	$("select[name='cat_id']").val(<{$item.cat_id}>);
+	$("select[name='brand_id']").val(<{$item.brand_id}>);
+	
 	
 });
 </script>
@@ -78,11 +81,11 @@ function validate() {
   	<table>
   		<tr>
   			<td>商品名称:&nbsp;&nbsp;&nbsp;</td>
-  			<td><input type="text" value="" name='it_name'/></td>
+  			<td><input type="text" value="<{$item.it_name}>"  /></td>
   		</tr>
   		<tr>
   			<td>商品序列号:&nbsp;&nbsp;&nbsp;</td>
-  			<td><input type="text" value="" name='it_sn' /></td>
+  			<td><input type="text" value="<{$item.it_sn}>"  /></td>
   		</tr>
   		<tr>
   			<td>商品分类:&nbsp;&nbsp;&nbsp;</td>
@@ -106,17 +109,17 @@ function validate() {
   		</tr>
   		<tr>
   			<td>商品价格:&nbsp;&nbsp;&nbsp;</td>
-  			<td><input type="text" value="" name='it_price' /></td>
+  			<td><input type="text" value="<{$item.it_price}>" /></td>
   		</tr>
   		<tr>
   			<td>商品数量:&nbsp;&nbsp;&nbsp;</td>
-  			<td><input type="text" value="" name='it_price' /></td>
+  			<td><input type="text" value="<{$item.it_quant}>" /></td>
   		</tr>
   		
   	</table>
   </div>
   <div id="tabs-2">
-	<textarea name="后台取值的key" id="myEditor">请添加商品描述</textarea>
+	<textarea name="后台取值的key" id="myEditor"><{$item.it_desc}></textarea>
 	<script type="text/javascript">
 	    var editor = new UE.ui.Editor();
 	    editor.render("myEditor");

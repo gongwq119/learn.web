@@ -1,22 +1,22 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-06-26 11:35:52
+<?php /* Smarty version Smarty-3.1.13, created on 2013-07-13 05:02:57
          compiled from "./smarty/templates/items_list.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:199860974051caa6f3e73214-76270737%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:45590340251de5c0d1d3346-12537241%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '15b2ee76cca03445bbaee1cfbc1ea7e9ac3cfc93' => 
     array (
       0 => './smarty/templates/items_list.tpl',
-      1 => 1372236518,
+      1 => 1373684569,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '199860974051caa6f3e73214-76270737',
+  'nocache_hash' => '45590340251de5c0d1d3346-12537241',
   'function' => 
   array (
   ),
   'version' => 'Smarty-3.1.13',
-  'unifunc' => 'content_51caa6f3ec97f8_38359868',
+  'unifunc' => 'content_51de5c0d25be03_95812331',
   'variables' => 
   array (
     'none' => 0,
@@ -25,7 +25,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_51caa6f3ec97f8_38359868')) {function content_51caa6f3ec97f8_38359868($_smarty_tpl) {?><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<?php if ($_valid && !is_callable('content_51de5c0d25be03_95812331')) {function content_51de5c0d25be03_95812331($_smarty_tpl) {?><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -114,6 +114,11 @@ function delSelected() {
 function hideSelected() {
 	$("input:checked").hide();
 }
+function editSelected() {
+	var link = "items.php?do=edit";
+	link = link + "&item_id=" + $("input:checked").val();
+	window.location.href=link; 
+}
 </script>
 </head>
 <body>
@@ -126,7 +131,7 @@ function hideSelected() {
 <div class="operations">
 	<button type="button" id="new_item" onclick="hideSelected()">NEW</button>
 	<button type="button" id="del_item" onclick="delSelected()">DEL</button>
-	<button type="button" id="edit_item" onclick="">EDIT</button>
+	<button type="button" id="edit_item" onclick="editSelected()">EDIT</button>
 </div>
 </div>
 
@@ -146,15 +151,16 @@ foreach ($_from as $_smarty_tpl->tpl_vars['item']->key => $_smarty_tpl->tpl_vars
 $_smarty_tpl->tpl_vars['item']->_loop = true;
 ?>
 	<tr>
-		<td><input type="checkbox" name="select"></td>
-		<td class="<?php echo $_smarty_tpl->tpl_vars['item']->value['id'];?>
-"><?php echo $_smarty_tpl->tpl_vars['item']->value['name'];?>
+		<td><input type="checkbox" name="select" value="<?php echo $_smarty_tpl->tpl_vars['item']->value['it_id'];?>
+" ></td>
+		<td class="<?php echo $_smarty_tpl->tpl_vars['item']->value['it_id'];?>
+"><?php echo $_smarty_tpl->tpl_vars['item']->value['it_name'];?>
 </td>
-		<td><?php echo $_smarty_tpl->tpl_vars['item']->value['sn'];?>
+		<td><?php echo $_smarty_tpl->tpl_vars['item']->value['it_sn'];?>
 </td>
-		<td><?php echo $_smarty_tpl->tpl_vars['item']->value['price'];?>
+		<td><?php echo $_smarty_tpl->tpl_vars['item']->value['it_price'];?>
 </td>
-		<td><?php echo $_smarty_tpl->tpl_vars['item']->value['quantity'];?>
+		<td><?php echo $_smarty_tpl->tpl_vars['item']->value['it_quant'];?>
 </td>
 	</tr>
 	<?php } ?>

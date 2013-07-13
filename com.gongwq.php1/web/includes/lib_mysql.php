@@ -50,7 +50,7 @@ class lib_mysql {
 	 * @return mixed
 	 */
 	function getItem($item_id) {
-		$sql = 'SELECT * FROM mydb.items WHERE id=' . $item_id;
+		$sql = 'SELECT * FROM mydb.items WHERE it_id=' . $item_id;
 		return $this->execute($sql);
 	}
 	
