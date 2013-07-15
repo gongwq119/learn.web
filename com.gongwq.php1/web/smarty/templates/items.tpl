@@ -7,9 +7,14 @@
 <script language="JavaScript" src="/js/jquery-1.9.1.js"></script>
 </head>
 <body>
-	<div class="homepage">
+	<div id="w_all">
+	<div id="w1">
 		<{include file="./header.lib.tpl"}>
+	</div>
+	<div id="w2">
 		<{include file="./navi.lib.tpl"}>
+	</div>
+	<div id="w3">
 		<!-- Begin of the container -->
 		<div class="container">
 			<!-- Begin of the breadcurmb -->
@@ -71,16 +76,6 @@
 			</div>
 		</div>
 		<!-- End of the container -->
-
-		<!-- Begin of the links -->
-		<div class="links">
-		</div>
-		<!-- End of the links -->
-		
-		<!-- Begin of the footer -->
-		<div class="footer">
-		</div>
-		<!-- End of the footer -->
 	</div>
 </body>
 </html>

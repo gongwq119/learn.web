@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-06-08 08:53:41
+<?php /* Smarty version Smarty-3.1.13, created on 2013-07-15 16:22:00
          compiled from "/home/gongwq/site/php1/com.gongwq.php1/web/smarty/templates/items.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:99237961751adb9ef2fc6a2-15959580%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'ab6eb6e5e6f0d5d2441ddb27dc0be438755b5910' => 
     array (
       0 => '/home/gongwq/site/php1/com.gongwq.php1/web/smarty/templates/items.tpl',
-      1 => 1370674419,
+      1 => 1373898098,
       2 => 'file',
     ),
   ),
@@ -34,11 +34,16 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 <script language="JavaScript" src="/js/jquery-1.9.1.js"></script>
 </head>
 <body>
-	<div class="homepage">
+	<div id="w_all">
+	<div id="w1">
 		<?php echo $_smarty_tpl->getSubTemplate ("./header.lib.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array(), 0);?>
 
+	</div>
+	<div id="w2">
 		<?php echo $_smarty_tpl->getSubTemplate ("./navi.lib.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array(), 0);?>
 
+	</div>
+	<div id="w3">
 		<!-- Begin of the container -->
 		<div class="container">
 			<!-- Begin of the breadcurmb -->
@@ -103,16 +108,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 			</div>
 		</div>
 		<!-- End of the container -->
-
-		<!-- Begin of the links -->
-		<div class="links">
-		</div>
-		<!-- End of the links -->
-		
-		<!-- Begin of the footer -->
-		<div class="footer">
-		</div>
-		<!-- End of the footer -->
 	</div>
 </body>
 </html>

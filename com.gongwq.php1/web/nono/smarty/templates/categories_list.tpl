@@ -74,9 +74,22 @@ operations button {
 <script language="JavaScript" src="/js/jquery-1.9.1.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-
 	$("input[name='select_all']").click(function() {
-		alert($("input[name='select_all']").attr("checked"));
+		if ($(this).prop("checked") == true) {
+			$("input[name='select']").each(function() {
+				if($(this).prop("checked") == false) {
+					$(this).click();
+				}
+			});
+		}
+		else 
+		{
+			$("input[name='select']").each(function() {
+				if ($(this).prop("checked") == true) {
+					$(this).click();
+				}
+			});
+		}
 	});
 });
 function delSelected() {

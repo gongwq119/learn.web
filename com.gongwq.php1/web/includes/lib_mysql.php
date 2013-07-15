@@ -55,6 +55,25 @@ class lib_mysql {
 	}
 	
 	/**
+	 * 
+	 * @param unknown $cat_id
+	 * @return mixed
+	 */
+	function getCategory($cat_id) {
+		$sql = 'SELECT * FROM mydb.categories WHERE cat_id=' . $cat_id;
+		return $this->execute($sql);
+	}
+	
+	/**
+	 * 
+	 * @return mixed
+	 */
+	function getAllParentCategory() {
+		$sql = 'SELECT * FROM mydb.categories WHERE parent_id="0"';
+		return $this->execute($sql);
+	}
+	
+	/**
 	 * Select the number of items from db
 	 * @param unknown $sql_sta
 	 * @param unknown $amount

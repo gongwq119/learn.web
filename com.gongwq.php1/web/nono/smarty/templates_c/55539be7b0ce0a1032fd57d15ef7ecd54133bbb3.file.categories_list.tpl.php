@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-07-11 10:47:18
+<?php /* Smarty version Smarty-3.1.13, created on 2013-07-15 14:44:15
          compiled from "./smarty/templates/categories_list.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:77211945551de711680f560-24562166%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '55539be7b0ce0a1032fd57d15ef7ecd54133bbb3' => 
     array (
       0 => './smarty/templates/categories_list.tpl',
-      1 => 1372390056,
+      1 => 1373892252,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.13',
+  'unifunc' => 'content_51de7116892ee6_49469694',
   'variables' => 
   array (
     'title' => 0,
@@ -22,8 +24,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'cat' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.13',
-  'unifunc' => 'content_51de7116892ee6_49469694',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_51de7116892ee6_49469694')) {function content_51de7116892ee6_49469694($_smarty_tpl) {?><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -102,9 +102,22 @@ operations button {
 <script language="JavaScript" src="/js/jquery-1.9.1.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-
 	$("input[name='select_all']").click(function() {
-		alert($("input[name='select_all']").attr("checked"));
+		if ($(this).prop("checked") == true) {
+			$("input[name='select']").each(function() {
+				if($(this).prop("checked") == false) {
+					$(this).click();
+				}
+			});
+		}
+		else 
+		{
+			$("input[name='select']").each(function() {
+				if ($(this).prop("checked") == true) {
+					$(this).click();
+				}
+			});
+		}
 	});
 });
 function delSelected() {
