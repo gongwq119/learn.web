@@ -92,14 +92,8 @@ CREATE TABLE `categories` (
   `keywords` varchar(255) NOT NULL DEFAULT '',
   `cat_desc` varchar(255) NOT NULL DEFAULT '',
   `parent_id` smallint(5) unsigned NOT NULL DEFAULT '0',
-  `sort_order` tinyint(1) unsigned NOT NULL DEFAULT '50',
-  `template_file` varchar(50) NOT NULL DEFAULT '',
-  `measure_unit` varchar(15) NOT NULL DEFAULT '',
   `show_in_nav` tinyint(1) NOT NULL DEFAULT '0',
-  `style` varchar(150) NOT NULL,
   `is_show` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `grade` tinyint(4) NOT NULL DEFAULT '0',
-  `filter_attr` varchar(255) NOT NULL DEFAULT '0',
   PRIMARY KEY (`cat_id`),
   KEY `parent_id` (`parent_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
@@ -111,7 +105,7 @@ CREATE TABLE `categories` (
 
 LOCK TABLES `categories` WRITE;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
-INSERT INTO `categories` VALUES (6,'电梯主板','主板','',0,50,'','',0,'',1,0,'0'),(7,'外招按钮','按钮','',0,50,'','',0,'',1,0,'0');
+INSERT INTO `categories` VALUES (6,'电梯主板','主板','',0,0,1),(7,'外招按钮','按钮','',0,0,1);
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -183,4 +177,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-07-12 16:07:55
+-- Dump completed on 2013-07-15 18:25:02
