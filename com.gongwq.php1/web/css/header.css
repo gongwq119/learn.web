@@ -39,4 +39,4 @@ ul.option {
 	text-align: center;
 	vertical-align: middle;
 }
-.option a:hover { text-decoration:none;color: #696969}
+.option a:hover { text-decoration:none;color: #696969;cursor:pointer;}

@@ -19,7 +19,7 @@ ul.menu {
 	list-style-type: none; 
 	cursor：hand;
 }
-a.menu {
+.menu a{
 	display: block;
 	color: #393939;
 	padding: 1px 12px 0;
@@ -29,7 +29,8 @@ a.menu {
 	text-align: center;
 	vertical-align: middle;
 }
-a.menu:hover { 
+.menu a:hover { 
 	text-decoration:none;
-	color: #696969
+	color: #696969;
+	cursor:pointer;
 	}

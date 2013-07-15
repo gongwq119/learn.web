@@ -3,7 +3,7 @@
 require(dirname(__FILE__) . '/includes/init.php');
 
 /*------------------------------------------------------ */
-//-- 商品列表，商品回收站
+//-- 分类列表
 /*------------------------------------------------------ */
 if ($_REQUEST['do'] == 'list' || $_REQUEST['do'] == 'trash')
 {
@@ -25,3 +25,37 @@ if ($_REQUEST['do'] == 'list' || $_REQUEST['do'] == 'trash')
 	$smarty->assign('cats', $cats);
 	$smarty->display('categories_list.tpl');
 }
+/*------------------------------------------------------ */
+//-- 添加分类，编辑分类
+/*------------------------------------------------------ */
+elseif ($_REQUEST['do'] == 'add' || $_REQUEST['do'] == 'edit')
+{
+	//初始化变量
+	$is_add = $_REQUEST['do'] == 'add';
+	
+	//检查权限
+	
+	//读取所有非子分类
+	
+	//新建空分类商品信息，或者读取分类信息
+	if ($is_add) {
+		$cat = array(
+			'cat_name' => '',
+			'keywords' => '',
+			'cat_desc' => '',
+			'parent_id'=> 0,
+			'show_in_nav' => 0,
+			'is_show' => 0,
+		);
+	}
+	else
+	{
+		$cat = array();
+// 		$db->selectAll($table)
+	}
+	
+	//模版赋值
+	$smarty->assign('item', $item);
+	$smarty->display("items_info.tpl");
+	
+} 

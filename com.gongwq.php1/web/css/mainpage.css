@@ -3,6 +3,8 @@
 @IMPORT url("./header.css");
 @IMPORT url("./menu.css");
 @IMPORT url("./active_frame.css");
+@IMPORT url("./links.css");
+@IMPORT url("./footer.css");
 @IMPORT url("./item_intro.css");
 body {
 	padding: 0 10px 10px;
@@ -11,6 +13,22 @@ body {
 	background: #fff;
 	font-family: Arial,Helvetica,sans-serif;
 	font-size: 12px;
+}
+#w1 {
+	margin: 0px 10px;
+	border: dotted 0px;
+}
+#w2 {
+	margin: 0px 10px;
+	border: dotted 0px;
+}
+#w3 {
+	margin: 0px 10px;
+	border: dotted 0px;
+}
+#w4 {
+	margin: 0px 10px;
+	border: dotted 0px;
 }
 .container {
 	margin: 0;

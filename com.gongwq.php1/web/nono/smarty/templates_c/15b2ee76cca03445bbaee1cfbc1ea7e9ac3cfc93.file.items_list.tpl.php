@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-07-13 05:02:57
+<?php /* Smarty version Smarty-3.1.13, created on 2013-07-15 04:58:29
          compiled from "./smarty/templates/items_list.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:45590340251de5c0d1d3346-12537241%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '15b2ee76cca03445bbaee1cfbc1ea7e9ac3cfc93' => 
     array (
       0 => './smarty/templates/items_list.tpl',
-      1 => 1373684569,
+      1 => 1373857076,
       2 => 'file',
     ),
   ),
@@ -102,9 +102,22 @@ operations button {
 <script language="JavaScript" src="/js/jquery-1.9.1.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-
 	$("input[name='select_all']").click(function() {
-		alert($("input[name='select_all']").attr("checked"));
+		if ($(this).prop("checked") == true) {
+			$("input[name='select']").each(function() {
+				if($(this).prop("checked") == false) {
+					$(this).click();
+				}
+			});
+		}
+		else 
+		{
+			$("input[name='select']").each(function() {
+				if ($(this).prop("checked") == true) {
+					$(this).click();
+				}
+			});
+		}
 	});
 });
 function delSelected() {
