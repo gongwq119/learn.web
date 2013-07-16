@@ -16,13 +16,15 @@ $brand_db_name = 'brands';
 if ($_REQUEST['do'] == 'list' || $_REQUEST['do'] == 'trash')
 {
 	//解析参数，page等，默认值是第一页
-	$page = 0;
-	$amount = 10;
+	$page = !empty($_GET['page']) ? intval($_GET['page']) : 0;
+	$amount = 15;
 	
 	//读取数据库
-// 	$count = $db->getRowNumber($sql_sta);
 	$sql = 'SELECT i.it_id, i.it_name, i.it_sn, i.it_price, i.it_quant FROM mydb.items AS i ';
-	$result = $db->selectLimit($sql, $amount, $page);
+	$page_count = floor($db->getRowNumber($sql)/$amount) + 1;
+	$page_sta = ($page + 1) . '/' . $page_count;
+	$result = $db->selectLimit($sql, $amount, $page * $amount);
+	$page_count = $result->num_rows;
 	$items = array();
 	// $result->num_rows;
 	for ($i = 0; $i < $result->num_rows; $i++) {
@@ -31,6 +33,7 @@ if ($_REQUEST['do'] == 'list' || $_REQUEST['do'] == 'trash')
 	}
 	$smarty->assign('title', 'admin page');
 	$smarty->assign('items', $items);
+	$smarty->assign('page_sta', $page_sta);
 	$smarty->display('items_list.tpl');
 }
 

@@ -41,7 +41,7 @@ class lib_mysql {
 	function getRowNumber($sql_sta) {
 		$result = $this->execute($sql_sta);
 		$num_results = $result->num_rows;
-		echo $num_results;
+		return $num_results;
 	}
 	
 	/**

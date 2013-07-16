@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title><{$none}></title>
+<title><{$title}></title>
 <style type="text/css">
 body {
 	background:#DDEEF2;
@@ -75,6 +75,8 @@ operations button {
 <script type="text/javascript">
 $(document).ready(function() {
 	$("input[name='select_all']").click(function() {
+		
+		//all check function
 		if ($(this).prop("checked") == true) {
 			$("input[name='select']").each(function() {
 				if($(this).prop("checked") == false) {
@@ -90,6 +92,9 @@ $(document).ready(function() {
 				}
 			});
 		}
+		
+		//inital page paramter
+		var currentPage = 
 	});
 });
 function delSelected() {
@@ -143,9 +148,9 @@ function editSelected() {
 		<td colspan="5">
 		<div class="page_navi">	
 			<div>第<input type="text" class="goto_page" maxlength="3">页 <a>跳转</a></div>
-			<div><a href="http://localhost">下一页</a></div>
-			<div><a href="http://localhost">上一页</a></div>
-			<div>1/3页</div>
+			<div><a href="items.php?do=list&page=">下一页</a></div>
+			<div><a href="items.php?do=list&page=">上一页</a></div>
+			<div><{$page_sta}></div>
 		</div>
 		</td>
 	</tr>

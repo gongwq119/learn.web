@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-07-15 04:58:29
+<?php /* Smarty version Smarty-3.1.13, created on 2013-07-16 12:21:44
          compiled from "./smarty/templates/items_list.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:45590340251de5c0d1d3346-12537241%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '15b2ee76cca03445bbaee1cfbc1ea7e9ac3cfc93' => 
     array (
       0 => './smarty/templates/items_list.tpl',
-      1 => 1373857076,
+      1 => 1373970101,
       2 => 'file',
     ),
   ),
@@ -19,9 +19,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'unifunc' => 'content_51de5c0d25be03_95812331',
   'variables' => 
   array (
-    'none' => 0,
+    'title' => 0,
     'items' => 0,
     'item' => 0,
+    'page_sta' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
@@ -29,7 +30,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title><?php echo $_smarty_tpl->tpl_vars['none']->value;?>
+<title><?php echo $_smarty_tpl->tpl_vars['title']->value;?>
 </title>
 <style type="text/css">
 body {
@@ -183,7 +184,8 @@ $_smarty_tpl->tpl_vars['item']->_loop = true;
 			<div>第<input type="text" class="goto_page" maxlength="3">页 <a>跳转</a></div>
 			<div><a href="http://localhost">下一页</a></div>
 			<div><a href="http://localhost">上一页</a></div>
-			<div>1/3页</div>
+			<div><?php echo $_smarty_tpl->tpl_vars['page_sta']->value;?>
+</div>
 		</div>
 		</td>
 	</tr>
