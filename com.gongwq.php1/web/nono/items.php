@@ -22,9 +22,7 @@ if ($_REQUEST['do'] == 'list' || $_REQUEST['do'] == 'trash')
 	//读取数据库
 	$sql = 'SELECT i.it_id, i.it_name, i.it_sn, i.it_price, i.it_quant FROM mydb.items AS i ';
 	$page_count = floor($db->getRowNumber($sql)/$amount) + 1;
-	$page_sta = ($page + 1) . '/' . $page_count;
 	$result = $db->selectLimit($sql, $amount, $page * $amount);
-	$page_count = $result->num_rows;
 	$items = array();
 	// $result->num_rows;
 	for ($i = 0; $i < $result->num_rows; $i++) {
@@ -33,7 +31,8 @@ if ($_REQUEST['do'] == 'list' || $_REQUEST['do'] == 'trash')
 	}
 	$smarty->assign('title', 'admin page');
 	$smarty->assign('items', $items);
-	$smarty->assign('page_sta', $page_sta);
+	$smarty->assign('page', $page);
+	$smarty->assign('page_count', $page_count);
 	$smarty->display('items_list.tpl');
 }
 

@@ -92,9 +92,47 @@ $(document).ready(function() {
 				}
 			});
 		}
+	});
+	$("#edit_item").hide();
+	$(":checkbox").click(function() {
+		if (1 == $(":checked[name='select']").length)
+		{
+			$("#edit_item").show();
+		}
+		else
+		{
+			$("#edit_item").hide();
+		}
 		
-		//inital page paramter
-		var currentPage = 
+	});
+	$("#edit_item").click(function() {
+		if (1 == $(":checked[name='select']").length)
+		{
+			var edit_link = 'items.php?do=edit&item_id=' + $(":checked[name='select']").val();
+			window.location.href = edit_link;
+		}
+	});
+	//inital page paramter
+	var page = parseInt(<{$page}>);
+	var max_page = parseInt(<{$page_count}>);
+	var page_sta = (page+1) + '/' + max_page;
+	if (page <= 0) 
+	{
+		$("#previous_page").hide();
+		$("#next_page").attr('href','items.php?do=list&page=' + (page+1));
+	} else if (page >= max_page-1) 
+	{
+		$("#next_page").hide();
+		$("#previous_page").attr('href','items.php?do=list&page=' + (page-1));
+	} else {
+		$("#next_page").attr('href','items.php?do=list&page=' + (page+1));
+		$("#previous_page").attr('href','items.php?do=list&page=' + (page-1));
+	}
+	$("#page_sta").text(page_sta);
+	
+	//
+	$(".goto_page").change(function() {
+		$(".goto_page_a").attr('href', 'items.php?do=list&page=' + $(this).val());
 	});
 });
 function delSelected() {
@@ -147,10 +185,10 @@ function editSelected() {
 	<tr>
 		<td colspan="5">
 		<div class="page_navi">	
-			<div>第<input type="text" class="goto_page" maxlength="3">页 <a>跳转</a></div>
-			<div><a href="items.php?do=list&page=">下一页</a></div>
-			<div><a href="items.php?do=list&page=">上一页</a></div>
-			<div><{$page_sta}></div>
+			<div>第<input type="text" class="goto_page" maxlength="3">页 <a class="goto_page_a">跳转</a></div>
+			<div><a id="next_page">下一页</a></div>
+			<div><a id="previous_page">上一页</a></div>
+			<div id="page_sta"></div>
 		</div>
 		</td>
 	</tr>

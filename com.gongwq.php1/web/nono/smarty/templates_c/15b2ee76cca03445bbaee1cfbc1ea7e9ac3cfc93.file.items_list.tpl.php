@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-07-16 12:21:44
+<?php /* Smarty version Smarty-3.1.13, created on 2013-07-16 18:17:42
          compiled from "./smarty/templates/items_list.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:45590340251de5c0d1d3346-12537241%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '15b2ee76cca03445bbaee1cfbc1ea7e9ac3cfc93' => 
     array (
       0 => './smarty/templates/items_list.tpl',
-      1 => 1373970101,
+      1 => 1373991457,
       2 => 'file',
     ),
   ),
@@ -20,9 +20,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'variables' => 
   array (
     'title' => 0,
+    'page' => 0,
+    'page_count' => 0,
     'items' => 0,
     'item' => 0,
-    'page_sta' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
@@ -104,6 +105,8 @@ operations button {
 <script type="text/javascript">
 $(document).ready(function() {
 	$("input[name='select_all']").click(function() {
+		
+		//all check function
 		if ($(this).prop("checked") == true) {
 			$("input[name='select']").each(function() {
 				if($(this).prop("checked") == false) {
@@ -119,6 +122,49 @@ $(document).ready(function() {
 				}
 			});
 		}
+	});
+	$("#edit_item").hide();
+	$(":checkbox").click(function() {
+		if (1 == $(":checked[name='select']").length)
+		{
+			$("#edit_item").show();
+		}
+		else
+		{
+			$("#edit_item").hide();
+		}
+		
+	});
+	$("#edit_item").click(function() {
+		if (1 == $(":checked[name='select']").length)
+		{
+			var edit_link = 'items.php?do=edit&item_id=' + $(":checked[name='select']").val();
+			window.location.href = edit_link;
+		}
+	});
+	//inital page paramter
+	var page = parseInt(<?php echo $_smarty_tpl->tpl_vars['page']->value;?>
+);
+	var max_page = parseInt(<?php echo $_smarty_tpl->tpl_vars['page_count']->value;?>
+);
+	var page_sta = (page+1) + '/' + max_page;
+	if (page <= 0) 
+	{
+		$("#previous_page").hide();
+		$("#next_page").attr('href','items.php?do=list&page=' + (page+1));
+	} else if (page >= max_page-1) 
+	{
+		$("#next_page").hide();
+		$("#previous_page").attr('href','items.php?do=list&page=' + (page-1));
+	} else {
+		$("#next_page").attr('href','items.php?do=list&page=' + (page+1));
+		$("#previous_page").attr('href','items.php?do=list&page=' + (page-1));
+	}
+	$("#page_sta").text(page_sta);
+	
+	//
+	$(".goto_page").change(function() {
+		$(".goto_page_a").attr('href', 'items.php?do=list&page=' + $(this).val());
 	});
 });
 function delSelected() {
@@ -181,11 +227,10 @@ $_smarty_tpl->tpl_vars['item']->_loop = true;
 	<tr>
 		<td colspan="5">
 		<div class="page_navi">	
-			<div>第<input type="text" class="goto_page" maxlength="3">页 <a>跳转</a></div>
-			<div><a href="http://localhost">下一页</a></div>
-			<div><a href="http://localhost">上一页</a></div>
-			<div><?php echo $_smarty_tpl->tpl_vars['page_sta']->value;?>
-</div>
+			<div>第<input type="text" class="goto_page" maxlength="3">页 <a class="goto_page_a">跳转</a></div>
+			<div><a id="next_page">下一页</a></div>
+			<div><a id="previous_page">上一页</a></div>
+			<div id="page_sta"></div>
 		</div>
 		</td>
 	</tr>
