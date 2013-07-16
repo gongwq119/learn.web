@@ -31,6 +31,6 @@ ul.menu {
 }
 .menu a:hover { 
 	text-decoration:none;
-	color: #696969;
+	boder: solid 1px;
 	cursor:pointer;
 	}

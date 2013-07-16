@@ -5,6 +5,22 @@
 <title>HHH</title>
 <link href="../css/mainpage.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="/js/jquery-1.9.1.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$(".image").mouseover(function() {
+		$(this).css("border", "solid 1px #ddd");
+	});
+	$(".image").mouseleave(function() {
+		$(this).css("border", "solid 1px #fff");
+	});
+	$(".explode").click(function() {
+		$(this).find(".son").toggle();
+	});
+	$(".explode").click(function() {
+		$(this).parent().find(".son").toggle();
+	});
+});
+</script>
 <style type="text/css">
 #w_cat_left{
 	float: left;
@@ -12,6 +28,52 @@
 #w_cat_right{
 	float:right;
 }
+ul{
+	list-style-type: none;
+}
+.filter_left{
+	float: left;
+	width: 199px;
+	height:40px;
+	line-height:40px;
+}
+.filter_right{
+	float: right;
+	width: 539px;
+	line-height:40px;
+}
+#farther_ul{
+	margin:0px;
+	padding:0px;
+}
+#farther_ul li{
+	text-align: left;
+}
+#farther_ul li:hover{
+	cursor: pointer;
+}
+.farther_li {
+	background-color: #f7f7f7;
+	border: 1px solid #ddd;
+	line-height: 30px;
+	font-size: 15px;
+}
+.farther_li ul{
+	background-color: #fff;
+	border: 0px;
+}
+.clear{
+	clear:both;
+}
+.filter_ops{
+	width: 80px;
+	height:40px;
+	float:left;
+}
+.filter_ops a:hover{
+	cursor: pointer;
+}
+
 .cat_tree {
 	margin: 10px 0px 0px 0px;
 	height: 500px;
@@ -20,18 +82,27 @@
 }
 .cat_filter {
 	margin: 10px 0px 0px 0px;
-	height: 300px;
 	width: 740px;
 }
 .cat_list_menu {
 	margin: 10px 0px 0px 0px;
-	height: 150px;
 	width: 740px;
 	background-color: #f7f7f7;
-	border: dotted 1px;
+	border: 1px solid #ddd;
 }
-.cat_list {
-	border: dotted 1px;
+.item_list {
+	margin: 10px 0px 0px 0px;
+	width: 740px;
+}
+.item{
+	float: left;
+	margin: 10px;
+}
+.item_list ul{
+	padding: 0px;
+}
+.image {
+	border: solid 1px #ffffff;
 }
 </style>
 </head>
@@ -86,7 +157,6 @@
 			</ul>
 		</div>
 		<!-- End of the navigation -->
-
 	</div>
 	<div id="w3">
 		<!-- Begin of the container -->
@@ -102,11 +172,26 @@
 			</div>
 			<!-- End of the breadcurmb-->
 			
-			<div id="W_cat_left">
+			<div id="w_cat_left">
 			<!-- Begin of the category tree -->
 			<div class="cat_tree">
-				<div class="sf_t"><h2>分类树</h2></div>
-				<div class="sf_c">...</div>
+				<ul id="farther_ul">
+					<li class="farther_li">
+					<span class="explode">父级菜单一</span>
+					<ul>
+						<li class="son"><a href="http://localhost/items.php">子菜单一</a></li>
+						<li class="son"><a href="">子菜单一</a></li>
+					</ul>
+					</li>
+					<li class="farther_li">
+					<span class="explode">父级菜单一</span>
+					<ul>
+						<li class="son"><a href="http://localhost/items.php">子菜单一</a></li>
+						<li class="son"><a href="">子菜单一</a></li>
+					</ul>
+					</li>
+				</ul>
+				</div>
 			</div>
 			<!-- End of the category tree -->
 			</div>
@@ -115,7 +200,15 @@
 			<!-- Begin of the category filter -->
 			<div class="cat_filter">
 				<div class="sf_t"><h2>分类筛选</h2></div>
-				<div class="sf_c">...</div>
+				<div class="sf_c">
+					<div class="filter_left" align="right">品牌:  </div>
+					<div class="filter_right">
+						<div class="filter_ops"><a>abc</a></div>
+						<div class="filter_ops"><a>abc</a></div>
+						<div class="clear"></div>
+					</div>
+					<div class="clear"></div>
+				</div>
 			</div>
 			<!-- End of the category filter -->
 			
@@ -126,8 +219,22 @@
 			<!-- End of the category list menu -->
 			
 			<!-- Begin of the categories list -->
-			<div class="cat_list">
-				items
+			<div class="item_list">
+				<ul>
+					<li class="item">
+						<div class="image"><a href=""><img width="220" height="220" src="../upload/201307/stand/1373524785479153966.jpg"></a></div>
+						<div class="name">电梯按钮</div>
+						<div class="short_info">当前库存:100</div>
+						<div class="buttons"><a><button>物品详情</button></a><a><button>立刻购买</button></a></div>
+					</li>
+					<li class="item">
+						<div class="image"><a href=""><img width="220" height="220" src="../upload/201307/stand/1373524785479153966.jpg"></a></div>
+						<div class="name">电梯按钮</div>
+						<div class="short_info">当前库存:100</div>
+						<div class="buttons"><a><button>物品详情</button></a><a><button>立刻购买</button></a></div>
+					</li>
+					<li class="clear"></li>
+				</ul>
 			</div>
 			<!-- End of the categories list -->
 			</div>

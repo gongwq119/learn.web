@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>HHH</title>
+<script language="JavaScript" src="/js/jquery-1.9.1.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$(".explode").click(function() {
+		$(".son").toggle();
+	});
+});
+</script>
+<style type="text/css">
+.explode:hover {cursor:pointer;}
+.son:hover {cursor:pointer;}
+</style>
+</head>
+<body>
+<ul>
+	<li class="farther_li">
+	<span class="explode">父级菜单一</span>
+		<ul>
+			<li class="son">子菜单一</li>
+			<li class="son">子菜单二</li>
+		</ul>
+	</li>
+</ul>
+</body>
+</html>
