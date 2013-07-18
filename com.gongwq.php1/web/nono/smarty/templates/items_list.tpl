@@ -116,18 +116,19 @@ $(document).ready(function() {
 	var page = parseInt(<{$page}>);
 	var max_page = parseInt(<{$page_count}>);
 	var page_sta = (page+1) + '/' + max_page;
+	$("#next_page").attr('href','items.php?do=list&page=' + (page+1));
+	$("#previous_page").attr('href','items.php?do=list&page=' + (page-1));
+
 	if (page <= 0) 
 	{
 		$("#previous_page").hide();
 		$("#next_page").attr('href','items.php?do=list&page=' + (page+1));
-	} else if (page >= max_page-1) 
+	}
+	if (page >= max_page-1) 
 	{
 		$("#next_page").hide();
 		$("#previous_page").attr('href','items.php?do=list&page=' + (page-1));
-	} else {
-		$("#next_page").attr('href','items.php?do=list&page=' + (page+1));
-		$("#previous_page").attr('href','items.php?do=list&page=' + (page-1));
-	}
+	} 
 	$("#page_sta").text(page_sta);
 	
 	//

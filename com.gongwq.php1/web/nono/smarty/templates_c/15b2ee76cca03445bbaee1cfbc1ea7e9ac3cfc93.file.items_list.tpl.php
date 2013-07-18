@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-07-16 18:17:42
+<?php /* Smarty version Smarty-3.1.13, created on 2013-07-17 10:05:40
          compiled from "./smarty/templates/items_list.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:45590340251de5c0d1d3346-12537241%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '15b2ee76cca03445bbaee1cfbc1ea7e9ac3cfc93' => 
     array (
       0 => './smarty/templates/items_list.tpl',
-      1 => 1373991457,
+      1 => 1374048284,
       2 => 'file',
     ),
   ),
@@ -148,18 +148,19 @@ $(document).ready(function() {
 	var max_page = parseInt(<?php echo $_smarty_tpl->tpl_vars['page_count']->value;?>
 );
 	var page_sta = (page+1) + '/' + max_page;
+	$("#next_page").attr('href','items.php?do=list&page=' + (page+1));
+	$("#previous_page").attr('href','items.php?do=list&page=' + (page-1));
+
 	if (page <= 0) 
 	{
 		$("#previous_page").hide();
 		$("#next_page").attr('href','items.php?do=list&page=' + (page+1));
-	} else if (page >= max_page-1) 
+	}
+	if (page >= max_page-1) 
 	{
 		$("#next_page").hide();
 		$("#previous_page").attr('href','items.php?do=list&page=' + (page-1));
-	} else {
-		$("#next_page").attr('href','items.php?do=list&page=' + (page+1));
-		$("#previous_page").attr('href','items.php?do=list&page=' + (page-1));
-	}
+	} 
 	$("#page_sta").text(page_sta);
 	
 	//

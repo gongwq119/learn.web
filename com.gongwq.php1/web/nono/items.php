@@ -75,8 +75,10 @@ elseif ($_REQUEST['do'] == 'add' || $_REQUEST['do'] == 'edit' || $_REQUEST['do']
 				'it_desc' => '请编辑商品描述',
 				'cat_id' => 0,
 				'brand_id' => 0,
-				'it_quant' => 0
+				'it_quant' => 0,
+				'img_id' => 0
 		);
+		$images = array();
 	}
 	else
 	{
@@ -90,14 +92,20 @@ elseif ($_REQUEST['do'] == 'add' || $_REQUEST['do'] == 'edit' || $_REQUEST['do']
 				'it_desc' => $tem['it_desc'],
 				'cat_id' => $tem['cat_id'],
 				'brand_id' => $tem['brand_id'],
-				'it_quant' => $tem['it_quant']
+				'it_quant' => $tem['it_quant'],
+				'img_id' => $tem['img_id']
 		);
+		$images = array();
+		$result_image = $db->getStandImages($item_id);
+		//foreach(fetch_assoc());
+		
 	}
 	
 	//模版赋值
 	$smarty->assign('cats',$cat_array);
 	$smarty->assign('brands',$brand_array);
 	$smarty->assign('item', $item);
+	$smarty->assign('images', $images);
 	$smarty->display("items_info.tpl");
 }
 
