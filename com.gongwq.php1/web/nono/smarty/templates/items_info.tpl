@@ -35,6 +35,9 @@ div.image_frame {
 	width: 198px;
 	display: block;
 }
+.defaultImg {
+	border: solid 3px blue;
+}
 .clear{
 	clear:both;
 }
@@ -48,25 +51,19 @@ div.image_frame {
 <script language="JavaScript" src="../js/formValidator-4.0.1.min.js"></script>
 <script language="JavaScript" src="../js/formValidatorRegex.js"></script>
 <script type="text/javascript">
+var maxImageQuant = 3;
+var imageQuant = 0;
+imageQuant = <{$images|count}>;
+var item_id = '0';
+<{if $smarty.get.do == edit }>
+item_id = '<{$smarty.get.item_id}>'
+<{/if}>
+
 $(function() {
     $( "#tabs" ).tabs();
   });
 
 $(document).ready(function() {
-	//初始化图片上传功能
-	var maxImageQuant = 3;
-	var imageQuant = 1;
-	$("button[name='addImage']").click(function() {
-		if (imageQuant < maxImageQuant) {
-			$("div#addImage").before('<div class="image_frame"><img  width="200" height="200" src="" ><input type="file" name="uploadImages[]" /><button type="button" name="setDefault">设为默认</button><button type="button" name="delImage">删除图片</button></div>');
-			imageQuant ++;
-			assginButtonFunc();
-		}
-		else {
-			alert("最多一次上传三张图片");
-		}
-	});
-	assginButtonFunc()
 	//初始化cat,brand值
 	$("select[name='cat_id']").val(<{$item.cat_id}>);
 	$("select[name='brand_id']").val(<{$item.brand_id}>);
@@ -76,19 +73,61 @@ $(document).ready(function() {
 	$("#item_sn").formValidator({onShow:"请输入商品序列号",}).inputValidator({min:1,onError:"错误，名称最少一个字符"});
 	$("#item_price").formValidator({onShow:"请输入商品价格",}).inputValidator({min:1,onError:"错误，名称最少一个字符"});
 	$("#item_quant").formValidator({onShow:"请输入商品数量",}).inputValidator({min:1,onError:"错误，名称最少一个字符"});
+	//初始化图片上传功能
+	$("button[name='addImage']").click(function() {
+		if (imageQuant < maxImageQuant) {
+			$("div#addImage").before('<div class="image_frame"><img  width="200" height="200" src="" ><input type="file" name="uploadImages[]" accept="image/gif, image/jpeg, image/png"/><button type="button" name="setDefault">设为默认</button><button type="button" name="delImage">删除图片</button></div>');
+			imageQuant ++;
+			assginButtonFunc();
+		}
+		else {
+			alert("最多一次上传三张图片");
+		}
+	});
+	assginButtonFunc();
+	//如果有已上传的图片设置默认图片
+	$("img#<{$item.img_id}>").addClass("defaultImg");
+	$("input[name='default_image']").val(<{$item.img_id}>);
+	//隐藏saved image input字段
+	$("input.saved_img").hide();
+	//设置隐藏字段item_id
+	var item_id_string = '<input type="hidden" name="item_id" value="'
+						+ item_id
+						+ '">';
+	$("input[name='default_image']").after(item_id_string);
+	
 });
 
 function assginButtonFunc() {
 	$("button[name='setDefault']").click(function() {
-		$("#good").toggle();
+		$("div.image_frame").each(function() {
+			$(this).children("img").removeClass("defaultImg");
+		});
+		$(this).parent().children("img").addClass("defaultImg");
+		$("input[name='default_image']").val($(this).parent().children("img").prop('id'));
 	});
 	$("button[name='delImage']").click(function() {
 		$(this).parent().remove();
+		imageQuant--;
+		var delString = '<input type="hidden" name="deleted_image[]" value="'
+						+ $(this).parent().children("img").prop('id')
+						+ '">';
+		$("input[name='default_image']").after(delString);
 	});
 }
-function setDefaultImage() {
-	//用隐藏字段mark default image id
+
+function findUploadName(path) {
+	if (path.indexOf("fakepath") >= 0 )
+	{
+		var sa = path.split("\\")
+		return sa[2];
+	}
+	return "LOST_NAME";
 	
+}
+function processUploadImages() {
+	//修改default_image的值，
+	$("input[name='default_image']").val(findUploadName($("img.defaultImg").parent().children("input").val()));
 }
 </script>
 </head>
@@ -105,17 +144,18 @@ function setDefaultImage() {
     <li><a href="#tabs-2">详细描述</a></li>
     <li><a href="#tabs-3">物品相册</a></li>
   </ul>
-  <form enctype="multipart/form-data" action="" method="post" name="theForm" id="form1">
+  <form enctype="multipart/form-data" action="" method="post" name="theForm" id="form1" onsubmit="processUploadImages()">
   <input type="hidden" name="do" value="insert">
+  <input type="hidden" name="default_image" value="0">
   <div id="tabs-1">
   	<table>
   		<tr>
   			<td>商品名称:&nbsp;&nbsp;&nbsp;</td>
-  			<td><input id="item_name" type="text" value="<{$item.it_name}>"  /><span id="item_nameTip"></span></td>
+  			<td><input id="item_name" name="it_name" type="text" value="<{$item.it_name}>"  /><span id="item_nameTip"></span></td>
   		</tr>
   		<tr>
   			<td>商品序列号:&nbsp;&nbsp;&nbsp;</td>
-  			<td><input id="item_sn" type="text" value="<{$item.it_sn}>"  /><span id="item_snTip"></span></td>
+  			<td><input id="item_sn" name="it_sn" type="text" value="<{$item.it_sn}>"  /><span id="item_snTip"></span></td>
   		</tr>
   		<tr>
   			<td>商品分类:&nbsp;&nbsp;&nbsp;</td>
@@ -139,29 +179,31 @@ function setDefaultImage() {
   		</tr>
   		<tr>
   			<td>商品价格:&nbsp;&nbsp;&nbsp;</td>
-  			<td><input id="item_price" type="text" value="<{$item.it_price}>" /><span id="item_priceTip"></span></td>
+  			<td><input id="item_price" name="it_price" type="text" value="<{$item.it_price}>" /><span id="item_priceTip"></span></td>
   		</tr>
   		<tr>
   			<td>商品数量:&nbsp;&nbsp;&nbsp;</td>
-  			<td><input id="item_quant" type="text" value="<{$item.it_quant}>" /><span id="item_quantTip"></span></td>
+  			<td><input id="item_quant" name="it_quant" type="text" value="<{$item.it_quant}>" /><span id="item_quantTip"></span></td>
   		</tr>
   		
   	</table>
   </div>
   <div id="tabs-2">
-	<textarea name="后台取值的key" id="myEditor"><{$item.it_desc}></textarea>
+	<textarea name="it_desc" id="myEditor"><{$item.it_desc}></textarea>
 	<script type="text/javascript">
 	    var editor = new UE.ui.Editor();
 	    editor.render("myEditor");
 	</script>
   </div>
   <div id="tabs-3">
+  	<{foreach $images as $image}>
   	<div class="image_frame">
-  		<img  id="good" width="200" height="200" src="" >
-  		<input type="file" name="uploadImages[]" />
-  		<button type="button" name="setDefault">设为默认</button>
-   		<button type="button" name="delImage">删除图片</button>
+  		<img  id="<{$image.img_id}>" width="200" height="200" src="<{$image.stand_url}>" >
+  		<input type="file" class="saved_img" name="uploadImages[]" accept="image/gif, image/jpeg, image/png" />
+  		<button type="button" name="setDefault" >设为默认</button>
+   		<button type="button" name="delImage" >删除图片</button>
   	</div>
+  	<{/foreach}>
   	<div class="image_frame" id="addImage">
    		<button type="button" name="addImage">添加图片</button>
   	</div>

@@ -105,6 +105,12 @@ class lib_mysql {
 		return $this->db->insert_id;
 		}		
 
+	function updateRow($table, $id_name, $id_value, $array) {
+		//$sql = "UPDATE `mydb`.`items` SET `it_sn`='234', `it_name`='我的我的343', `it_price`=123434, `it_desc`='1234124' WHERE `it_id`='54'";
+		$sql = 'UPDATE ' . $table . ' SET ' . $array
+			   . ' WHERE ' . $id_name . '=' . $id_value;
+		return $this->execute($sql);
+	}
 	/******************************
 	 * admin_users
 	******************************/
@@ -135,8 +141,8 @@ class lib_mysql {
 	/******************************
 	 * items_images
 	******************************/
-	function getDefalutStandImage($it_id) {
-		$sql = 'SELECT g.stand_url FROM mydb.items_images AS g WHERE g.it_id=' . $it_id;
+	function getItemImages($it_id) {
+		$sql = 'SELECT g.img_id, g.stand_url FROM mydb.items_images AS g WHERE g.it_id=' . $it_id;
 		return $this->execute($sql);
 	}
 	

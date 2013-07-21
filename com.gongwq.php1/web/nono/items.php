@@ -96,9 +96,11 @@ elseif ($_REQUEST['do'] == 'add' || $_REQUEST['do'] == 'edit' || $_REQUEST['do']
 				'img_id' => $tem['img_id']
 		);
 		$images = array();
-		$result_image = $db->getStandImages($item_id);
-		//foreach(fetch_assoc());
-		
+		$result_image = $db->getItemImages($tem['it_id']);
+		for ($i = 0; $i < $result_image->num_rows; $i++) {
+			$tem = $result_image->fetch_assoc();
+			$images[$i] = $tem;
+		}
 	}
 	
 	//模版赋值
@@ -109,34 +111,108 @@ elseif ($_REQUEST['do'] == 'add' || $_REQUEST['do'] == 'edit' || $_REQUEST['do']
 	$smarty->display("items_info.tpl");
 }
 
-//处理插入或者更新动作
+//处理插入或者更新动作(不管是insert还是update,都先处理图片)
 elseif ($_REQUEST['do'] == 'insert' || $_REQUEST['do'] == 'update')
 {
+	//初始化
+	$is_insert = $_REQUEST['do'] == 'insert';
 	//验证字段
 	
 	//准备数据
+	$db_item = array();
+	$item_update_array = array();
+	
 	$it_sn = !empty($_POST['it_sn']) ? $_POST['it_sn'] : '0';
 	$it_name = !empty($_POST['it_name']) ? $_POST['it_name'] : '0';
 	$it_price = !empty($_POST['it_price']) ? $_POST['it_price'] : '0';
 	$it_desc = !empty($_POST['it_desc']) ? $_POST['it_desc'] : '0';
 	$cat_id = !empty($_POST['cat_id']) ? $_POST['cat_id'] : 0;
-	$brand_id = !empty($_POST['$brand_id']) ? $_POST['$brand_id'] : 0;
+	$brand_id = !empty($_POST['brand_id']) ? $_POST['brand_id'] : 0;
 	$click_count = 0;
-	$it_quant = !empty($_POST['$it_quant']) ? $_POST['$it_quant'] : 0;
+	$it_quant = !empty($_POST['it_quant']) ? $_POST['it_quant'] : 0;
+	$default_img = !empty($_POST['default_image']) ? $_POST['default_image'] : 0;
 	
-	
-	//处理图片
-	$num_image = sizeof($_FILES['uploadImages']['name']);
-	if (empty($_FILES['uploadImages']['name'][0]))
+	if (!$is_insert)
 	{
-		$num_image = 0;
+		if (isset($_REQUEST['item_id']))
+		{
+			$db_item_result = $db->getItem($_REQUEST['item_id']);
+			$db_item = $db_item_result->fetch_assoc();
+		} 
+		else
+		{
+			die("没有指定item id");
+		}
+		$default_img = !empty($_POST['default_img']) ? $_POST['default_img'] : 0;
+		if ($db_item['it_sn'] != $it_sn)
+		{
+			$item_update_array['it_sn'] = $it_sn;
+		}
+		if ($db_item['it_name'] != $it_name)
+		{
+			$item_update_array['it_name'] = $it_name;
+		}
+		if ($db_item['it_price'] != $it_price)
+		{
+			$item_update_array['it_price'] = $it_price;
+		}
+		if ($db_item['it_desc'] != $it_desc)
+		{
+			$item_update_array['it_desc'] = $it_desc;
+		}
+		if ($db_item['cat_id'] != $cat_id)
+		{
+			$item_update_array['cat_id'] = $cat_id;
+		}
+		if ($db_item['brand_id'] != $brand_id)
+		{
+			$item_update_array['brand_id'] = $brand_id;
+		}
+		if ($db_item['it_quant'] != $it_quant)
+		{
+			$item_update_array['it_quant'] = $it_quant;
+		}
+		if ($db_item['default_img'] != $default_img)
+		{
+			$item_update_array['default_img'] = $it_quant;
+		}
+		
 	}
-	$img_stand_path =array();
-	$img_thumb_path =array();
-	$img_large_path =array();
+	
+	
+	//删除图片
+	if (!empty($_POST['deleted_image']))
+	{
+		//找出图片的路径，删除本地图片
+		//删除数据库记录
+	}
+	
+	//判断是否指定了默认图片
+	$find_default_img_in_unuploaded = false;
+	$sql_find_img = "SELECT * FROM items_images WHERE img_id='" . $_POST['default_image'] . "'";
+	if ($db->getRowNumber($sql_find_img) == 0)
+	{
+		$find_default_img_in_unuploaded = true;
+	}
+	
+	//处理图片，并上传
+	$num_image = 0;
+	if (isset($_FILES['uploadImages'])) 
+	{
+		$num_image = sizeof($_FILES['uploadImages']['name']);
+	}
+	$acc_num_image = $num_image;
 	if (isset($_FILES['uploadImages'])) {
+		$img_stand_path = array();
+		$img_thumb_path = array();
+		$img_large_path = array();
+		
 		for ($i = 0; $i < $num_image; $i++) {
-			if ($_FILES['uploadImages']['error'][$i] > 0) {
+			if ($_FILES['uploadImages']['error'][$i] = 4 ) {
+				$acc_num_image --;
+				continue;
+			}			
+			if ($_FILES['uploadImages']['error'][$i] > 0 ) {
 				die("上传图片错误");
 			}
 			//修改标准尺寸，并上传，
@@ -157,30 +233,68 @@ elseif ($_REQUEST['do'] == 'insert' || $_REQUEST['do'] == 'update')
 				;
 			}
 			$img_large_path[$i] = $imageUtil->upload_image_source($img_res, 'large');
+			if ($find_default_img_in_unuploaded && $_FILES['uploadImages']['name'][$i] == $_POST['default_image'])
+			{
+				$default_img_stand_url = $img_stand_path[$i];
+			}
+		}
+
+	}
+
+	//数据入库
+	if ($is_insert)
+	{
+		$items = array();
+		$items['it_sn'] = $it_sn;
+		$items['it_name'] = $it_name;
+		$items['it_price'] = $it_price;
+		$items['it_desc'] = $it_desc;
+		$items['cat_id'] = $cat_id;
+		$items['brand_id'] = $brand_id;
+		$items['click_count'] = $click_count;
+		$items['it_quant'] = $it_quant;
+		$items['img_id'] = $default_img;
+		$item_id = $db->insertRow("items", $items);
+	}
+	else
+	{
+		$sql_update = '';
+		foreach ($item_update_array as $key => $value) {
+			$sql_update = $sql_update . $key . '=' . $value . ', ';
+		}
+		$sql_update = substr($sql_update, 0, strlen($sql_update)-2);
+		$db->updateRow('items', 'it_name', $_REQUEST['item_id'], $sql_update);
+	}
+
+	
+	//图片入库
+	if ($is_insert)
+	{
+		for ($i = 0; $i < $acc_num_image; $i++) {
+			$items_images = array();
+			$items_images['it_id'] = $item_id;
+			$items_images['stand_url'] = $img_stand_path[$i];
+			$items_images['thumb_url'] = $img_thumb_path[$i];
+			$items_images['large_url'] = $img_large_path[$i];
+			$insert_id = $db->insertRow("items_images", $items_images);
+			if ($default_img_stand_url == $img_stand_path[$i])
+			{
+				$default_img = $insert_id;
+			}
 		}
 	}
-	
-	//插入数据库
-	$items = array();
-	$items['it_sn'] = $it_sn;
-	$items['it_name'] = $it_name;
-	$items['it_price'] = $it_price;
-	$items['it_desc'] = $it_desc;
-	$items['cat_id'] = $cat_id;
-	$items['brand_id'] = $brand_id;
-	$items['click_count'] = $click_count;
-	$items['it_quant'] = $it_quant;
-	$item_id = $db->insertRow("items", $items);
-	
-	for ($i = 0; $i < $num_image; $i++) {
-		$items_images = array();
-		$items_images['it_id'] = $item_id;
-		$items_images['stand_url'] = $img_stand_path[$i];
-		$items_images['thumb_url'] = $img_thumb_path[$i];
-		$items_images['large_url'] = $img_large_path[$i];
-		$db->insertRow("items_images", $items_images);
+	else 
+	{
+		
 	}
-	
-	
+
+
+	//更新默认image
+	if ($default_img != 0) 
+	{
+		$sql_img = 'img_id=' . $default_img;
+		$db->updateRow('items', 'it_id', $item_id, $sql_img);
+	}
+
 	$smarty -> display("ok.tpl");
 }
