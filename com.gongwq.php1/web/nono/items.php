@@ -143,7 +143,7 @@ elseif ($_REQUEST['do'] == 'insert' || $_REQUEST['do'] == 'update')
 		{
 			die("没有指定item id");
 		}
-		$default_img = !empty($_POST['default_img']) ? $_POST['default_img'] : 0;
+		$default_img = !empty($_POST['default_image']) ? $_POST['default_image'] : 0;
 		if ($db_item['it_sn'] != $it_sn)
 		{
 			$item_update_array['it_sn'] = $it_sn;
@@ -172,19 +172,31 @@ elseif ($_REQUEST['do'] == 'insert' || $_REQUEST['do'] == 'update')
 		{
 			$item_update_array['it_quant'] = $it_quant;
 		}
-		if ($db_item['default_img'] != $default_img)
+		if ($db_item['img_id'] != $default_img)
 		{
-			$item_update_array['default_img'] = $it_quant;
+			$item_update_array['img_id'] = $default_img;
 		}
 		
 	}
 	
-	
-	//删除图片
-	if (!empty($_POST['deleted_image']))
+	//删除图片,遍历所有删除图片，如果数据库内的存在就删除掉
+	if (isset($_POST['deleted_image']))
 	{
+		$del_size = sizeof($_POST['deleted_image']);
 		//找出图片的路径，删除本地图片
-		//删除数据库记录
+		for ($i = 0; $i < $del_size; $i++) {
+			$result_it_img = $db->getAllItemImages($_POST['deleted_image'][$i]);
+			if (0 != $result_it_img->num_rows) 
+			{
+				$it_img = $result_it_img->fetch_assoc();
+				//删除本地图片
+				delLocalImage($it_img['stand_url']);
+				delLocalImage($it_img['thumb_url']);
+				delLocalImage($it_img['large_url']);
+				//删除数据库记录
+				$db->delRow('items_images', 'img_id', $_POST['deleted_image'][$i]);
+			}
+		}
 	}
 	
 	//判断是否指定了默认图片
@@ -208,7 +220,7 @@ elseif ($_REQUEST['do'] == 'insert' || $_REQUEST['do'] == 'update')
 		$img_large_path = array();
 		
 		for ($i = 0; $i < $num_image; $i++) {
-			if ($_FILES['uploadImages']['error'][$i] = 4 ) {
+			if ($_FILES['uploadImages']['error'][$i] == 4 ) {
 				$acc_num_image --;
 				continue;
 			}			
@@ -220,22 +232,22 @@ elseif ($_REQUEST['do'] == 'insert' || $_REQUEST['do'] == 'update')
 					$imageUtil::$stand_size, $imageUtil::$stand_size)) != false) {
 				;
 			}
-			$img_stand_path[$i] = $imageUtil->upload_image_source($img_res, 'stand');
-			//修改小尺寸尺寸，并上传，总共三总尺寸
+			array_push($img_stand_path, $imageUtil->upload_image_source($img_res, 'stand'));
+			//修改小尺寸尺寸，并上传
 			if (($img_res = $imageUtil->make_image($_FILES['uploadImages']['tmp_name'][$i],
 					$imageUtil::$thumb_size, $imageUtil::$thumb_size)) != false) {
 				;
 			}
-			$img_thumb_path[$i] = $imageUtil->upload_image_source($img_res, 'thumb');
-			//修改大尺寸，并上传，总共三总尺寸
+			array_push($img_thumb_path, $imageUtil->upload_image_source($img_res, 'thumb'));
+			//修改大尺寸，并上传
 			if (($img_res = $imageUtil->make_image($_FILES['uploadImages']['tmp_name'][$i],
 					$imageUtil::$large_size, $imageUtil::$large_size)) != false) {
 				;
 			}
-			$img_large_path[$i] = $imageUtil->upload_image_source($img_res, 'large');
+			array_push($img_large_path, $imageUtil->upload_image_source($img_res, 'large'));
 			if ($find_default_img_in_unuploaded && $_FILES['uploadImages']['name'][$i] == $_POST['default_image'])
 			{
-				$default_img_stand_url = $img_stand_path[$i];
+				$default_img_stand_url = end($img_stand_path);
 			}
 		}
 
@@ -263,38 +275,39 @@ elseif ($_REQUEST['do'] == 'insert' || $_REQUEST['do'] == 'update')
 			$sql_update = $sql_update . $key . '=' . $value . ', ';
 		}
 		$sql_update = substr($sql_update, 0, strlen($sql_update)-2);
-		$db->updateRow('items', 'it_name', $_REQUEST['item_id'], $sql_update);
+		$db->updateRow('items', 'it_id', $_REQUEST['item_id'], $sql_update);
 	}
 
 	
 	//图片入库
-	if ($is_insert)
-	{
-		for ($i = 0; $i < $acc_num_image; $i++) {
-			$items_images = array();
-			$items_images['it_id'] = $item_id;
-			$items_images['stand_url'] = $img_stand_path[$i];
-			$items_images['thumb_url'] = $img_thumb_path[$i];
-			$items_images['large_url'] = $img_large_path[$i];
-			$insert_id = $db->insertRow("items_images", $items_images);
-			if ($default_img_stand_url == $img_stand_path[$i])
-			{
-				$default_img = $insert_id;
-			}
+	for ($i = 0; $i < $acc_num_image; $i++) {
+		$items_images = array();
+		$items_images['it_id'] = $is_insert ? $item_id : $_REQUEST['item_id'];
+		$items_images['stand_url'] = $img_stand_path[$i];
+		$items_images['thumb_url'] = $img_thumb_path[$i];
+		$items_images['large_url'] = $img_large_path[$i];
+		$insert_id = $db->insertRow("items_images", $items_images);
+		if (isset($default_img_stand_url) && $default_img_stand_url == $img_stand_path[$i])
+		{
+			$default_img = $insert_id;
 		}
 	}
-	else 
-	{
-		
-	}
-
 
 	//更新默认image
-	if ($default_img != 0) 
+	if ($default_img != 0)
 	{
 		$sql_img = 'img_id=' . $default_img;
-		$db->updateRow('items', 'it_id', $item_id, $sql_img);
+		$it_id = $is_insert ? $item_id : $_REQUEST['item_id'];
+		$db->updateRow('items', 'it_id', $it_id, $sql_img);
 	}
 
 	$smarty -> display("ok.tpl");
+}
+
+function delLocalImage($file) {
+	$filepath = ROOT_PATH . $file;
+	if (file_exists($filepath))
+	{
+		return @unlink($filepath);
+	}
 }

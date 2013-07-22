@@ -111,6 +111,12 @@ class lib_mysql {
 			   . ' WHERE ' . $id_name . '=' . $id_value;
 		return $this->execute($sql);
 	}
+	
+	function delRow($table, $field_name, $field_value) {
+		//sql = DELETE FROM `mydb`.`items_images` WHERE `img_id`='39';
+		$sql = 'DELETE FROM ' . $table . ' WHERE ' . $field_name . '=' . $field_value;
+		return $this->execute($sql);
+	}
 	/******************************
 	 * admin_users
 	******************************/
@@ -143,6 +149,11 @@ class lib_mysql {
 	******************************/
 	function getItemImages($it_id) {
 		$sql = 'SELECT g.img_id, g.stand_url FROM mydb.items_images AS g WHERE g.it_id=' . $it_id;
+		return $this->execute($sql);
+	}
+	
+	function getAllItemImages($img_id) {
+		$sql = 'SELECT * FROM mydb.items_images AS g WHERE g.img_id=' . $img_id;
 		return $this->execute($sql);
 	}
 	

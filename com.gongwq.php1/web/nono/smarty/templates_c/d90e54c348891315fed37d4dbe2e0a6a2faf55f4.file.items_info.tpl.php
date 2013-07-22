@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-07-21 18:09:51
+<?php /* Smarty version Smarty-3.1.13, created on 2013-07-22 06:01:12
          compiled from "./smarty/templates/items_info.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:115664904251de5e486621b8-41486655%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'd90e54c348891315fed37d4dbe2e0a6a2faf55f4' => 
     array (
       0 => './smarty/templates/items_info.tpl',
-      1 => 1374422986,
+      1 => 1374465630,
       2 => 'file',
     ),
   ),
@@ -153,18 +153,24 @@ function assginButtonFunc() {
 	});
 }
 
-function findUploadName(path) {
-	if (path.indexOf("fakepath") >= 0 )
-	{
-		var sa = path.split("\\")
-		return sa[2];
-	}
-	return "LOST_NAME";
-	
-}
 function processUploadImages() {
+	//如果没有default_image, 自动第一个img添加class
+	if ($("img.defaultImg").size() == 0 && $("div.image_frame").children("img").size() > 0)
+	{
+		$("div.image_frame").children("img").first().addClass("defaultImg");
+	}
 	//修改default_image的值，
-	$("input[name='default_image']").val(findUploadName($("img.defaultImg").parent().children("input").val()));
+	var value = $("img.defaultImg").parent().children("input").val();
+	var sa = value.split("\\");
+	if (value.indexOf("fakepath") >= 0)
+	{
+		$("input[name='default_image']").val(sa[2]);
+	}
+	else
+	{
+		$("input[name='default_image']").val($("img.defaultImg").prop('id'));
+	}
+
 }
 </script>
 </head>
@@ -182,7 +188,12 @@ function processUploadImages() {
     <li><a href="#tabs-3">物品相册</a></li>
   </ul>
   <form enctype="multipart/form-data" action="" method="post" name="theForm" id="form1" onsubmit="processUploadImages()">
+  <?php if ($_GET['do']=='edit'){?>
+  <input type="hidden" name="do" value="update">
+  <?php }?>
+   <?php if ($_GET['do']=='add'){?>
   <input type="hidden" name="do" value="insert">
+  <?php }?>
   <input type="hidden" name="default_image" value="0">
   <div id="tabs-1">
   	<table>

@@ -116,18 +116,24 @@ function assginButtonFunc() {
 	});
 }
 
-function findUploadName(path) {
-	if (path.indexOf("fakepath") >= 0 )
-	{
-		var sa = path.split("\\")
-		return sa[2];
-	}
-	return "LOST_NAME";
-	
-}
 function processUploadImages() {
+	//如果没有default_image, 自动第一个img添加class
+	if ($("img.defaultImg").size() == 0 && $("div.image_frame").children("img").size() > 0)
+	{
+		$("div.image_frame").children("img").first().addClass("defaultImg");
+	}
 	//修改default_image的值，
-	$("input[name='default_image']").val(findUploadName($("img.defaultImg").parent().children("input").val()));
+	var value = $("img.defaultImg").parent().children("input").val();
+	var sa = value.split("\\");
+	if (value.indexOf("fakepath") >= 0)
+	{
+		$("input[name='default_image']").val(sa[2]);
+	}
+	else
+	{
+		$("input[name='default_image']").val($("img.defaultImg").prop('id'));
+	}
+
 }
 </script>
 </head>
@@ -145,7 +151,12 @@ function processUploadImages() {
     <li><a href="#tabs-3">物品相册</a></li>
   </ul>
   <form enctype="multipart/form-data" action="" method="post" name="theForm" id="form1" onsubmit="processUploadImages()">
+  <{if $smarty.get.do == edit }>
+  <input type="hidden" name="do" value="update">
+  <{/if}>
+   <{if $smarty.get.do == add }>
   <input type="hidden" name="do" value="insert">
+  <{/if}>
   <input type="hidden" name="default_image" value="0">
   <div id="tabs-1">
   	<table>
