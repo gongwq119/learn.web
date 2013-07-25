@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-07-15 16:22:00
+<?php /* Smarty version Smarty-3.1.13, created on 2013-07-24 04:54:31
          compiled from "/home/gongwq/site/php1/com.gongwq.php1/web/smarty/templates/items.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:99237961751adb9ef2fc6a2-15959580%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'ab6eb6e5e6f0d5d2441ddb27dc0be438755b5910' => 
     array (
       0 => '/home/gongwq/site/php1/com.gongwq.php1/web/smarty/templates/items.tpl',
-      1 => 1373898098,
+      1 => 1374634448,
       2 => 'file',
     ),
   ),
@@ -19,9 +19,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'unifunc' => 'content_51adb9ef33aed3_32214295',
   'variables' => 
   array (
-    'item_name' => 0,
-    'item_sn' => 0,
-    'item_price' => 0,
+    'item_images' => 0,
+    'image' => 0,
+    'item' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
@@ -32,6 +32,28 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 <title>HHH</title>
 <link href="css/mainpage.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="/js/jquery-1.9.1.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	/*设置相册*/
+	//1,布局li
+	//2,设置事件
+	<?php  $_smarty_tpl->tpl_vars['image'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['image']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['item_images']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['image']->key => $_smarty_tpl->tpl_vars['image']->value){
+$_smarty_tpl->tpl_vars['image']->_loop = true;
+?>
+	$("#<?php echo $_smarty_tpl->tpl_vars['image']->value['img_id'];?>
+").mouseover(function() {
+		$("#current_img").attr("src", ".<?php echo $_smarty_tpl->tpl_vars['image']->value['stand_url'];?>
+");
+	});
+	<?php } ?>
+	//3,初始化,设置ul长度和位置，设置默认图片
+	
+	
+});
+
+</script>
 </head>
 <body>
 	<div id="w_all">
@@ -59,25 +81,51 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 			<!-- Begin of the item introduction -->
 			<div class="item_intro">
 				<div class="item_info">
-					<div class="item_name"><h1><?php echo $_smarty_tpl->tpl_vars['item_name']->value;?>
+					<div class="item_name"><h1><?php echo $_smarty_tpl->tpl_vars['item']->value['it_name'];?>
 </h1></div>
 					<div class="item_summary">
 					<ul>
-						<li><div>商品编号: </div><div><?php echo $_smarty_tpl->tpl_vars['item_sn']->value;?>
+						<li><div>商品编号&nbsp&nbsp:&nbsp&nbsp</div><div><?php echo $_smarty_tpl->tpl_vars['item']->value['it_sn'];?>
 </div></li>
-						<li><p>商品价格: ￥</p><p><?php echo $_smarty_tpl->tpl_vars['item_price']->value;?>
-</p></li>
+						<li><div>商品价格&nbsp&nbsp:&nbsp&nbsp￥</div><div><?php echo $_smarty_tpl->tpl_vars['item']->value['it_price'];?>
+</div></li>
+						<li><div>商品库存&nbsp&nbsp:&nbsp&nbsp</div><div><?php echo $_smarty_tpl->tpl_vars['item']->value['it_quant'];?>
+</div></li>
 					</ul>
 					</div>
 				</div>
+			
 				<div class="item_preview">
+					<div class='item_image'>
+						<img id="current_img" width="250" height="250"alt="" src="./upload/201307/stand/1374467683800549716.jpg" />
+					</div>
+					<div class="item_image_select">
+						<a id="move_left"></a>
+						<div class="item_image_select_list">
+							<ul>
+								<?php  $_smarty_tpl->tpl_vars['image'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['image']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['item_images']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['image']->key => $_smarty_tpl->tpl_vars['image']->value){
+$_smarty_tpl->tpl_vars['image']->_loop = true;
+?>
+								<li>
+									<img id="<?php echo $_smarty_tpl->tpl_vars['image']->value['img_id'];?>
+" width="50" height="50" alt="" src=".<?php echo $_smarty_tpl->tpl_vars['image']->value['thumb_url'];?>
+" />
+								</li>
+								<?php } ?>
+							</ul>
+						</div>
+						<a id="move_right"></a>
+					</div>
 				</div>
 			</div>
 			<!-- End of the item introduction -->
 			<div class="main_part">
 				<div class="main_right">
 					<div class="sf_t"><h2>详细描述</h2></div>
-					<div class="sf_c">...</div>
+					<div class="sf_c"><?php echo $_smarty_tpl->tpl_vars['item']->value['it_desc'];?>
+</div>
 				</div>
 				<div class="main_left">
 					<div class="related_sort">
@@ -105,9 +153,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 						</div>
 					</div>
 				</div>
+				<div class="clear"></div>
 			</div>
 		</div>
 		<!-- End of the container -->
+	</div>
 	</div>
 </body>
 </html>

@@ -124,28 +124,26 @@ ul{
 				</div>
 			</div>
 			<!-- End of the breadcurmb-->
-			
 			<div id="w_cat_left">
 			<!-- Begin of the category tree -->
-			<div class="cat_tree">
-				<ul id="farther_ul">
-					<li class="farther_li">
-					<span class="explode">父级菜单一</span>
-					<ul>
-						<li class="son"><a href="http://localhost/items.php">子菜单一</a></li>
-						<li class="son"><a href="">子菜单一</a></li>
+				<div class="cat_tree">
+					<ul id="farther_ul">
+						<li class="farther_li">
+						<span class="explode">父级菜单一</span>
+						<ul>
+							<li class="son"><a href="http://localhost/items.php">子菜单一</a></li>
+							<li class="son"><a href="">子菜单一</a></li>
+						</ul>
+						</li>
+						<li class="farther_li">
+						<span class="explode">父级菜单一</span>
+						<ul>
+							<li class="son"><a href="http://localhost/items.php">子菜单一</a></li>
+							<li class="son"><a href="">子菜单一</a></li>
+						</ul>
+						</li>
 					</ul>
-					</li>
-					<li class="farther_li">
-					<span class="explode">父级菜单一</span>
-					<ul>
-						<li class="son"><a href="http://localhost/items.php">子菜单一</a></li>
-						<li class="son"><a href="">子菜单一</a></li>
-					</ul>
-					</li>
-				</ul>
 				</div>
-			</div>
 			<!-- End of the category tree -->
 			</div>
 			
@@ -174,18 +172,20 @@ ul{
 					<ul>
 						<{foreach $items as $item}>
 						<li class="item">
-							<div class="image"><a href="items.php"><img width="220" height="220" src="../upload/201307/stand/1373524785479153966.jpg"></a></div>
+							<div class="image"><a href="items.php?id=<{$item.it_id}>"><img width="220" height="220" src="<{$item.img_stand_url}>"></a></div>
 							<div class="name"><{$item.it_name}></div>
 							<div class="price">嘉海价格&nbsp;&nbsp:&nbsp;&nbsp￥<{$item.it_price}></div>
 							<div class="storage">当前库存&nbsp;&nbsp:&nbsp;&nbsp<{$item.it_quant}></div>
-							<div class="buttons"><a><button>物品详情</button></a><a><button>立刻购买</button></a></div>
+							<div class="buttons"><a href="items.php?id=<{$item.it_id}>"><button>物品详情</button></a><a><button>立刻购买</button></a></div>
 						</li>
 						<{/foreach}>
 					</ul>
 				</div>
 				<!-- End of the categories list -->
 			</div>
-			<!-- End of the container -->
+			<div class="clear"></div>
+		</div>	
+		<!-- End of the container -->
 	</div>
 	</div>
 </body>

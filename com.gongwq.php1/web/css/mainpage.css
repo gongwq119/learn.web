@@ -15,7 +15,7 @@ body {
 	font-size: 12px;
 }
 #w_all{
-	background: #fff url(/image/bg.png) no-repeat center; 
+	background: #fff url(/image/bg.png) no-repeat top center; 
 }
 #w1 {
 	margin: 0px 10px;
@@ -61,4 +61,7 @@ body {
 }
 .sf_c {
 	border: 1px solid #ddd;
+}
+.clear{
+	clear:both;
 }

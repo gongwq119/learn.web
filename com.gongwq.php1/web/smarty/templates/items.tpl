@@ -5,6 +5,22 @@
 <title>HHH</title>
 <link href="css/mainpage.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="/js/jquery-1.9.1.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	/*设置相册*/
+	//1,布局li
+	//2,设置事件
+	<{foreach $item_images as $image}>
+	$("#<{$image.img_id}>").mouseover(function() {
+		$("#current_img").attr("src", ".<{$image.stand_url}>");
+	});
+	<{/foreach}>
+	//3,初始化,设置ul长度和位置，设置默认图片
+	
+	
+});
+
+</script>
 </head>
 <body>
 	<div id="w_all">
@@ -30,22 +46,40 @@
 			<!-- Begin of the item introduction -->
 			<div class="item_intro">
 				<div class="item_info">
-					<div class="item_name"><h1><{$item_name}></h1></div>
+					<div class="item_name"><h1><{$item.it_name}></h1></div>
 					<div class="item_summary">
 					<ul>
-						<li><div>商品编号: </div><div><{$item_sn}></div></li>
-						<li><p>商品价格: ￥</p><p><{$item_price}></p></li>
+						<li><div>商品编号&nbsp&nbsp:&nbsp&nbsp</div><div><{$item.it_sn}></div></li>
+						<li><div>商品价格&nbsp&nbsp:&nbsp&nbsp￥</div><div><{$item.it_price}></div></li>
+						<li><div>商品库存&nbsp&nbsp:&nbsp&nbsp</div><div><{$item.it_quant}></div></li>
 					</ul>
 					</div>
 				</div>
+			
 				<div class="item_preview">
+					<div class='item_image'>
+						<img id="current_img" width="250" height="250"alt="" src="./upload/201307/stand/1374467683800549716.jpg" />
+					</div>
+					<div class="item_image_select">
+						<a id="move_left"></a>
+						<div class="item_image_select_list">
+							<ul>
+								<{foreach $item_images as $image}>
+								<li>
+									<img id="<{$image.img_id}>" width="50" height="50" alt="" src=".<{$image.thumb_url}>" />
+								</li>
+								<{/foreach}>
+							</ul>
+						</div>
+						<a id="move_right"></a>
+					</div>
 				</div>
 			</div>
 			<!-- End of the item introduction -->
 			<div class="main_part">
 				<div class="main_right">
 					<div class="sf_t"><h2>详细描述</h2></div>
-					<div class="sf_c">...</div>
+					<div class="sf_c"><{$item.it_desc}></div>
 				</div>
 				<div class="main_left">
 					<div class="related_sort">
@@ -73,9 +107,11 @@
 						</div>
 					</div>
 				</div>
+				<div class="clear"></div>
 			</div>
 		</div>
 		<!-- End of the container -->
+	</div>
 	</div>
 </body>
 </html>

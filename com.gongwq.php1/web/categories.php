@@ -18,6 +18,10 @@ elseif (isset($_REQUEST['category']))
 {
     $cat_id = intval($_REQUEST['category']);
 }
+elseif (isset($_REQUEST['cat_id']))
+{
+	$cat_id = intval($_REQUEST['cat_id']);
+}
 
 //没有id的时候，默认为cat_id=1
 
@@ -27,13 +31,27 @@ $page = 0;
 $amount = 12;
 
 //读取items
-$sql_items = 'SELECT i.it_id, i.it_name, i.it_sn, i.it_price, i.it_quant FROM mydb.items AS i ';
+$sql_items = 'SELECT i.it_id, i.it_name, i.it_sn, i.it_price, i.it_quant, i.img_id FROM mydb.items AS i WHERE cat_id=' . $cat_id . ' ';
 $result_items = $db->selectLimit($sql_items, $amount, $page);
 $items = array();
 for ($i = 0; $i < $result_items->num_rows; $i++) {
 	$tem = $result_items->fetch_assoc();
 	$items[$i] = $tem;
+	if (isset($tem['img_id'])) {
+		$result_images = $db->getAllItemImages($tem['img_id']);
+		$tem_image = $result_images->fetch_assoc();
+		//如果图片，就默认图片
+		if (empty($tem_image)) {
+			$items[$i]['img_stand_url'] = './image/default_stand_item.png';
+		}
+		else 
+		{
+			$items[$i]['img_stand_url'] = $tem_image['stand_url'];
+		}
+		
+	}
 }
+
 //读取categories
 $result_cats = $db->selectAll("categories",'cat_id', 'cat_name');
 $cats = array();

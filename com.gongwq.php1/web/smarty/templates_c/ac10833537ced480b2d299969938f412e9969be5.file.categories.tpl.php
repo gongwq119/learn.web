@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-07-16 10:49:28
+<?php /* Smarty version Smarty-3.1.13, created on 2013-07-24 05:02:56
          compiled from "/home/gongwq/site/php1/com.gongwq.php1/web/smarty/templates/categories.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:17505272151adb5f0062c55-14954276%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'ac10833537ced480b2d299969938f412e9969be5' => 
     array (
       0 => '/home/gongwq/site/php1/com.gongwq.php1/web/smarty/templates/categories.tpl',
-      1 => 1373964567,
+      1 => 1374634975,
       2 => 'file',
     ),
   ),
@@ -152,28 +152,26 @@ ul{
 				</div>
 			</div>
 			<!-- End of the breadcurmb-->
-			
 			<div id="w_cat_left">
 			<!-- Begin of the category tree -->
-			<div class="cat_tree">
-				<ul id="farther_ul">
-					<li class="farther_li">
-					<span class="explode">父级菜单一</span>
-					<ul>
-						<li class="son"><a href="http://localhost/items.php">子菜单一</a></li>
-						<li class="son"><a href="">子菜单一</a></li>
+				<div class="cat_tree">
+					<ul id="farther_ul">
+						<li class="farther_li">
+						<span class="explode">父级菜单一</span>
+						<ul>
+							<li class="son"><a href="http://localhost/items.php">子菜单一</a></li>
+							<li class="son"><a href="">子菜单一</a></li>
+						</ul>
+						</li>
+						<li class="farther_li">
+						<span class="explode">父级菜单一</span>
+						<ul>
+							<li class="son"><a href="http://localhost/items.php">子菜单一</a></li>
+							<li class="son"><a href="">子菜单一</a></li>
+						</ul>
+						</li>
 					</ul>
-					</li>
-					<li class="farther_li">
-					<span class="explode">父级菜单一</span>
-					<ul>
-						<li class="son"><a href="http://localhost/items.php">子菜单一</a></li>
-						<li class="son"><a href="">子菜单一</a></li>
-					</ul>
-					</li>
-				</ul>
 				</div>
-			</div>
 			<!-- End of the category tree -->
 			</div>
 			
@@ -206,21 +204,26 @@ foreach ($_from as $_smarty_tpl->tpl_vars['item']->key => $_smarty_tpl->tpl_vars
 $_smarty_tpl->tpl_vars['item']->_loop = true;
 ?>
 						<li class="item">
-							<div class="image"><a href="items.php"><img width="220" height="220" src="../upload/201307/stand/1373524785479153966.jpg"></a></div>
+							<div class="image"><a href="items.php?id=<?php echo $_smarty_tpl->tpl_vars['item']->value['it_id'];?>
+"><img width="220" height="220" src="<?php echo $_smarty_tpl->tpl_vars['item']->value['img_stand_url'];?>
+"></a></div>
 							<div class="name"><?php echo $_smarty_tpl->tpl_vars['item']->value['it_name'];?>
 </div>
 							<div class="price">嘉海价格&nbsp;&nbsp:&nbsp;&nbsp￥<?php echo $_smarty_tpl->tpl_vars['item']->value['it_price'];?>
 </div>
 							<div class="storage">当前库存&nbsp;&nbsp:&nbsp;&nbsp<?php echo $_smarty_tpl->tpl_vars['item']->value['it_quant'];?>
 </div>
-							<div class="buttons"><a><button>物品详情</button></a><a><button>立刻购买</button></a></div>
+							<div class="buttons"><a href="items.php?id=<?php echo $_smarty_tpl->tpl_vars['item']->value['it_id'];?>
+"><button>物品详情</button></a><a><button>立刻购买</button></a></div>
 						</li>
 						<?php } ?>
 					</ul>
 				</div>
 				<!-- End of the categories list -->
 			</div>
-			<!-- End of the container -->
+			<div class="clear"></div>
+		</div>	
+		<!-- End of the container -->
 	</div>
 	</div>
 </body>

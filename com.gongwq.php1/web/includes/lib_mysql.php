@@ -148,7 +148,7 @@ class lib_mysql {
 	 * items_images
 	******************************/
 	function getItemImages($it_id) {
-		$sql = 'SELECT g.img_id, g.stand_url FROM mydb.items_images AS g WHERE g.it_id=' . $it_id;
+		$sql = 'SELECT * FROM mydb.items_images AS g WHERE g.it_id=' . $it_id;
 		return $this->execute($sql);
 	}
 	
