@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-07-11 09:21:28
+<?php /* Smarty version Smarty-3.1.13, created on 2013-07-26 11:18:29
          compiled from "./smarty/templates/login.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:92382280951de5cf862cdd6-61963619%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '8cecd537087c6eb53b51506344ea5c5f8f5085ce' => 
     array (
       0 => './smarty/templates/login.tpl',
-      1 => 1371197209,
+      1 => 1374830308,
       2 => 'file',
     ),
   ),
@@ -15,9 +15,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
-  'has_nocache_code' => false,
   'version' => 'Smarty-3.1.13',
   'unifunc' => 'content_51de5cf8660147_32654151',
+  'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_51de5cf8660147_32654151')) {function content_51de5cf8660147_32654151($_smarty_tpl) {?><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -27,19 +27,24 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 <script language="JavaScript" src="/js/jquery-1.9.1.js"></script>
 <style type="text/css">
 .login{
-	margin: auto; 
+	margin: 100px auto; 
 	padding: 0px;
 	width: 500px;
-	height: 250px;
-	background: gray;
+	height: 357px;
+	background: url(../image/dianti.jpg);
 }
 .logo {
-	float: left;
-	margin: 5px;
+	position: relative;
+	width: 120px;
+	top:35px;
+	margin: 0px 0px 0px 35px;
 	padding: 0px;
+	font-size: 20px;
 }
 .content {
-	float: right;
+	position: relative;
+	margin: 0px 0px 0px 300px;
+	width: 200px;
 }
 .form div {
 	margin: 0px;
@@ -48,18 +53,18 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 </style>
 </head>
 <body>
-	<div class="login">
-		<div class="logo">nothing</div>
-		<div class="content">
-		<form name="login" method="post" action="privilege.php?do=validate" class="form">
-			<div><p>用户名</p></div>
-		 	<div><input type="text" name="username"></div>
-		 	<div><p>密码</p></div>
-		 	<div><input type="text" name="password"></div>
-		 	<div class="buttons"><input type="submit" value="Submit" /></div>
-		</form>
+		<div class="login">
+			<div class="logo">嘉海电梯配件</div>
+			<div class="content">
+			<form name="login" method="post" action="privilege.php?do=validate" class="form">
+				<div><p>用户名</p></div>
+			 	<div><input type="text" name="username"></div>
+			 	<div><p>密码</p></div>
+			 	<div><input type="password" name="password"></div>
+			 	<div class="buttons"><input type="submit" value="确认" /></div>
+			</form>
+			</div>
 		</div>
-	</div>
 </body>
 </html>
 <?php }} ?>

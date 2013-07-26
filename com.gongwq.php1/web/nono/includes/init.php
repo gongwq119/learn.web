@@ -24,7 +24,7 @@ if(!defined('ADMIN_PATH_NAME'))
 	define('ADMIN_PATH_NAME','/nono');
 }
 define('ROOT_PATH', str_replace(ADMIN_PATH_NAME . '/includes/init.php', '', str_replace('\\', '/', __FILE__)));
-
+$host_name = $_SERVER['SERVER_NAME'];
 //初始化PHP engine 变量
 @ini_set('memory_limit',          '64M');
 @ini_set('session.cache_expire',  180);
@@ -83,13 +83,13 @@ session_start();
 if (!isset($_SESSION['admin_on'])) {
 	$_SESSION['admin_on'] = false;
 	$_SESSION['previous_page'] = 'http://' . $_SERVER['HTTP_HOST'] .  $_SERVER['REQUEST_URI'];
-	header("Location: http://localhost/nono/privilege.php?do=login");
-	return;
+	header("Location: http://{$host_name}/nono/privilege.php?do=login");
+	exit;
 }
 if ($_SESSION['admin_on'] == false) {
 	$_SESSION['previous_page'] = 'http://' . $_SERVER['HTTP_HOST'] .  $_SERVER['REQUEST_URI'];
-	header("Location: http://localhost/nono/privilege.php?do=login");
-	return;
+	header("Location: http://{$host_name}/nono/privilege.php?do=login");
+	exit;
 }
 if ($_SESSION['admin_on'] == true) {
 	return;

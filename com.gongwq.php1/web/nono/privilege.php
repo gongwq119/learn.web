@@ -51,7 +51,6 @@ elseif ($_REQUEST['do'] == 'validate')
 
     if ($row)
     {
-    	echo "ok";
     	$result = $row->fetch_assoc();
     	
         // 登录成功,修改session
