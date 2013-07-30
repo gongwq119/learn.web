@@ -77,7 +77,7 @@ elseif ($_REQUEST['do'] == 'menu')
 /*------------------------------------------------------ */
 elseif ($_REQUEST['do'] == 'main')
 {
-	header("Location: http://localhost/nono/items.php?do=list");
+	header("Location: http://{$host_name}/nono/items.php?do=list");
 }
 
 /*------------------------------------------------------ */
