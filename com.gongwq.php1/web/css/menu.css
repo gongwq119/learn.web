@@ -1,16 +1,16 @@
 @CHARSET "UTF-8";
 .navigation {
 	margin: 0 auto;
-	width: 970px;
+	width: 975px;
 	height: 46px;
 }
 ul.menu {
 	float: left;
 	margin: 0px;
 	padding: 0px;
-	width: 970px;
+	width: 975px;
 	background: #fff;
-	background:url(../image/menu.png) repeat-y 0 0 
+	background:url(../image/menu_975.png) repeat-y 0 0 
 }
 .menu li { 
 	float: left;
