@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-07-11 09:17:33
+<?php /* Smarty version Smarty-3.1.13, created on 2013-07-31 12:00:21
          compiled from "./smarty/templates/menu.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:198592483551de5c0d053618-05060485%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '7b65456ad2701ce3f0da6b5d364880a34a27975e' => 
     array (
       0 => './smarty/templates/menu.tpl',
-      1 => 1371798629,
+      1 => 1375264819,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.13',
+  'unifunc' => 'content_51de5c0d127020_53796425',
   'variables' => 
   array (
     'menus' => 0,
@@ -23,8 +25,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'child' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.13',
-  'unifunc' => 'content_51de5c0d127020_53796425',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_51de5c0d127020_53796425')) {function content_51de5c0d127020_53796425($_smarty_tpl) {?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -50,7 +50,7 @@ body {
 .tab-front {
   background: #80BDCB;
   line-height: 20px;
-  font-weight: bold;
+  font: 16px bold;
   padding: 4px 15px 4px 18px;
   border-right: 2px solid #335b64;
   cursor: hand;
@@ -108,16 +108,16 @@ body {
   color: #EB8A3D;
 }
 .explode {
-  background: url(images/menu_minus.gif) no-repeat 0px 3px;
-  font-weight: bold;
+  background: url(../image/bg_sidebar_menu_minus.gif) no-repeat 0px 3px;
+  font: 14px normal;
 }
 .collapse {
-  background: url(images/menu_plus.gif) no-repeat 0px 3px;
-  font-weight: bold;
+  background: url(../image/bg_sidebar_menu_plus.gif) no-repeat 0px 3px;
+  font: 14px bold;
 }
 .menu-item {
-  background: url(images/menu_arrow.gif) no-repeat 0px 3px;
-  font-weight: normal;
+  background: url(../image/bg_sidebar_menu_arrow.gif) no-repeat 0px 3px;
+  font:12px normal;
 }
 #help-title {
   font-size: 14px;
@@ -139,8 +139,8 @@ body {
 </head>
 <body>
 <div id="tabbar-div">
-<p><span style="float:right; padding: 3px 5px;" ><a href="javascript:toggleCollapse();"><img id="toggleImg" src="images/menu_minus.gif" width="9" height="9" border="0" alt="{$lang.collapse_all}" /></a></span>
-  <span class="tab-front" id="menu-tab">tree</span>
+<p><span style="float:right; padding: 3px 5px;" ><a href="javascript:toggleCollapse();"><img id="toggleImg" src="../image/bg_sidebar_menu_minus.gif" width="9" height="9" border="0" alt="{$lang.collapse_all}" /></a></span>
+  <span class="tab-front" id="menu-tab">菜单</span>
 </p>
 </div>
 <div id="main-div">
@@ -216,7 +216,7 @@ function toggleCollapse()
   }
 
   collapse = !collapse;
-  document.getElementById('toggleImg').src = collapse ? 'images/menu_minus.gif' : 'images/menu_plus.gif';
+  document.getElementById('toggleImg').src = collapse ? '../images/bg_sidebar_menu_minus.gif' : '../image/bg_sidebar_menu_plus.gif';
   document.getElementById('toggleImg').alt = collapse ? collapse_all : expand_all;
 }
 
@@ -435,7 +435,7 @@ Object.extend(ToggleHanlder ,{
         }
      }
     }
-    document.getElementById('toggleImg').src = collapse ? 'images/menu_minus.gif' : 'images/menu_plus.gif';
+    document.getElementById('toggleImg').src = collapse ? '../image/bg_sidebar_menu_minus.gif' : '../image/bg_sidebar_menu_plus.gif';
     document.getElementById('toggleImg').alt = collapse ? collapse_all : expand_all;
   }
 });

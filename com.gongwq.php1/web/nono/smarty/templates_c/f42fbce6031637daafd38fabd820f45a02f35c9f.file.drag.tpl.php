@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-07-11 09:17:32
+<?php /* Smarty version Smarty-3.1.13, created on 2013-07-31 12:04:58
          compiled from "./smarty/templates/drag.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:25236126551de5c0d001717-26994222%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'f42fbce6031637daafd38fabd820f45a02f35c9f' => 
     array (
       0 => './smarty/templates/drag.tpl',
-      1 => 1371628587,
+      1 => 1375265094,
       2 => 'file',
     ),
   ),
@@ -15,9 +15,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
-  'has_nocache_code' => false,
   'version' => 'Smarty-3.1.13',
   'unifunc' => 'content_51de5c0d042099_47542143',
+  'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_51de5c0d042099_47542143')) {function content_51de5c0d042099_47542143($_smarty_tpl) {?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <!-- $Id: drag.htm 14216 2008-03-10 02:27:21Z testyang $ -->
@@ -36,7 +36,7 @@ body {
 <script type="text/javascript" language="JavaScript">
 <!--
 var pic = new Image();
-pic.src="images/arrow_right.gif";
+pic.src="../image/bg_sidebar_drag_right.gif";
 
 function toggleMenu()
 {
@@ -46,12 +46,12 @@ function toggleMenu()
   if (frmBody.cols == "0, 10, *")
   {
     frmBody.cols="200, 10, *";
-    imgArrow.src = "images/arrow_left.gif";
+    imgArrow.src = "../image/bg_sidebar_drag_left.gif";
   }
   else
   {
     frmBody.cols="0, 10, *";
-    imgArrow.src = "images/arrow_right.gif";
+    imgArrow.src = "../image/bg_sidebar_drag_right.gif";
   }
 }
 
@@ -98,7 +98,7 @@ Utils.fixEvent = function(e)
 </head>
 <body onselect="return false;">
 <table height="100%" cellspacing="0" cellpadding="0" id="tbl">
-  <tr><td><a href="javascript:toggleMenu();"><img src="images/arrow_left.gif" width="10" height="30" id="img" border="0" /></a></td></tr>
+  <tr><td><a href="javascript:toggleMenu();"><img src="../image/bg_sidebar_drag_left.gif" width="10" height="30" id="img" border="0" /></a></td></tr>
 </table>
 </body>
 </html><?php }} ?>

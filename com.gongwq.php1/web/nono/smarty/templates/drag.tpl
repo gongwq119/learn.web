@@ -15,7 +15,7 @@ body {
 <script type="text/javascript" language="JavaScript">
 <!--
 var pic = new Image();
-pic.src="images/arrow_right.gif";
+pic.src="../image/bg_sidebar_drag_right.gif";
 
 function toggleMenu()
 {
@@ -25,12 +25,12 @@ function toggleMenu()
   if (frmBody.cols == "0, 10, *")
   {
     frmBody.cols="200, 10, *";
-    imgArrow.src = "images/arrow_left.gif";
+    imgArrow.src = "../image/bg_sidebar_drag_left.gif";
   }
   else
   {
     frmBody.cols="0, 10, *";
-    imgArrow.src = "images/arrow_right.gif";
+    imgArrow.src = "../image/bg_sidebar_drag_right.gif";
   }
 }
 
@@ -77,7 +77,7 @@ Utils.fixEvent = function(e)
 </head>
 <body onselect="return false;">
 <table height="100%" cellspacing="0" cellpadding="0" id="tbl">
-  <tr><td><a href="javascript:toggleMenu();"><img src="images/arrow_left.gif" width="10" height="30" id="img" border="0" /></a></td></tr>
+  <tr><td><a href="javascript:toggleMenu();"><img src="../image/bg_sidebar_drag_left.gif" width="10" height="30" id="img" border="0" /></a></td></tr>
 </table>
 </body>
 </html>

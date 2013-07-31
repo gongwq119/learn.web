@@ -22,7 +22,7 @@ body {
 .tab-front {
   background: #80BDCB;
   line-height: 20px;
-  font-weight: bold;
+  font: 16px bold;
   padding: 4px 15px 4px 18px;
   border-right: 2px solid #335b64;
   cursor: hand;
@@ -80,16 +80,16 @@ body {
   color: #EB8A3D;
 }
 .explode {
-  background: url(images/menu_minus.gif) no-repeat 0px 3px;
-  font-weight: bold;
+  background: url(../image/bg_sidebar_menu_minus.gif) no-repeat 0px 3px;
+  font: 14px normal;
 }
 .collapse {
-  background: url(images/menu_plus.gif) no-repeat 0px 3px;
-  font-weight: bold;
+  background: url(../image/bg_sidebar_menu_plus.gif) no-repeat 0px 3px;
+  font: 14px bold;
 }
 .menu-item {
-  background: url(images/menu_arrow.gif) no-repeat 0px 3px;
-  font-weight: normal;
+  background: url(../image/bg_sidebar_menu_arrow.gif) no-repeat 0px 3px;
+  font:12px normal;
 }
 #help-title {
   font-size: 14px;
@@ -111,8 +111,8 @@ body {
 </head>
 <body>
 <div id="tabbar-div">
-<p><span style="float:right; padding: 3px 5px;" ><a href="javascript:toggleCollapse();"><img id="toggleImg" src="images/menu_minus.gif" width="9" height="9" border="0" alt="{$lang.collapse_all}" /></a></span>
-  <span class="tab-front" id="menu-tab">tree</span>
+<p><span style="float:right; padding: 3px 5px;" ><a href="javascript:toggleCollapse();"><img id="toggleImg" src="../image/bg_sidebar_menu_minus.gif" width="9" height="9" border="0" alt="{$lang.collapse_all}" /></a></span>
+  <span class="tab-front" id="menu-tab">菜单</span>
 </p>
 </div>
 <div id="main-div">
@@ -172,7 +172,7 @@ function toggleCollapse()
   }
 
   collapse = !collapse;
-  document.getElementById('toggleImg').src = collapse ? 'images/menu_minus.gif' : 'images/menu_plus.gif';
+  document.getElementById('toggleImg').src = collapse ? '../images/bg_sidebar_menu_minus.gif' : '../image/bg_sidebar_menu_plus.gif';
   document.getElementById('toggleImg').alt = collapse ? collapse_all : expand_all;
 }
 
@@ -391,7 +391,7 @@ Object.extend(ToggleHanlder ,{
         }
      }
     }
-    document.getElementById('toggleImg').src = collapse ? 'images/menu_minus.gif' : 'images/menu_plus.gif';
+    document.getElementById('toggleImg').src = collapse ? '../image/bg_sidebar_menu_minus.gif' : '../image/bg_sidebar_menu_plus.gif';
     document.getElementById('toggleImg').alt = collapse ? collapse_all : expand_all;
   }
 });

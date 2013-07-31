@@ -3,8 +3,11 @@
 <head>
 <title>{$app_name}</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="styles/general.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
+body {
+	margin: 0px;
+	padding: 0px;
+}
 #header-div {
   background: #278296;
   border-bottom: 1px solid #FFF;
@@ -13,49 +16,42 @@
 #logo-div {
   height: 50px;
   float: left;
+  font-size: 12px;
+  color: #ddd;
+  line-height: 50px;
+  margin: 0px 0px 0px 40px;
+}
+#logo-div strong {
+	color: #fff;
+	font: 28px bold ;
 }
 
-#license-div {
-  height: 50px;
-  float: left;
-  text-align:center;
-  vertical-align:middle;
-  line-height:50px;
-}
-
-#license-div a:visited, #license-div a:link {
-  color: #EB8A3D;
-}
-
-#license-div a:hover {
-  text-decoration: none;
-  color: #EB8A3D;
-}
-
-#submenu-div {
+#headmenu-div {
   height: 50px;
 }
 
-#submenu-div ul {
+#headmenu-div ul {
   margin: 0;
   padding: 0;
   list-style-type: none;
 }
 
-#submenu-div li {
+#headmenu-div li {
   float: right;
   padding: 0 10px;
   margin: 3px 0;
   border-left: 1px solid #FFF;
+  font: 14px bold;
 }
 
-#submenu-div a:visited, #submenu-div a:link {
+#headmenu-div a:visited, #headmenu-div a:link {
   color: #FFF;
   text-decoration: none;
 }
 
-#submenu-div a:hover {
+#headmenu-div a:hover {
   color: #F5C29A;
+
 }
 
 #loading-div {
@@ -66,7 +62,7 @@
 
 #menu-div {
   background: #80BDCB;
-  font-weight: bold;
+  font:12px bold;
   height: 24px;
   line-height:24px;
 }
@@ -96,17 +92,18 @@
   background:#80BDCB;
 }
 
-#submenu-div a.fix-submenu{ clear:both; margin-left:5px; padding:1px 5px; *padding:3px 5px 5px; background:#DDEEF2; color:#278296; }
-#submenu-div a.fix-submenu:hover{ padding:1px 5px; *padding:3px 5px 5px; background:#FFF; color:#278296; }
+#headmenu-div a.fix-submenu{ clear:both; margin-left:5px; padding:1px 5px; *padding:3px 5px 5px; background:#DDEEF2; color:#278296; }
+#headmenu-div a.fix-submenu:hover{ padding:1px 5px; *padding:3px 5px 5px; background:#FFF; color:#278296; }
 #menu-div li.fix-spacel{ width:30px; border-left:none; }
 #menu-div li.fix-spacer{ border-right:none; }
 </style>
 </head>
 <body>
 <div id="header-div">
-  <div id="submenu-div">
+  <div id="logo-div"><strong>嘉海</strong>后台管理系统</div>
+  <div id="headmenu-div">
     <ul>
-      <li><a href="index.php?act=about_us" target="main-frame">关于我们</a></li>
+      <li><a href="bg.php?do=about_us" target="main-frame">关于我们</a></li>
       <li><a href="#"  onclick="ShowToDoList()">要做的事情</a></li>
     </ul>
   </div>
