@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-07-31 08:46:02
+<?php /* Smarty version Smarty-3.1.13, created on 2013-07-31 08:59:20
          compiled from "/home/gongwq/site/php1/com.gongwq.php1/web/smarty/templates/items.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:99237961751adb9ef2fc6a2-15959580%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'ab6eb6e5e6f0d5d2441ddb27dc0be438755b5910' => 
     array (
       0 => '/home/gongwq/site/php1/com.gongwq.php1/web/smarty/templates/items.tpl',
-      1 => 1375253126,
+      1 => 1375253954,
       2 => 'file',
     ),
   ),
@@ -36,7 +36,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 $(document).ready(function() {
 	/*设置相册*/
 	//1,布局li
-	//2,设置事件
+	//2,设置事件,设置默认图片
 	<?php  $_smarty_tpl->tpl_vars['image'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['image']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['item_images']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['image']->key => $_smarty_tpl->tpl_vars['image']->value){
@@ -47,8 +47,15 @@ $_smarty_tpl->tpl_vars['image']->_loop = true;
 		$("#current_img").attr("src", ".<?php echo $_smarty_tpl->tpl_vars['image']->value['stand_url'];?>
 ");
 	});
+	if (<?php echo $_smarty_tpl->tpl_vars['item']->value['img_id'];?>
+ == <?php echo $_smarty_tpl->tpl_vars['image']->value['img_id'];?>
+) {
+		$("#current_img").attr("src", ".<?php echo $_smarty_tpl->tpl_vars['image']->value['stand_url'];?>
+");
+	}
 	<?php } ?>
-	//3,初始化,设置ul长度和位置，设置默认图片
+	//3,初始化,设置ul长度和位置
+	
 	
 });
 
@@ -96,7 +103,7 @@ $_smarty_tpl->tpl_vars['image']->_loop = true;
 			
 				<div id="item_preview">
 					<div id='item_image'>
-						<img id="current_img" width="350" height="350"alt="" src="./upload/201307/stand/1374467683800549716.jpg" />
+						<img id="current_img" width="350" height="350"alt="" src="" />
 					</div>
 					<div id="item_image_select">
 						<a id="move_left"></a>

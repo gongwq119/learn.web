@@ -9,13 +9,17 @@
 $(document).ready(function() {
 	/*设置相册*/
 	//1,布局li
-	//2,设置事件
+	//2,设置事件,设置默认图片
 	<{foreach $item_images as $image}>
 	$("#<{$image.img_id}>").mouseover(function() {
 		$("#current_img").attr("src", ".<{$image.stand_url}>");
 	});
+	if (<{$item.img_id}> == <{$image.img_id}>) {
+		$("#current_img").attr("src", ".<{$image.stand_url}>");
+	}
 	<{/foreach}>
-	//3,初始化,设置ul长度和位置，设置默认图片
+	//3,初始化,设置ul长度和位置
+	
 	
 });
 
@@ -57,7 +61,7 @@ $(document).ready(function() {
 			
 				<div id="item_preview">
 					<div id='item_image'>
-						<img id="current_img" width="350" height="350"alt="" src="./upload/201307/stand/1374467683800549716.jpg" />
+						<img id="current_img" width="350" height="350"alt="" src="" />
 					</div>
 					<div id="item_image_select">
 						<a id="move_left"></a>
