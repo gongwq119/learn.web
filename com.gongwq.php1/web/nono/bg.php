@@ -86,7 +86,7 @@ elseif ($_REQUEST['do'] == 'main')
 
 elseif ($_REQUEST['do'] == 'drag')
 {
-    $smarty->display('drag.tpl');;
+    $smarty->display('drag.tpl');
 }
 
 ?>

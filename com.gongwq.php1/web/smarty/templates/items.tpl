@@ -17,7 +17,6 @@ $(document).ready(function() {
 	<{/foreach}>
 	//3,初始化,设置ul长度和位置，设置默认图片
 	
-	
 });
 
 </script>
@@ -44,10 +43,10 @@ $(document).ready(function() {
 			</div>
 			<!-- End of the breadcurmb-->
 			<!-- Begin of the item introduction -->
-			<div class="item_intro">
-				<div class="item_info">
-					<div class="item_name"><h1><{$item.it_name}></h1></div>
-					<div class="item_summary">
+			<div id="item_intro">
+				<div id="item_info">
+					<div id="item_name"><h1><{$item.it_name}></h1><strong>促销信息</strong></div>
+					<div id="item_summary">
 					<ul>
 						<li><div>商品编号&nbsp&nbsp:&nbsp&nbsp</div><div><{$item.it_sn}></div></li>
 						<li><div>商品价格&nbsp&nbsp:&nbsp&nbsp￥</div><div><{$item.it_price}></div></li>
@@ -56,13 +55,13 @@ $(document).ready(function() {
 					</div>
 				</div>
 			
-				<div class="item_preview">
-					<div class='item_image'>
-						<img id="current_img" width="250" height="250"alt="" src="./upload/201307/stand/1374467683800549716.jpg" />
+				<div id="item_preview">
+					<div id='item_image'>
+						<img id="current_img" width="350" height="350"alt="" src="./upload/201307/stand/1374467683800549716.jpg" />
 					</div>
-					<div class="item_image_select">
+					<div id="item_image_select">
 						<a id="move_left"></a>
-						<div class="item_image_select_list">
+						<div id="item_image_select_list">
 							<ul>
 								<{foreach $item_images as $image}>
 								<li>
@@ -76,12 +75,12 @@ $(document).ready(function() {
 				</div>
 			</div>
 			<!-- End of the item introduction -->
-			<div class="main_part">
-				<div class="main_right">
+			<div id="main_part">
+				<div id="item_main_right">
 					<div class="sf_t"><h2>详细描述</h2></div>
 					<div class="sf_c"><{$item.it_desc}></div>
 				</div>
-				<div class="main_left">
+				<div id="item_main_left">
 					<div class="related_sort">
 						<div class="sf_t"><h2>相关分类</h2></div>
 						<div class="sf_c">

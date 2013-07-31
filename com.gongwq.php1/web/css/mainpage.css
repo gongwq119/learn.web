@@ -7,44 +7,29 @@
 @IMPORT url("./footer.css");
 @IMPORT url("./item_intro.css");
 body {
-	padding: 0 10px 10px;
+	padding: 0;
 	margin: 0;
 	color: #000;
 	background: #fff;
-	font-family: Arial,Helvetica,sans-serif;
-	font-size: 12px;
+	font: 14px Arial,Helvetica,sans-serif;
 }
 #w_all{
-	background: #fff url(/image/bg.png) no-repeat top center; 
+	background: url(/image/bg.png) no-repeat top center; 
 }
-#w1 {
+#w1,#w2,#w3,#w4 {
 	margin: 0px 10px;
-	border: dotted 0px;
-}
-#w2 {
-	margin: 0px 10px;
-	border: dotted 0px;
-}
-#w3 {
-	margin: 0px 10px;
-	border: dotted 0px;
-}
-#w4 {
-	margin: 0px 10px;
-	border: dotted 0px;
 }
 .container {
 	margin: 0 auto;
-	padding: 0;
 	width: 970px;
 }
-.main_right {
+#item_main_right {
 	margin: 10px 0px 0px 0px;
 	height: 500px;
 	width: 740px;
 	float: right;
 }
-.main_left {
+#item_main_left {
 	margin: 10px 0px 0px 0px;
 	height: 500px;
 	width: 200px;

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-07-24 05:02:56
+<?php /* Smarty version Smarty-3.1.13, created on 2013-07-31 04:38:27
          compiled from "/home/gongwq/site/php1/com.gongwq.php1/web/smarty/templates/categories.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:17505272151adb5f0062c55-14954276%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'ac10833537ced480b2d299969938f412e9969be5' => 
     array (
       0 => '/home/gongwq/site/php1/com.gongwq.php1/web/smarty/templates/categories.tpl',
-      1 => 1374634975,
+      1 => 1375238085,
       2 => 'file',
     ),
   ),
@@ -50,9 +50,6 @@ $(document).ready(function() {
 }
 #w_cat_right{
 	float:right;
-}
-ul{
-	list-style-type: none;
 }
 .filter_left{
 	float: left;

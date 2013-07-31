@@ -25,9 +25,6 @@ $(document).ready(function() {
 #w_cat_right{
 	float:right;
 }
-ul{
-	list-style-type: none;
-}
 .filter_left{
 	float: left;
 	width: 199px;
