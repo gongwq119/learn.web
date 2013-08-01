@@ -23,7 +23,7 @@ if ($_REQUEST['do'] == '')
 elseif ($_REQUEST['do'] == 'top')
 {
 	$nav_list = array();
-	$nav_list['/items.php?do=list'] = '商品列表';
+	$nav_list['/nono/items.php?do=list'] = '商品列表';
 	$smarty->assign('nav_list', $nav_list);
 	$smarty->display('top.tpl');
 }
@@ -88,5 +88,3 @@ elseif ($_REQUEST['do'] == 'drag')
 {
     $smarty->display('drag.tpl');
 }
-
-?>

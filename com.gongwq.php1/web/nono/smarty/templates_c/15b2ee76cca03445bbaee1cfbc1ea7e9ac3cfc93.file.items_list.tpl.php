@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-07-17 10:05:40
+<?php /* Smarty version Smarty-3.1.13, created on 2013-08-01 10:38:15
          compiled from "./smarty/templates/items_list.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:45590340251de5c0d1d3346-12537241%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '15b2ee76cca03445bbaee1cfbc1ea7e9ac3cfc93' => 
     array (
       0 => './smarty/templates/items_list.tpl',
-      1 => 1374048284,
+      1 => 1375346291,
       2 => 'file',
     ),
   ),
@@ -65,8 +65,38 @@ body {
 	padding: 10px;
 	height: 28px;
 }
-operations button {
-	float: right;
+.operations span {
+	display:block;
+	margin: auto 5px;
+	float:left;
+	width: 52px;
+	height: 24px;
+	text-align: center;
+	line-height:24px;
+}
+#new_item {
+	background: url(../image/cred.png) no-repeat 0px -25px;
+}
+#new_item:hover {
+	color:#fff;
+	cursor:pointer;
+	background: url(../image/cred.png) no-repeat -54px -25px;
+}
+#del_item {
+	background: url(../image/cred.png) no-repeat 0px 0px;
+}
+#del_item:hover {
+	color:#fff;
+	cursor:pointer;
+	background: url(../image/cred.png) no-repeat -54px 0px;
+}
+#edit_item {
+	background: url(../image/cred.png) no-repeat 0px 0px;
+}
+#edit_item:hover {
+	color:#fff;
+	cursor:pointer;
+	background: url(../image/cred.png) no-repeat -54px 0px;
 }
 #item_list
   {
@@ -124,16 +154,25 @@ $(document).ready(function() {
 		}
 	});
 	$("#edit_item").hide();
+	$("#del_item").hide();
 	$(":checkbox").click(function() {
-		if (1 == $(":checked[name='select']").length)
-		{
-			$("#edit_item").show();
-		}
-		else
-		{
+		switch ($(":checked[name='select']").length) {
+		case 0:
 			$("#edit_item").hide();
+			$("#del_item").hide();
+			break;
+		case 1:
+			$("#edit_item").show();
+			$("#del_item").show();
+			break;
+		default:
+			$("#edit_item").hide();
+			$("#del_item").show();
+			break;
 		}
-		
+	});
+	$("#new_item").click(function() {
+		window.location.href = "items.php?do=add";
 	});
 	$("#edit_item").click(function() {
 		if (1 == $(":checked[name='select']").length)
@@ -142,6 +181,14 @@ $(document).ready(function() {
 			window.location.href = edit_link;
 		}
 	});
+	$("#del_item").click(function() {
+		var del_id = '';
+		$(":checked[name='select']").each(function() {
+			del_id = del_id + ',' + $(this).val();
+		});
+		del_id = del_id.substring(1, del_id.length);
+		window.location.href = 'items.php?do=del&item_id=' + del_id;
+	});	
 	//inital page paramter
 	var page = parseInt(<?php echo $_smarty_tpl->tpl_vars['page']->value;?>
 );
@@ -168,18 +215,6 @@ $(document).ready(function() {
 		$(".goto_page_a").attr('href', 'items.php?do=list&page=' + $(this).val());
 	});
 });
-function delSelected() {
-	var sel = $("input:checked").parent().parent().attr("id");
-	alert(sel);
-}
-function hideSelected() {
-	$("input:checked").hide();
-}
-function editSelected() {
-	var link = "items.php?do=edit";
-	link = link + "&item_id=" + $("input:checked").val();
-	window.location.href=link; 
-}
 </script>
 </head>
 <body>
@@ -190,9 +225,9 @@ function editSelected() {
 </div>
 <div id="w2">
 <div class="operations">
-	<button type="button" id="new_item" onclick="hideSelected()">NEW</button>
-	<button type="button" id="del_item" onclick="delSelected()">DEL</button>
-	<button type="button" id="edit_item" onclick="editSelected()">EDIT</button>
+	<span id="new_item">新建</span>
+	<span id="del_item">删除</span>
+	<span id="edit_item">编辑</span>
 </div>
 </div>
 

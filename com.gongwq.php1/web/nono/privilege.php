@@ -18,6 +18,22 @@ else
 }
 
 /*------------------------------------------------------ */
+//-- 退出登陆
+/*------------------------------------------------------ */
+if ($_REQUEST['do'] == 'logout')
+{
+	//清除cookie
+	
+	//清除session
+	session_start();
+	unset($_SESSION['admin_id']);
+	session_destroy();
+	
+	$_REQUEST['do'] = 'login';
+}
+
+
+/*------------------------------------------------------ */
 //-- 登陆界面
 /*------------------------------------------------------ */
 if ($_REQUEST['do'] == 'login')
@@ -25,34 +41,17 @@ if ($_REQUEST['do'] == 'login')
 	$smarty->display("login.tpl");
 }
 
-
-/*------------------------------------------------------ */
-//-- 退出登录
-/*------------------------------------------------------ */
-if ($_REQUEST['do'] == 'logout')
-{
-	/* 清除cookie */
-	setcookie('ECSCP[admin_id]',   '', 1);
-	setcookie('ECSCP[admin_pass]', '', 1);
-
-	$sess->destroy_session();
-
-	$_REQUEST['do'] = 'login';
-}
-
 //验证用户名和密码
 elseif ($_REQUEST['do'] == 'validate')
 {
-    $_POST['username'] = isset($_POST['username']) ? trim($_POST['username']) : '';
-    $_POST['password'] = isset($_POST['password']) ? trim($_POST['password']) : '';
+    $username= isset($_POST['username']) ? trim($_POST['username']) : '';
+    $password = isset($_POST['password']) ? trim($_POST['password']) : '';
 
     /* 检查密码是否正确 */
-    $row = $db->getAdminUserId($_POST['username'], $_POST['password']);
-
-    if ($row)
+    $row = $db->getAdminUserId($username, $password);
+    $result = $row->fetch_assoc();
+    if (isset($result))
     {
-    	$result = $row->fetch_assoc();
-    	
         // 登录成功,修改session
         session_start();
         $_SESSION['admin_id'] = $result['user_id'];
@@ -61,9 +60,13 @@ elseif ($_REQUEST['do'] == 'validate')
         // 更新最后登录时间和IP
 
         // 清除购物车中过期的数据
+        if (!isset($_SESSION['previous_page'])) {
+        	$_SESSION['previous_page'] = 'http://' . $_SERVER['HTTP_HOST'] .  '/nono/bg.php';
+        }
 		header('Location: ' . $_SESSION['previous_page']);
         exit;
     }
+    echo "登陆错误";
 }
 
 /*------------------------------------------------------ */

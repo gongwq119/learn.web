@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-07-31 11:41:37
+<?php /* Smarty version Smarty-3.1.13, created on 2013-08-01 05:43:36
          compiled from "./smarty/templates/top.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:191161266151de5c0cd95324-19175983%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '2ab9fdad7394bfb98eefba16c4e97bf6e41db87d' => 
     array (
       0 => './smarty/templates/top.tpl',
-      1 => 1375263696,
+      1 => 1375328613,
       2 => 'file',
     ),
   ),
@@ -35,6 +35,9 @@ body {
 	margin: 0px;
 	padding: 0px;
 }
+.clear {
+	clear: both;
+}
 #header-div {
   background: #278296;
   border-bottom: 1px solid #FFF;
@@ -61,6 +64,7 @@ body {
   margin: 0;
   padding: 0;
   list-style-type: none;
+  height: 50%;
 }
 
 #headmenu-div li {
@@ -80,11 +84,25 @@ body {
   color: #F5C29A;
 
 }
-
-#loading-div {
-  clear: right;
-  text-align: right;
-  display: block;
+#admin_control {
+	margin-right:10px;
+	text-align: right;
+	height:50%;
+	font: 14px normal;
+}
+#admin_control span {
+    margin-left:5px;
+	border: solid 1px #000;
+	background-color: #fff;
+	
+}
+#admin_control a:hover {
+	background:#ddd;
+	cursor:pointer;
+}
+#admin_control a:hover {
+	color:#fff;
+	cursor:pointer;
 }
 
 #menu-div {
@@ -118,7 +136,6 @@ body {
   color: #000;
   background:#80BDCB;
 }
-
 #headmenu-div a.fix-submenu{ clear:both; margin-left:5px; padding:1px 5px; *padding:3px 5px 5px; background:#DDEEF2; color:#278296; }
 #headmenu-div a.fix-submenu:hover{ padding:1px 5px; *padding:3px 5px 5px; background:#FFF; color:#278296; }
 #menu-div li.fix-spacel{ width:30px; border-left:none; }
@@ -132,8 +149,14 @@ body {
     <ul>
       <li><a href="bg.php?do=about_us" target="main-frame">关于我们</a></li>
       <li><a href="#"  onclick="ShowToDoList()">要做的事情</a></li>
+      <div class="clear"></div>
     </ul>
+    <div id="admin_control">你好！admin<span><a style="color:#000; font-size:14px" href="privilege.php?do=logout" target="_top">退出</a></span></div>
+  	<script language="JavaScript">
+  		
+	</script>
   </div>
+  
 </div>
 <div id="menu-div">
   <ul>

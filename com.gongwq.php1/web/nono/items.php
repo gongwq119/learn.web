@@ -303,6 +303,15 @@ elseif ($_REQUEST['do'] == 'insert' || $_REQUEST['do'] == 'update')
 
 	$smarty -> display("ok.tpl");
 }
+elseif ($_REQUEST['do'] == 'del')
+{
+	//获得参数
+	$del_item_id = isset($_GET['item_id']) ? $_GET['item_id'] : '0';
+	if ($del_item_id == '0') {
+		die("删除参数错误");
+	}
+	echo "删除入库";
+}
 
 function delLocalImage($file) {
 	$filepath = ROOT_PATH . $file;
