@@ -1,4 +1,30 @@
 @CHARSET "UTF-8";
-.footer{
+#footer{
+	margin: 0px auto;
 	width: 975px;
+}
+#seg_line {
+	height:2px;
+	background: #ddd ;
+}
+#ref_links {
+	text-align: center;
+}
+#ref_links a{
+	color: #666;
+	margin: 0px 10px;
+	font: 12px normal;
+	text-decoration: none;
+	
+}
+#ref_links a:hover{
+	cursor: pointer;
+}
+#banquan {
+	text-align: center;
+	font: 12px normal;
+}
+#beian {
+	text-align: center;
+	font: 12px normal;
 }

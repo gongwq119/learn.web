@@ -17,7 +17,7 @@ body {
 	background: url(/image/bg.png) no-repeat top center; 
 }
 #w1,#w2,#w3,#w4 {
-	margin: 0px 10px;
+	margin: 0px 0px;
 }
 .container {
 	margin: 0 auto;

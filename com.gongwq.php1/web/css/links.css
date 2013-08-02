@@ -1,4 +1,37 @@
 @CHARSET "UTF-8";
-.links{
+#links{
+	margin: 0px auto;
 	width: 975px;
+	height: 140px;
+	position: relative;
+	background: url(../image/link_footer.png) repeat-x 0px -406px;
+}
+#cgzn {
+	position: absolute;
+	left:300px;
+}
+#shfw {
+	position: absolute;
+	left:420px;
+}
+#jhpj {
+	position: absolute;
+	left:540px;
+}
+.link_div {
+	margin-top: 10px;
+	width: 120px;
+}
+.link_div span {
+	font: 16px bold;
+}
+.link_div span:hover {
+	cursor: pointer;
+}
+.link_div a {
+	font: 12px bold;
+	margin: 5px 0px 5px -36px;
+}
+.link_div a:hover {
+	cursor: pointer;
 }
