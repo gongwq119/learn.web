@@ -3,15 +3,26 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script language="JavaScript" src="../js/jquery-1.9.1.js"></script>
+<script language="JavaScript" src="../js/jquery-ui.js"></script>
 <script type="text/javascript">
-function funcA() {
-	var a = 'a';
-	var b = 1;
-}
-alert(funcA.toString());
+$(document).ready(function() {
+	$("div").click(function() {
+		$(this).effect( "easing", "lnear" );
+	});
+});
 </script>
+<style type="text/css">
+div {
+	margin: 100px auto;
+	padding: 0;
+	width: 100px;
+	height: 100px;
+	background-color: #ddd;
+}
+</style>
 </head>
 <body>
-
+	<div>test</div>
 </body>
 </html>
