@@ -1,17 +1,17 @@
 @CHARSET "UTF-8";
-.window{
+#active_window{
 	height:531px;	
 	width: 975px;
 	overflow: hidden;
 	position: relative;
 }
-.active_frame {
+#active_frame {
 	position: absolute;
 }
-.active_frame img {
+#active_frame img {
 	float: left;
 }
-.active_bottons {
+#active_buttons {
 	position: relative;
 	top: 20;
 	left: 20;

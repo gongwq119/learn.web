@@ -9,27 +9,27 @@
 $(document).ready(function() {
 	
 	//Get size of images, how many there are, then determin the size of the image frame.
-	var imageWidth = $(".window").width();
-	var imageSum = $(".active_frame img").size();
+	var imageWidth = $("#active_window").width();
+	var imageSum = $("#active_frame img").size();
 	var imageFrameWidth = imageWidth * imageSum;
 	
 	//Paging + Slider Function
 	rotate = function(position){	
 		var image_framePosition = (position - 1) * imageWidth; //Determines the distance the image frame needs to slide
 		//Slider Animation
-		$(".active_frame").animate({ 
+		$("#active_frame").animate({ 
 			left: -image_framePosition
 		}, 500 );
 	}; 
 
-	$(".active_frame").css({'width' : imageFrameWidth});
-  	$(".btn1").click(function() {
+	$("#active_frame").css({'width' : imageFrameWidth});
+  	$("#btn1").click(function() {
   		rotate(1);
 	});
-  	$(".btn2").click(function() {
+  	$("#btn2").click(function() {
   		rotate(2);
 	});
-  	$(".btn3").click(function() {
+  	$("#btn3").click(function() {
   		rotate(3);
 	});
 });
@@ -90,13 +90,13 @@ $(document).ready(function() {
 	<div id="w3">
 		<!-- Begin of the container -->
 		<div class="container">
-			<div class="window">
-				<div class="active_frame">
+			<div id="active_window">
+				<div id="active_frame">
 					<a href="#"><img alt="" src="image/1.jpg"></a>
 					<a href="#"><img alt="" src="image/2.jpg"></a>
 					<a href="#"><img alt="" src="image/3.jpg"></a>
 				</div>
-				<div class="active_bottons">
+				<div id="active_buttons">
 					<a href="#"><button class="btn1" type="button">1</button></a>
 					<a href="#"><button class="btn2" type="button">2</button></a>
 					<a href="#"><button class="btn3" type="button">3</button></a>
