@@ -5,32 +5,62 @@
 <title>HHH</title>
 <link href="css/mainpage.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="/js/jquery-1.9.1.js"></script>
+<script language="JavaScript" src="/js/jquery-ui.js"></script>
 <script type="text/javascript">
+
 $(document).ready(function() {
 	
 	//Get size of images, how many there are, then determin the size of the image frame.
 	var imageWidth = $("#active_window").width();
 	var imageSum = $("#active_frame img").size();
 	var imageFrameWidth = imageWidth * imageSum;
+	var currentPosition = 1;
 	
 	//Paging + Slider Function
 	rotate = function(position){	
 		var image_framePosition = (position - 1) * imageWidth; //Determines the distance the image frame needs to slide
-		//Slider Animation
+		
+		//chose word
+		switch (position) {
+		case 1:
+			$("#word_img").attr("src","image/b1.png");
+			break;
+		case 2:
+			$("#word_img").attr("src","image/b2.png");
+			break;
+		case 3:
+			$("#word_img").attr("src","image/b3.png");
+			break;
+		default:
+			break;
+		}
+		
+		//next word position
+		if (position < currentPosition) {
+			$("#word_img").css('left' : '-500px')
+		} else {
+			$("#word_img").css('right' : '-500px')
+		}
+		//word out
+		//Slider Animation, word run together
 		$("#active_frame").animate({ 
 			left: -image_framePosition
-		}, 500 );
+		}, 1200, "easeInOutCubic" );
 	}; 
 
+	//文字动作，分两步，第一步是出去（都是从左侧出去），第二步是进来（和图片方向一致）
 	$("#active_frame").css({'width' : imageFrameWidth});
   	$("#btn1").click(function() {
   		rotate(1);
+  		currentPosition = 1;
 	});
   	$("#btn2").click(function() {
   		rotate(2);
+  		currentPosition = 2;
 	});
   	$("#btn3").click(function() {
   		rotate(3);
+  		currentPosition = 3;
 	});
 });
 </script>
@@ -96,10 +126,13 @@ $(document).ready(function() {
 					<a href="#"><img alt="" src="image/2.jpg"></a>
 					<a href="#"><img alt="" src="image/3.jpg"></a>
 				</div>
+				<div id="words">
+					<a href="#"><img id="word_img" alt="" src="image/b1.png"></a>
+				</div>
 				<div id="active_buttons">
-					<a href="#"><button class="btn1" type="button">1</button></a>
-					<a href="#"><button class="btn2" type="button">2</button></a>
-					<a href="#"><button class="btn3" type="button">3</button></a>
+					<div id="btn1">1</div>
+					<div id="btn2">2</div>
+					<div id="btn3">3</div>words
 				</div>
 			</div>
 		</div>
