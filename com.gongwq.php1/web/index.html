@@ -9,58 +9,59 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
-	
 	//Get size of images, how many there are, then determin the size of the image frame.
 	var imageWidth = $("#active_window").width();
 	var imageSum = $("#active_frame img").size();
 	var imageFrameWidth = imageWidth * imageSum;
 	var currentPosition = 1;
+	var animationLock = true;
 	
 	//Paging + Slider Function
 	rotate = function(position){	
+		if (position == currentPosition) {
+			return;
+		}
 		var image_framePosition = (position - 1) * imageWidth; //Determines the distance the image frame needs to slide
 		
-		//chose word
-		switch (position) {
-		case 1:
-			$("#word_img").attr("src","image/b1.png");
-			break;
-		case 2:
-			$("#word_img").attr("src","image/b2.png");
-			break;
-		case 3:
-			$("#word_img").attr("src","image/b3.png");
-			break;
-		default:
-			break;
-		}
+		//word out 
+		$("#words").animate({'left' : '-518px'}, 800, "easeInCirc", function() {
+			//chose word 
+			switch (position) {
+			case 1:
+				$("#word_img").attr("src","image/b1.png");
+				break;
+			case 2:
+				$("#word_img").attr("src","image/b2.png");
+				break;
+			case 3:
+				$("#word_img").attr("src","image/b3.png");
+				break;
+			default:
+				break;
+			};
+		});
 		
-		//next word position
-		if (position < currentPosition) {
-			$("#word_img").css('left' : '-500px')
-		} else {
-			$("#word_img").css('right' : '-500px')
-		}
-		//word out
 		//Slider Animation, word run together
-		$("#active_frame").animate({ 
+		$("#active_frame").delay(600).animate({ 
 			left: -image_framePosition
-		}, 1200, "easeInOutCubic" );
+		}, 1200, "easeInOutCirc" );
+		$("#words").delay(600).animate({
+			left: 0
+		}, 800, "easeInOutCirc", function() {
+			currentPosition = position;
+		});
 	}; 
 
-	//文字动作，分两步，第一步是出去（都是从左侧出去），第二步是进来（和图片方向一致）
 	$("#active_frame").css({'width' : imageFrameWidth});
   	$("#btn1").click(function() {
   		rotate(1);
-  		currentPosition = 1;
+  		
 	});
   	$("#btn2").click(function() {
   		rotate(2);
-  		currentPosition = 2;
 	});
   	$("#btn3").click(function() {
   		rotate(3);
-  		currentPosition = 3;
 	});
 });
 </script>
@@ -132,7 +133,7 @@ $(document).ready(function() {
 				<div id="active_buttons">
 					<div id="btn1">1</div>
 					<div id="btn2">2</div>
-					<div id="btn3">3</div>words
+					<div id="btn3">3</div>
 				</div>
 			</div>
 		</div>
