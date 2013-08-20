@@ -34,3 +34,9 @@ ul.option {
 	vertical-align: middle;
 }
 .option a:hover { text-decoration:none;color: #696969;cursor:pointer;}
+#search_box {
+	float:right;
+	position: relative;
+	right: 20px;
+	top: 10px;
+}
