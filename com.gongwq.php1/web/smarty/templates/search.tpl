@@ -19,10 +19,10 @@ $(document).ready(function() {
 });
 </script>
 <style type="text/css">
-#w_cat_left{
+#w_serh_rest_left{
 	float: left;
 }
-#w_cat_right{
+#w_serh_rest_right{
 	float:right;
 }
 .filter_left{
@@ -74,11 +74,11 @@ $(document).ready(function() {
 	width: 200px;
 	float:left;
 }
-#cat_filter {
+#search_reminder {
 	margin: 10px 0px 0px 0px;
 	width: 740px;
 }
-#cat_list_menu {
+#rest_menu {
 	margin: 10px 0px 0px 0px;
 	width: 740px;
 	background-color: #f7f7f7;
@@ -121,7 +121,7 @@ $(document).ready(function() {
 				</div>
 			</div>
 			<!-- End of the breadcurmb-->
-			<div id="w_cat_left">
+			<div id="w_serh_rest_left">
 			<!-- Begin of the category tree -->
 				<div class="cat_tree">
 					<ul id="farther_ul">
@@ -144,27 +144,21 @@ $(document).ready(function() {
 			<!-- End of the category tree -->
 			</div>
 			
-			<div id="w_cat_right">
-				<!-- Begin of the category filter -->
-				<div id="cat_filter">
-					<div class="sf_t"><h2>分类筛选</h2></div>
+			<div id="w_serh_rest_right">
+				<!-- Begin of the search reminder -->
+				<div id="search_reminder">
+					<div class="sf_t"><h2>搜索结果</h2></div>
 					<div class="sf_c">
-						<div class="filter_left" align="right">品牌:  </div>
-						<div class="filter_right">
-							<div class="filter_ops"><a>abc</a></div>
-							<div class="filter_ops"><a>abc</a></div>
-							<div class="clear"></div>
-						</div>
-						<div class="clear"></div>
+						关键字搜索，结果<{$count}>项
 					</div>
 				</div>
-				<!-- End of the category filter -->
-				<!-- Begin of the category list menu -->
-				<div id="cat_list_menu">
+				<!-- End of the search reminder -->
+				<!-- Begin of the menu for result -->
+				<div id="rest_menu">
 					list menu
 				</div>
-				<!-- End of the category list menu -->
-				<!-- Begin of the categories list -->
+				<!-- End of the menu for result -->
+				<!-- Begin of the result list -->
 				<div id="item_list">
 					<ul>
 						<{foreach $items as $item}>
@@ -178,7 +172,7 @@ $(document).ready(function() {
 						<{/foreach}>
 					</ul>
 				</div>
-				<!-- End of the categories list -->
+				<!-- End of the result list -->
 			</div>
 			<div class="clear"></div>
 		</div>	

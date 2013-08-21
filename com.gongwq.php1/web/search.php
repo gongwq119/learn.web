@@ -101,12 +101,8 @@ else
 	
 		}
 	}
-	//显示页面
-	foreach ($items AS $item)
-	{
-		echo $item['it_name'];
-		echo $item['img_stand_url'];
-	}
-		
-	
 }
+
+$smarty->assign('count', $count);
+$smarty->assign('items',$items);
+$smarty->display(ROOT_PATH . '/smarty/templates/search.tpl');
