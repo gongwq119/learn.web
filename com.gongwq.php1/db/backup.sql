@@ -127,6 +127,9 @@ CREATE TABLE `items` (
   `click_count` int(11) NOT NULL DEFAULT '0',
   `it_quant` int(10) NOT NULL DEFAULT '0',
   `img_id` mediumint(8) NOT NULL,
+  `keywords` varchar(255) NOT NULL DEFAULT '',
+  `is_delete` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `is_on_sale` tinyint(3) unsigned NOT NULL,
   PRIMARY KEY (`it_id`),
   UNIQUE KEY `id_UNIQUE` (`it_id`,`it_name`)
 ) ENGINE=MyISAM AUTO_INCREMENT=82 DEFAULT CHARSET=utf8;
@@ -138,7 +141,7 @@ CREATE TABLE `items` (
 
 LOCK TABLES `items` WRITE;
 /*!40000 ALTER TABLE `items` DISABLE KEYS */;
-INSERT INTO `items` VALUES (1,'000001','不锈钢按钮',3,'按钮按钮',1,0,0,0,0),(2,'000002','控制主板',1990,'三菱主板',2,0,0,0,0),(80,'yyy','yyy',21,'<p>请编辑商品描述</p>',6,1,0,6,60),(81,'00000023','平层感应器',123,'<p>平层感应器，为宁波生产</p><p>使用品牌为<strong>otis</strong>，<strong>kone</strong>，<strong>shmit</strong>等等</p><p><br/></p>',6,2,0,1000,0);
+INSERT INTO `items` VALUES (1,'000001','不锈钢按钮',3,'按钮按钮',1,0,0,0,0,'',0,1),(2,'000002','控制主板',1990,'三菱主板',2,0,0,0,0,'',0,1),(80,'yyy','yyy',21,'<p>请编辑商品描述</p>',6,1,0,6,60,'',0,1),(81,'00000023','平层感应器',123,'<p>平层感应器，为宁波生产</p><p>使用品牌为<strong>otis</strong>，<strong>kone</strong>，<strong>shmit</strong>等等</p><p><br/></p>',6,2,0,1000,0,'',0,0);
 /*!40000 ALTER TABLE `items` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -178,4 +181,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-08-07 14:47:52
+-- Dump completed on 2013-08-21  9:02:20
