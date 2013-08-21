@@ -21,6 +21,11 @@ if ($_REQUEST['do'] == 'list' || $_REQUEST['do'] == 'trash')
 	
 	//读取数据库
 	$sql = 'SELECT i.it_id, i.it_name, i.it_sn, i.it_price, i.it_quant FROM mydb.items AS i ';
+	if ($_REQUEST['do'] == 'list') {
+		$sql .= 'WHERE i.is_delete=0 AND i.is_on_sale=1 ';
+	} elseif ($_REQUEST['do'] == 'trash') {
+		$sql .= 'WHERE i.is_delete=1 ';
+	}
 	$page_count = floor($db->getRowNumber($sql)/$amount) + 1;
 	$result = $db->selectLimit($sql, $amount, $page * $amount);
 	$items = array();
@@ -33,7 +38,11 @@ if ($_REQUEST['do'] == 'list' || $_REQUEST['do'] == 'trash')
 	$smarty->assign('items', $items);
 	$smarty->assign('page', $page);
 	$smarty->assign('page_count', $page_count);
-	$smarty->display('items_list.tpl');
+	if ($_REQUEST['do'] == 'list') {
+		$smarty->display('items_list.tpl');
+	} elseif ($_REQUEST['do'] == 'trash') {
+		$smarty->display('items_trash_list.tpl');
+	}
 }
 
 /*------------------------------------------------------ */
@@ -303,7 +312,7 @@ elseif ($_REQUEST['do'] == 'insert' || $_REQUEST['do'] == 'update')
 
 	$smarty -> display("ok.tpl");
 }
-elseif ($_REQUEST['do'] == 'del')
+elseif ($_REQUEST['do'] == 'remove')
 {
 	//获得参数
 	$del_item_id = isset($_GET['item_id']) ? $_GET['item_id'] : '0';
@@ -312,6 +321,11 @@ elseif ($_REQUEST['do'] == 'del')
 	}
 	echo "删除入库";
 }
+elseif ($_REQUEST['do'] == 'delete')
+{
+	echo "trash";
+}
+
 
 function delLocalImage($file) {
 	$filepath = ROOT_PATH . $file;
