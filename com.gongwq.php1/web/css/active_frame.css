@@ -17,11 +17,12 @@
 	bottom: 10px;
 }
 #active_buttons div {
+	position: relative;
 	margin: 0px 10px;
 	float: left;
-	width: 40px;
-	height: 30px;
-	background-color: red;
+	width: 20px;
+	height: 15px;
+	background-color: #dfdfdf;
 	border: 1px solid;
 }
 #active_buttons div:hover{

@@ -6,17 +6,29 @@
 	position: relative;
 	background: url(../image/link_footer.png) repeat-x 0px -406px;
 }
-#cgzn {
+#int_links {
 	position: absolute;
-	left:300px;
+	left: 75px;
+}
+#logo_links {
+	position: absolute;
+	left: 400px;
+	width: 600px;
+	height: 140px;
+	background: url(../image/dianti_logos.png) no-repeat;
+}
+#contact {
+	position: absolute;
+	left: 700px;
+}
+#cgzn {
+ 	float:left;
 }
 #shfw {
-	position: absolute;
-	left:420px;
+	float:left;
 }
 #jhpj {
-	position: absolute;
-	left:540px;
+	float:left;
 }
 .link_div {
 	margin-top: 10px;

@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>HHH</title>
+<title>陕西嘉海电梯配件销售有限公司</title>
 <link href="css/mainpage.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="/js/jquery-1.9.1.js"></script>
 <script language="JavaScript" src="/js/jquery-ui.js"></script>
@@ -14,13 +14,14 @@ $(document).ready(function() {
 	var imageSum = $("#active_frame img").size();
 	var imageFrameWidth = imageWidth * imageSum;
 	var currentPosition = 1;
-	var animationLock = true;
+	var animationLock = false;
 	
-	//Paging + Slider Function
-	rotate = function(position){	
+	//Paging + Slider Function 
+	rotate = function(position){
 		if (position == currentPosition) {
 			return;
 		}
+		animationLock = true;
 		var image_framePosition = (position - 1) * imageWidth; //Determines the distance the image frame needs to slide
 		
 		//word out 
@@ -49,20 +50,65 @@ $(document).ready(function() {
 			left: 0
 		}, 800, "easeInOutCirc", function() {
 			currentPosition = position;
+			animationLock = false;
 		});
 	}; 
 
+	// button posistion function 
+	btnAct = function(btn) {
+		$("#active_buttons div").css({'top' : '0px'});
+		btn.css({'top' : '-5px'});
+	}
+	
+	//auto silde 
+	rotateAuto =function() {
+		play = setInterval(function() {
+			switch (currentPosition) {
+			case 1:
+				rotate(2);
+				btnAct($("#btn2"));
+				break;
+			case 2:
+				rotate(3);
+				btnAct($("#btn3"));
+				break;
+			case 3:
+				rotate(1);
+				btnAct($("#btn1"));
+				break;
+			default:
+				break;
+			}
+		}, 5000);
+	}
+	
+	//initial 
 	$("#active_frame").css({'width' : imageFrameWidth});
   	$("#btn1").click(function() {
-  		rotate(1);
-  		
+  		if (animationLock == false) {
+  			clearInterval(play);
+  			btnAct($(this));
+  			rotate(1);
+  			rotateAuto();
+  		}
 	});
   	$("#btn2").click(function() {
-  		rotate(2);
+  		if (animationLock == false) {
+  			clearInterval(play);
+  			btnAct($(this));
+  			rotate(2);
+  			rotateAuto();
+  		}
 	});
   	$("#btn3").click(function() {
-  		rotate(3);
+  		if (animationLock == false) {
+  			clearInterval(play);
+  			btnAct($(this));
+  			rotate(3);
+  			rotateAuto();
+  		}
 	});
+  	rotateAuto();
 });
 </script>
 </head>
@@ -137,9 +183,9 @@ $(document).ready(function() {
 					<a href="#"><img id="word_img" alt="" src="image/b1.png"></a>
 				</div>
 				<div id="active_buttons">
-					<div id="btn1">1</div>
-					<div id="btn2">2</div>
-					<div id="btn3">3</div>
+					<div id="btn1"></div>
+					<div id="btn2"></div>
+					<div id="btn3"></div>
 				</div>
 			</div>
 		</div>
@@ -148,31 +194,37 @@ $(document).ready(function() {
 	<div id="w4">
 		<!-- Begin of the links -->
 		<div id="links">
-			<div class="link_div" id="cgzn">
-				<span>采购指南</span>
-				<ul>
-					<li><a>购物流程</a></li>
-					<li><a>会员介绍</a></li>
-					<li><a>配送方式</a></li>
-					<li><a>常见问题</a></li>
-				</ul>
+			<div id=int_links>
+				<div class="link_div" id="cgzn">
+					<span>采购指南</span>
+					<ul>
+						<li><a>购物流程</a></li>
+						<li><a>会员介绍</a></li>
+						<li><a>配送方式</a></li>
+						<li><a>常见问题</a></li>
+					</ul>
+				</div>
+				<div class="link_div" id="shfw">
+					<span>售后服务</span>
+					<ul>
+						<li><a>售后政策</a></li>
+						<li><a>取消订单</a></li>
+						<li><a>退款说明</a></li>
+						<li><a>品质保证</a></li>
+					</ul>
+				</div>
+				<div class="link_div" id="jhpj">
+					<span>嘉海配件</span>
+					<ul>
+						<li><a>关于我们</a></li>
+						<li><a>联系方式</a></li>
+						<li><a>特别政策</a></li>
+					</ul>
+				</div>
 			</div>
-			<div class="link_div" id="shfw">
-				<span>售后服务</span>
-				<ul>
-					<li><a>售后政策</a></li>
-					<li><a>取消订单</a></li>
-					<li><a>退款说明</a></li>
-					<li><a>品质保证</a></li>
-				</ul>
+			<div id="logo_links">
 			</div>
-			<div class="link_div" id="jhpj">
-				<span>嘉海配件</span>
-				<ul>
-					<li><a>关于我们</a></li>
-					<li><a>联系方式</a></li>
-					<li><a>特别政策</a></li>
-				</ul>
+			<div id="contact">
 			</div>
 		</div>
 		<!-- End of the links -->
@@ -182,7 +234,7 @@ $(document).ready(function() {
 		<div id="footer">
 			<div id="seg_line"></div>
 			<div id="ref_links">
-				<a href="http://www.goodlift.net" target="_blank">共利电梯网
+				<a href="http://www.sxase.com/" target="_blank">陕西特设协会
 				</a>
 				|
 				<a href="http://www.sh-ea.net.cn" target="_blank">上海电梯行业协会
@@ -192,7 +244,7 @@ $(document).ready(function() {
 				</a>
 			</div>
 			<div id="banquan">Copyright © 2008-2013  陕西嘉海电梯配件销售有限公司 版权所有</div>
-			<div id="beian">陕ICP证XXXXXX号</div>
+			<div id="beian">陕ICP备13006242号</div>
 		</div>
 		<!-- End of the footer -->
 	</div>
