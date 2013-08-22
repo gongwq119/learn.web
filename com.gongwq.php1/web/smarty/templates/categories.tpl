@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>HHH</title>
+<title>陕西嘉海电梯配件销售有限公司</title>
 <link href="css/mainpage.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="/js/jquery-1.9.1.js"></script>
 <script type="text/javascript">
@@ -183,6 +183,12 @@ $(document).ready(function() {
 			<div class="clear"></div>
 		</div>	
 		<!-- End of the container -->
+	</div>
+	<div id="w4">
+		<{include file="./links.lib.tpl"}>
+	</div>
+	<div id="w5">
+		<{include file="./footer.lib.tpl"}>
 	</div>
 	</div>
 </body>

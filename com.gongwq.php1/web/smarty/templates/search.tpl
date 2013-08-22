@@ -178,6 +178,12 @@ $(document).ready(function() {
 		</div>	
 		<!-- End of the container -->
 	</div>
+	<div id="w4">
+		<{include file="./links.lib.tpl"}>
+	</div>
+	<div id="w5">
+		<{include file="./footer.lib.tpl"}>
+	</div>
 	</div>
 </body>
 </html>

@@ -157,7 +157,7 @@ $(document).ready(function() {
 			del_id = del_id + ',' + $(this).val();
 		});
 		del_id = del_id.substring(1, del_id.length);
-		window.location.href = 'items.php?do=del&item_id=' + del_id;
+		window.location.href = 'items.php?do=remove&item_id=' + del_id;
 	});	
 	//inital page paramter
 	var page = parseInt(<{$page}>);

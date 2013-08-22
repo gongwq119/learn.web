@@ -143,6 +143,22 @@ class lib_mysql {
 		$sql = 'SELECT * FROM mydb.items WHERE it_id=' . $item_id;
 		return $this->execute($sql);
 	}
+	
+	/**
+	 * 
+	 * @param unknown $items
+	 */
+	function removeItem($items) {
+		//$sql = "UPDATE `mydb`.`items` SET `it_sn`='234', `it_name`='我的我的343', `it_price`=123434, `it_desc`='1234124' WHERE `it_id`='54'";
+		//(FirstName='Thomas' OR FirstName='William')
+		$sql = "UPDATE mydb.items SET is_delete='1' WHERE ";
+		$condition = '(';
+		foreach ($items AS $val) {
+			$condition .= 'it_id=' . $val . ' OR ';
+		}
+		$sql .= substr($condition, 0, -4) . ')';
+		return $this->execute($sql);
+	}
 
 	/******************************
 	 * items_images

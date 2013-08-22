@@ -46,8 +46,8 @@ div.image_frame {
 <link href="../css/jquery-ui.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../js/jquery-1.9.1.js"></script>
 <script language="JavaScript" src="../js/jquery-ui.js"></script>
-<script type="text/javascript" src="../ueditor/ueditor.config.js"></script>
-<script type="text/javascript" src="../ueditor/ueditor.all.js"></script>
+<script language="JavaScript" src="../ckeditor/ckeditor.js"></script>
+<script language="JavaScript" src="../ckfinder/ckfinder.js"></script>
 <script language="JavaScript" src="../js/formValidator-4.0.1.min.js"></script>
 <script language="JavaScript" src="../js/formValidatorRegex.js"></script>
 <script type="text/javascript">
@@ -202,8 +202,8 @@ function processUploadImages() {
   <div id="tabs-2">
 	<textarea name="it_desc" id="myEditor"><{$item.it_desc}></textarea>
 	<script type="text/javascript">
-	    var editor = new UE.ui.Editor();
-	    editor.render("myEditor");
+    	var editor = CKEDITOR.replace( 'it_desc' );
+    	CKFinder.setupCKEditor( editor, '../ckfinder/' );
 	</script>
   </div>
   <div id="tabs-3">

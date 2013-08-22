@@ -85,7 +85,9 @@ elseif ($_REQUEST['do'] == 'add' || $_REQUEST['do'] == 'edit' || $_REQUEST['do']
 				'cat_id' => 0,
 				'brand_id' => 0,
 				'it_quant' => 0,
-				'img_id' => 0
+				'img_id' => 0,
+				'is_delete' => 0,
+				'is_on_sale' => 1
 		);
 		$images = array();
 	}
@@ -102,7 +104,9 @@ elseif ($_REQUEST['do'] == 'add' || $_REQUEST['do'] == 'edit' || $_REQUEST['do']
 				'cat_id' => $tem['cat_id'],
 				'brand_id' => $tem['brand_id'],
 				'it_quant' => $tem['it_quant'],
-				'img_id' => $tem['img_id']
+				'img_id' => $tem['img_id'],
+				'is_delete' => $tem['is_delete'],
+				'is_on_sale' => $tem['is_on_sale']
 		);
 		$images = array();
 		$result_image = $db->getItemImages($tem['it_id']);
@@ -281,7 +285,7 @@ elseif ($_REQUEST['do'] == 'insert' || $_REQUEST['do'] == 'update')
 	{
 		$sql_update = '';
 		foreach ($item_update_array as $key => $value) {
-			$sql_update = $sql_update . $key . '=' . $value . ', ';
+			$sql_update = $sql_update . $key . '=' . "'" . $value . "'" . ', ';
 		}
 		$sql_update = substr($sql_update, 0, strlen($sql_update)-2);
 		$db->updateRow('items', 'it_id', $_REQUEST['item_id'], $sql_update);
@@ -310,7 +314,8 @@ elseif ($_REQUEST['do'] == 'insert' || $_REQUEST['do'] == 'update')
 		$db->updateRow('items', 'it_id', $it_id, $sql_img);
 	}
 
-	$smarty -> display("ok.tpl");
+	$smarty ->assign('message', '您操作成功');
+	$smarty -> display("message.tpl");
 }
 elseif ($_REQUEST['do'] == 'remove')
 {
@@ -319,11 +324,15 @@ elseif ($_REQUEST['do'] == 'remove')
 	if ($del_item_id == '0') {
 		die("删除参数错误");
 	}
-	echo "删除入库";
+	$del_items = explode(",",$del_item_id);
+	$db->removeItem($del_items);
+	
+	$smarty ->assign('message', '您已经将商品移到回收站');
+	$smarty -> display("message.tpl");
 }
 elseif ($_REQUEST['do'] == 'delete')
 {
-	echo "trash";
+	echo "目前彻底删除在没完成";
 }
 
 

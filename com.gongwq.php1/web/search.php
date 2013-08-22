@@ -13,7 +13,6 @@ $_REQUEST['do'] = !empty($_REQUEST['do']) ? trim($_REQUEST['do']) : '';
 if ($_REQUEST['do'] == 'advanced_search')
 {
 	
-
 }
 else
 {
@@ -68,7 +67,7 @@ else
 	/* 获得符合条件的商品总数 */
 	$amount = 12;
 	$sql   = 'SELECT COUNT(*) FROM mydb.items AS i ' .
-			'WHERE i.is_delete = 0 AND i.is_on_sale = 1 ' .
+			'WHERE i.is_delete=0 AND i.is_on_sale=1 ' .
 			$keywords;
 	$count = $db->getRowNumber($sql);
 	
@@ -79,7 +78,7 @@ else
 	}
 	/* 查询商品 */
 	$sql   = 'SELECT i.it_id, i.it_name, i.it_sn, i.it_price, i.it_quant, i.img_id FROM mydb.items AS i '.
-			"WHERE i.is_delete = 0 AND i.is_on_sale = 1 " .
+			"WHERE i.is_delete=0 AND i.is_on_sale=1 " .
 			$keywords;
 	$result_items = $db->selectLimit($sql, $amount, $page);
 	/* 处理对应图片*/
