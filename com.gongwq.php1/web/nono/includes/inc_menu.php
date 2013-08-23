@@ -4,11 +4,14 @@
  * 后台tree项目
  */
 
-$modules['02_cat_and_goods']['01_goods_list']       = 'items.php?do=list';         // 商品列表
-$modules['02_cat_and_goods']['02_goods_add']        = 'items.php?do=add';          // 添加商品
-$modules['02_cat_and_goods']['03_category_list']    = 'categories.php?do=list';
-$modules['02_cat_and_goods']['04_category_add']    = 'categories.php?do=add';
-$modules['02_cat_and_goods']['11_goods_trash']      = 'items.php?do=trash';        // 商品回收站
+$modules['02_goods']['01_goods_list']       = 'items.php?do=list';         // 商品列表
+$modules['02_goods']['02_goods_add']        = 'items.php?do=add';          // 添加商品
+$modules['02_goods']['11_goods_trash']      = 'items.php?do=trash';        // 商品回收站
+
+$modules['03_cats_brands']['03_category_list']    = 'categories.php?do=list';
+$modules['03_cats_brands']['04_category_add']    = 'categories.php?do=add';
+$modules['03_cats_brands']['05_brand_list']    = 'brands.php?do=list';
+$modules['03_cats_brands']['06_brand_add']    = 'brands.php?do=add';
 
 // $modules['02_cat_and_goods']['05_comment_manage']   = 'comment_manage.php?act=list';
 // $modules['02_cat_and_goods']['06_goods_brand_list'] = 'brand.php?act=list';

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-07-15 16:00:09
+<?php /* Smarty version Smarty-3.1.13, created on 2013-08-22 10:11:04
          compiled from "./smarty/templates/categories_info.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:202853125051e3f0f2541677-70147779%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '1fcd73d001d49897db586c5b848e0e08e28b72de' => 
     array (
       0 => './smarty/templates/categories_info.tpl',
-      1 => 1373896803,
+      1 => 1377159049,
       2 => 'file',
     ),
   ),
@@ -56,8 +56,8 @@ body {
 <link href="../css/jquery-ui.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="/js/jquery-1.9.1.js"></script>
 <script language="JavaScript" src="/js/jquery-ui.js"></script>
-<script type="text/javascript" src="../ueditor/ueditor.config.js"></script>
-<script type="text/javascript" src="../ueditor/ueditor.all.js"></script>
+<script language="JavaScript" src="../ckeditor/ckeditor.js"></script>
+<script language="JavaScript" src="../ckfinder/ckfinder.js"></script>
 <script type="text/javascript">
 $(function() {
     $( "#tabs" ).tabs();
@@ -139,8 +139,8 @@ $_smarty_tpl->tpl_vars['parent_cat']->_loop = true;
 	<textarea name="cat_desc" id="myEditor"><?php echo $_smarty_tpl->tpl_vars['cat']->value['cat_desc'];?>
 </textarea>
 	<script type="text/javascript">
-	    var editor = new UE.ui.Editor();
-	    editor.render("myEditor");
+    	var editor = CKEDITOR.replace( 'cat_desc' );
+    	CKFinder.setupCKEditor( editor, '../ckfinder/' );
 	</script>
   </div>
   <div>

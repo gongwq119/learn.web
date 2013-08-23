@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-07-22 06:01:12
+<?php /* Smarty version Smarty-3.1.13, created on 2013-08-22 09:14:10
          compiled from "./smarty/templates/items_info.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:115664904251de5e486621b8-41486655%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'd90e54c348891315fed37d4dbe2e0a6a2faf55f4' => 
     array (
       0 => './smarty/templates/items_info.tpl',
-      1 => 1374465630,
+      1 => 1377155645,
       2 => 'file',
     ),
   ),
@@ -77,8 +77,8 @@ div.image_frame {
 <link href="../css/jquery-ui.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="../js/jquery-1.9.1.js"></script>
 <script language="JavaScript" src="../js/jquery-ui.js"></script>
-<script type="text/javascript" src="../ueditor/ueditor.config.js"></script>
-<script type="text/javascript" src="../ueditor/ueditor.all.js"></script>
+<script language="JavaScript" src="../ckeditor/ckeditor.js"></script>
+<script language="JavaScript" src="../ckfinder/ckfinder.js"></script>
 <script language="JavaScript" src="../js/formValidator-4.0.1.min.js"></script>
 <script language="JavaScript" src="../js/formValidatorRegex.js"></script>
 <script type="text/javascript">
@@ -256,8 +256,8 @@ $_smarty_tpl->tpl_vars['brand']->_loop = true;
 	<textarea name="it_desc" id="myEditor"><?php echo $_smarty_tpl->tpl_vars['item']->value['it_desc'];?>
 </textarea>
 	<script type="text/javascript">
-	    var editor = new UE.ui.Editor();
-	    editor.render("myEditor");
+    	var editor = CKEDITOR.replace( 'it_desc' );
+    	CKFinder.setupCKEditor( editor, '../ckfinder/' );
 	</script>
   </div>
   <div id="tabs-3">

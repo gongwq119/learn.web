@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-06-08 04:49:01
+<?php /* Smarty version Smarty-3.1.13, created on 2013-08-21 03:29:53
          compiled from "/home/gongwq/site/php1/com.gongwq.php1/web/smarty/templates/navi.lib.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:24510632051b29b8af02cd6-40556677%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'b41eb571e7f509d1c70c9d195789d92a40e48e22' => 
     array (
       0 => '/home/gongwq/site/php1/com.gongwq.php1/web/smarty/templates/navi.lib.tpl',
-      1 => 1370659739,
+      1 => 1377048543,
       2 => 'file',
     ),
   ),

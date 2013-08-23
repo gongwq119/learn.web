@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-07-31 08:59:20
+<?php /* Smarty version Smarty-3.1.13, created on 2013-08-22 07:58:20
          compiled from "/home/gongwq/site/php1/com.gongwq.php1/web/smarty/templates/items.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:99237961751adb9ef2fc6a2-15959580%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'ab6eb6e5e6f0d5d2441ddb27dc0be438755b5910' => 
     array (
       0 => '/home/gongwq/site/php1/com.gongwq.php1/web/smarty/templates/items.tpl',
-      1 => 1375253954,
+      1 => 1377143737,
       2 => 'file',
     ),
   ),
@@ -29,7 +29,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>HHH</title>
+<title>陕西嘉海电梯配件销售有限公司</title>
 <link href="css/mainpage.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="/js/jquery-1.9.1.js"></script>
 <script type="text/javascript">
@@ -163,6 +163,14 @@ $_smarty_tpl->tpl_vars['image']->_loop = true;
 			</div>
 		</div>
 		<!-- End of the container -->
+	</div>
+	<div id="w4">
+		<?php echo $_smarty_tpl->getSubTemplate ("./links.lib.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array(), 0);?>
+
+	</div>
+	<div id="w5">
+		<?php echo $_smarty_tpl->getSubTemplate ("./footer.lib.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array(), 0);?>
+
 	</div>
 	</div>
 </body>

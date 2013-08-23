@@ -1,34 +1,35 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-08-22 08:12:10
-         compiled from "/home/gongwq/site/php1/com.gongwq.php1/web/smarty/templates/categories.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:17505272151adb5f0062c55-14954276%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /* Smarty version Smarty-3.1.13, created on 2013-08-22 08:06:14
+         compiled from "/home/gongwq/site/php1/com.gongwq.php1/web/smarty/templates/search.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:6264395435214242322e369-38086241%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    'ac10833537ced480b2d299969938f412e9969be5' => 
+    'b6abbbea00166930b894e7a9dcd51bb512bf46b2' => 
     array (
-      0 => '/home/gongwq/site/php1/com.gongwq.php1/web/smarty/templates/categories.tpl',
-      1 => 1377151539,
+      0 => '/home/gongwq/site/php1/com.gongwq.php1/web/smarty/templates/search.tpl',
+      1 => 1377151552,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '17505272151adb5f0062c55-14954276',
+  'nocache_hash' => '6264395435214242322e369-38086241',
   'function' => 
   array (
   ),
   'version' => 'Smarty-3.1.13',
-  'unifunc' => 'content_51adb5f00be614_80945455',
+  'unifunc' => 'content_521424233a5d76_98234099',
   'variables' => 
   array (
+    'count' => 0,
     'items' => 0,
     'item' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_51adb5f00be614_80945455')) {function content_51adb5f00be614_80945455($_smarty_tpl) {?><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<?php if ($_valid && !is_callable('content_521424233a5d76_98234099')) {function content_521424233a5d76_98234099($_smarty_tpl) {?><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>陕西嘉海电梯配件销售有限公司</title>
+<title>HHH</title>
 <link href="css/mainpage.css" type="text/css" rel="stylesheet">
 <script language="JavaScript" src="/js/jquery-1.9.1.js"></script>
 <script type="text/javascript">
@@ -45,10 +46,10 @@ $(document).ready(function() {
 });
 </script>
 <style type="text/css">
-#w_cat_left{
+#w_serh_rest_left{
 	float: left;
 }
-#w_cat_right{
+#w_serh_rest_right{
 	float:right;
 }
 .filter_left{
@@ -100,11 +101,11 @@ $(document).ready(function() {
 	width: 200px;
 	float:left;
 }
-#cat_filter {
+#search_reminder {
 	margin: 10px 0px 0px 0px;
 	width: 740px;
 }
-#cat_list_menu {
+#rest_menu {
 	margin: 10px 0px 0px 0px;
 	width: 740px;
 	background-color: #f7f7f7;
@@ -149,7 +150,7 @@ $(document).ready(function() {
 				</div>
 			</div>
 			<!-- End of the breadcurmb-->
-			<div id="w_cat_left">
+			<div id="w_serh_rest_left">
 			<!-- Begin of the category tree -->
 				<div class="cat_tree">
 					<ul id="farther_ul">
@@ -172,27 +173,22 @@ $(document).ready(function() {
 			<!-- End of the category tree -->
 			</div>
 			
-			<div id="w_cat_right">
-				<!-- Begin of the category filter -->
-				<div id="cat_filter">
-					<div class="sf_t"><h2>分类筛选</h2></div>
+			<div id="w_serh_rest_right">
+				<!-- Begin of the search reminder -->
+				<div id="search_reminder">
+					<div class="sf_t"><h2>搜索结果</h2></div>
 					<div class="sf_c">
-						<div class="filter_left" align="right">品牌:  </div>
-						<div class="filter_right">
-							<div class="filter_ops"><a>abc</a></div>
-							<div class="filter_ops"><a>abc</a></div>
-							<div class="clear"></div>
-						</div>
-						<div class="clear"></div>
+						关键字搜索，结果<?php echo $_smarty_tpl->tpl_vars['count']->value;?>
+项
 					</div>
 				</div>
-				<!-- End of the category filter -->
-				<!-- Begin of the category list menu -->
-				<div id="cat_list_menu">
+				<!-- End of the search reminder -->
+				<!-- Begin of the menu for result -->
+				<div id="rest_menu">
 					list menu
 				</div>
-				<!-- End of the category list menu -->
-				<!-- Begin of the categories list -->
+				<!-- End of the menu for result -->
+				<!-- Begin of the result list -->
 				<div id="item_list">
 					<ul>
 						<?php  $_smarty_tpl->tpl_vars['item'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['item']->_loop = false;
@@ -216,7 +212,7 @@ $_smarty_tpl->tpl_vars['item']->_loop = true;
 						<?php } ?>
 					</ul>
 				</div>
-				<!-- End of the categories list -->
+				<!-- End of the result list -->
 			</div>
 			<div class="clear"></div>
 		</div>	

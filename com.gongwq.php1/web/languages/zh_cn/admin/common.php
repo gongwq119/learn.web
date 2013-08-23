@@ -129,8 +129,8 @@ $_LANG['gram'] = '克';
 $_LANG['kilogram'] = '千克';
 
 /* 菜单分类部分 */
-$_LANG['02_cat_and_goods'] = '商品管理';
-$_LANG['03_promotion'] = '促销管理';
+$_LANG['02_goods'] = '商品管理';
+$_LANG['03_cats_brands'] = '分类和品牌管理';
 $_LANG['04_order'] = '订单管理';
 $_LANG['05_banner'] = '广告管理';
 $_LANG['06_stats'] = '报表统计';
@@ -148,11 +148,10 @@ $_LANG['16_email_manage'] = '邮件群发管理';
 /* 商品管理 */
 $_LANG['01_goods_list'] = '商品列表';
 $_LANG['02_goods_add'] = '添加新商品';
-$_LANG['03_category_list'] = '商品分类';
-$_LANG['04_category_add'] = '添加分类';
-$_LANG['05_comment_manage'] = '用户评论';
-$_LANG['06_goods_brand_list'] = '商品品牌';
-$_LANG['07_brand_add'] = '添加品牌';
+$_LANG['03_category_list'] = '分类列表';
+$_LANG['04_category_add'] = '添加新分类';
+$_LANG['05_brand_list'] = '品牌列表';
+$_LANG['06_brand_add'] = '添加新品牌';
 $_LANG['08_goods_type'] = '商品类型';
 $_LANG['09_attribute_list'] = '商品属性';
 $_LANG['10_attribute_add'] = '添加属性';

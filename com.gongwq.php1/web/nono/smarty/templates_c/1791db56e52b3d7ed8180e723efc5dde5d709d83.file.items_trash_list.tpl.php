@@ -1,22 +1,20 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-08-22 11:07:42
-         compiled from "./smarty/templates/items_list.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:45590340251de5c0d1d3346-12537241%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /* Smarty version Smarty-3.1.13, created on 2013-08-21 10:50:57
+         compiled from "./smarty/templates/items_trash_list.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:5393044852147f711e1167-90229856%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    '15b2ee76cca03445bbaee1cfbc1ea7e9ac3cfc93' => 
+    '1791db56e52b3d7ed8180e723efc5dde5d709d83' => 
     array (
-      0 => './smarty/templates/items_list.tpl',
-      1 => 1377162459,
+      0 => './smarty/templates/items_trash_list.tpl',
+      1 => 1375346291,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '45590340251de5c0d1d3346-12537241',
+  'nocache_hash' => '5393044852147f711e1167-90229856',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.13',
-  'unifunc' => 'content_51de5c0d25be03_95812331',
   'variables' => 
   array (
     'title' => 0,
@@ -26,8 +24,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'item' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.13',
+  'unifunc' => 'content_52147f71435118_10956691',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_51de5c0d25be03_95812331')) {function content_51de5c0d25be03_95812331($_smarty_tpl) {?><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<?php if ($_valid && !is_callable('content_52147f71435118_10956691')) {function content_52147f71435118_10956691($_smarty_tpl) {?><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -187,7 +187,7 @@ $(document).ready(function() {
 			del_id = del_id + ',' + $(this).val();
 		});
 		del_id = del_id.substring(1, del_id.length);
-		window.location.href = 'items.php?do=remove&item_id=' + del_id;
+		window.location.href = 'items.php?do=del&item_id=' + del_id;
 	});	
 	//inital page paramter
 	var page = parseInt(<?php echo $_smarty_tpl->tpl_vars['page']->value;?>
