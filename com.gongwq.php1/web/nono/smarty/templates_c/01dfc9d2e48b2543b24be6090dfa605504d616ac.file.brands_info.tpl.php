@@ -1,4 +1,29 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<?php /* Smarty version Smarty-3.1.13, created on 2013-08-23 05:53:08
+         compiled from "./smarty/templates/brands_info.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:18967558905216d29039bb78-86418256%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '01dfc9d2e48b2543b24be6090dfa605504d616ac' => 
+    array (
+      0 => './smarty/templates/brands_info.tpl',
+      1 => 1377229508,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '18967558905216d29039bb78-86418256',
+  'function' => 
+  array (
+  ),
+  'version' => 'Smarty-3.1.13',
+  'unifunc' => 'content_5216d2903ed3a7_99157918',
+  'variables' => 
+  array (
+    'brand' => 0,
+  ),
+  'has_nocache_code' => false,
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_5216d2903ed3a7_99157918')) {function content_5216d2903ed3a7_99157918($_smarty_tpl) {?><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -35,14 +60,6 @@ body {
 $(function() {
     $( "#tabs" ).tabs();
   });
-$(document).ready(function() {
-	var maxImageQuant = 3;
-	var imageQuant = 1;
-	//初始化cat,brand值
-	$("select[name='parent_id']").val(<{$cat.parent_id}>);
-	$("select[name='is_show']").val(<{$cat.is_show}>);
-	
-});
 </script>
 <script type="text/javascript">
 
@@ -65,48 +82,26 @@ function validate() {
     <li><a href="#tabs-2">详细描述</a></li>
   </ul>
   <form enctype="multipart/form-data" action="" method="post" name="theForm" >
-  <{if $smarty.get.do == edit }>
+  <?php if ($_GET['do']=='edit'){?>
   <input type="hidden" name="do" value="update">
-  <{/if}>
-   <{if $smarty.get.do == add }>
+  <?php }?>
+   <?php if ($_GET['do']=='add'){?>
   <input type="hidden" name="do" value="insert">
-  <{/if}>
+  <?php }?>
   <div id="tabs-1">
   	<table>
   		<tr>
-  			<td>分类名称:&nbsp;&nbsp;&nbsp;</td>
-  			<td><input type="text" name="cat_name" value="<{$cat.cat_name}>"  /></td>
+  			<td>品牌名称:&nbsp;&nbsp;&nbsp;</td>
+  			<td><input type="text" name="brand_name" value="<?php echo $_smarty_tpl->tpl_vars['brand']->value['brand_name'];?>
+"  /></td>
   		</tr>
-  		<tr>
-  			<td>关键词:&nbsp;&nbsp;&nbsp;</td>
-  			<td><input type="text" name="keywords" value="<{$cat.keywords}>"  /></td>
-  		</tr>
-  		<tr>
-  			<td>上级分类:&nbsp;&nbsp;&nbsp;</td>
-  			<td>
-	  		<select name="parent_id">
-	  			<{foreach $parent_cats as $parent_cat}>
-				<option value="<{$parent_cat.cat_id}>"><{$parent_cat.cat_name}></option>
-				<{/foreach}>
-			</select>
-  			</td>
-  		</tr>
-  		<tr>
-  			<td>是否显示:&nbsp;&nbsp;&nbsp;</td>
-  			<td>
-  			<select name="is_show">
-				<option value="0">不显示</option>
-				<option value="1">显示</option>
-			</select>
-  			</td>
-  		</tr>
-  		
   	</table>
   </div>
   <div id="tabs-2">
-	<textarea name="cat_desc" id="myEditor"><{$cat.cat_desc}></textarea>
+	<textarea name="brand_desc" id="myEditor"><?php echo $_smarty_tpl->tpl_vars['brand']->value['brand_desc'];?>
+</textarea>
 	<script type="text/javascript">
-    	var editor = CKEDITOR.replace( 'cat_desc' );
+    	var editor = CKEDITOR.replace( 'brand_desc' );
     	CKFinder.setupCKEditor( editor, '../ckfinder/' );
 	</script>
   </div>
@@ -117,4 +112,4 @@ function validate() {
 </div>
 </div>
 </body>
-</html>
+</html><?php }} ?>

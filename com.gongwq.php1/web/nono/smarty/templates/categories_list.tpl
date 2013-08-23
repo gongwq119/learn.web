@@ -35,8 +35,38 @@ body {
 	padding: 10px;
 	height: 28px;
 }
-operations button {
-	float: right;
+.operations span {
+	display:block;
+	margin: auto 5px;
+	float:left;
+	width: 52px;
+	height: 24px;
+	text-align: center;
+	line-height:24px;
+}
+#new_item {
+	background: url(../image/cred.png) no-repeat 0px -25px;
+}
+#new_item:hover {
+	color:#fff;
+	cursor:pointer;
+	background: url(../image/cred.png) no-repeat -54px -25px;
+}
+#del_item {
+	background: url(../image/cred.png) no-repeat 0px 0px;
+}
+#del_item:hover {
+	color:#fff;
+	cursor:pointer;
+	background: url(../image/cred.png) no-repeat -54px 0px;
+}
+#edit_item {
+	background: url(../image/cred.png) no-repeat 0px 0px;
+}
+#edit_item:hover {
+	color:#fff;
+	cursor:pointer;
+	background: url(../image/cred.png) no-repeat -54px 0px;
 }
 #item_list
   {
@@ -74,6 +104,8 @@ operations button {
 <script language="JavaScript" src="/js/jquery-1.9.1.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+	
+	//all check function
 	$("input[name='select_all']").click(function() {
 		if ($(this).prop("checked") == true) {
 			$("input[name='select']").each(function() {
@@ -91,14 +123,56 @@ $(document).ready(function() {
 			});
 		}
 	});
+	//opration btns 
+	$("#edit_item").hide();
+	$(":checkbox").click(function() {
+		switch ($(":checked[name='select']").length) {
+		case 0:
+			$("#edit_item").hide();
+			break;
+		case 1:
+			$("#edit_item").show();
+			break;
+		default:
+			$("#edit_item").hide();
+			break;
+		}
+	});
+	$("#new_item").click(function() {
+		window.location.href = "categories.php?do=add";
+	});
+	$("#edit_item").click(function() {
+		if (1 == $(":checked[name='select']").length)
+		{
+			var edit_link = 'categories.php?do=edit&cat_id=' + $(":checked[name='select']").val();
+			window.location.href = edit_link;
+		}
+	});
+	//inital page paramter
+	var page = parseInt(<{$page}>);
+	var max_page = parseInt(<{$page_count}>);
+	var page_sta = (page+1) + '/' + max_page;
+	$("#next_page").attr('href','categories.php?do=list&page=' + (page+1));
+	$("#previous_page").attr('href','categories.php?do=list&page=' + (page-1));
+
+	if (page <= 0) 
+	{
+		$("#previous_page").hide();
+		$("#next_page").attr('href','categories.php?do=list&page=' + (page+1));
+	}
+	if (page >= max_page-1) 
+	{
+		$("#next_page").hide();
+		$("#previous_page").attr('href','categories.php?do=list&page=' + (page-1));
+	} 
+	$("#page_sta").text(page_sta);
+	
+	//
+	$(".goto_page").change(function() {
+		$(".goto_page_a").attr('href', 'categories.php?do=list&page=' + $(this).val());
+	});
 });
-function delSelected() {
-	var sel = $("input:checked").parent().parent().attr("id");
-	alert(sel);
-}
-function hideSelected() {
-	$("input:checked").hide();
-}
+
 </script>
 </head>
 <body>
@@ -109,12 +183,10 @@ function hideSelected() {
 </div>
 <div id="w2">
 <div class="operations">
-	<button type="button" id="new_item" onclick="hideSelected()">NEW</button>
-	<button type="button" id="del_item" onclick="delSelected()">DEL</button>
-	<button type="button" id="edit_item" onclick="">EDIT</button>
+	<span id="new_item">新建</span>
+	<span id="edit_item">编辑</span>
 </div>
 </div>
-
 <div id="w3">
 	<form action="" >
 	<table id="item_list">
@@ -125,13 +197,19 @@ function hideSelected() {
 	</tr>
 	<{foreach $cats as $cat}>
 	<tr>
-		<td><input type="checkbox" name="select"></td>
+		<td><input type="checkbox" name="select" value="<{$cat.cat_id}>"></td>
 		<td class="<{$cat.cat_id}>"><{$cat.cat_name}></td>
-		<td>没有</td>
+		<td>未知</td>
 	</tr>
 	<{/foreach}>
 	<tr>
-		<td colspan="3">
+		<td colspan="5">
+		<div class="page_navi">	
+			<div>第<input type="text" class="goto_page" maxlength="3">页 <a class="goto_page_a">跳转</a></div>
+			<div><a id="next_page">下一页</a></div>
+			<div><a id="previous_page">上一页</a></div>
+			<div id="page_sta"></div>
+		</div>
 		</td>
 	</tr>
 	</table>

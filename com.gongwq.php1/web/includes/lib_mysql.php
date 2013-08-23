@@ -148,12 +148,26 @@ class lib_mysql {
 	 * 
 	 * @param unknown $items
 	 */
-	function removeItem($items) {
-		//$sql = "UPDATE `mydb`.`items` SET `it_sn`='234', `it_name`='我的我的343', `it_price`=123434, `it_desc`='1234124' WHERE `it_id`='54'";
+	function removeItem($items_id) {
 		//(FirstName='Thomas' OR FirstName='William')
 		$sql = "UPDATE mydb.items SET is_delete='1' WHERE ";
 		$condition = '(';
-		foreach ($items AS $val) {
+		foreach ($items_id AS $val) {
+			$condition .= 'it_id=' . $val . ' OR ';
+		}
+		$sql .= substr($condition, 0, -4) . ')';
+		return $this->execute($sql);
+	}
+	
+	/**
+	 * 
+	 * @param unknown $items_id
+	 * @return mixed
+	 */
+	function restoreItem($items_id) {
+		$sql = "UPDATE mydb.items SET is_delete='0' WHERE ";
+		$condition = '(';
+		foreach ($items_id AS $val) {
 			$condition .= 'it_id=' . $val . ' OR ';
 		}
 		$sql .= substr($condition, 0, -4) . ')';
@@ -194,7 +208,19 @@ class lib_mysql {
 		$sql = 'SELECT * FROM mydb.categories WHERE parent_id="0"';
 		return $this->execute($sql);
 	}
+	
+	/******************************
+	 * brands
+	******************************/
+	
+	/**
+	 * 
+	 * @param unknown $brand_id
+	 */
+	function getBrand($brand_id) {
+		$sql = 'SELECT * FROM mydb.brands WHERE brand_id=' . $brand_id;
+		return $this->execute($sql);		
+	}
 
 }
 
-?>

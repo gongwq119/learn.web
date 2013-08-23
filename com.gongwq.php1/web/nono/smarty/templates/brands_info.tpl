@@ -35,14 +35,6 @@ body {
 $(function() {
     $( "#tabs" ).tabs();
   });
-$(document).ready(function() {
-	var maxImageQuant = 3;
-	var imageQuant = 1;
-	//初始化cat,brand值
-	$("select[name='parent_id']").val(<{$cat.parent_id}>);
-	$("select[name='is_show']").val(<{$cat.is_show}>);
-	
-});
 </script>
 <script type="text/javascript">
 
@@ -74,39 +66,15 @@ function validate() {
   <div id="tabs-1">
   	<table>
   		<tr>
-  			<td>分类名称:&nbsp;&nbsp;&nbsp;</td>
-  			<td><input type="text" name="cat_name" value="<{$cat.cat_name}>"  /></td>
+  			<td>品牌名称:&nbsp;&nbsp;&nbsp;</td>
+  			<td><input type="text" name="brand_name" value="<{$brand.brand_name}>"  /></td>
   		</tr>
-  		<tr>
-  			<td>关键词:&nbsp;&nbsp;&nbsp;</td>
-  			<td><input type="text" name="keywords" value="<{$cat.keywords}>"  /></td>
-  		</tr>
-  		<tr>
-  			<td>上级分类:&nbsp;&nbsp;&nbsp;</td>
-  			<td>
-	  		<select name="parent_id">
-	  			<{foreach $parent_cats as $parent_cat}>
-				<option value="<{$parent_cat.cat_id}>"><{$parent_cat.cat_name}></option>
-				<{/foreach}>
-			</select>
-  			</td>
-  		</tr>
-  		<tr>
-  			<td>是否显示:&nbsp;&nbsp;&nbsp;</td>
-  			<td>
-  			<select name="is_show">
-				<option value="0">不显示</option>
-				<option value="1">显示</option>
-			</select>
-  			</td>
-  		</tr>
-  		
   	</table>
   </div>
   <div id="tabs-2">
-	<textarea name="cat_desc" id="myEditor"><{$cat.cat_desc}></textarea>
+	<textarea name="brand_desc" id="myEditor"><{$brand.brand_desc}></textarea>
 	<script type="text/javascript">
-    	var editor = CKEDITOR.replace( 'cat_desc' );
+    	var editor = CKEDITOR.replace( 'brand_desc' );
     	CKFinder.setupCKEditor( editor, '../ckfinder/' );
 	</script>
   </div>

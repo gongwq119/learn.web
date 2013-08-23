@@ -54,6 +54,12 @@ elseif ($_REQUEST['do'] == 'add' || $_REQUEST['do'] == 'edit' || $_REQUEST['do']
 {
 	//初始化变量
 	$is_add = $_REQUEST['do'] == 'add';
+	if (!$is_add) {
+		$item_id = isset($_GET['item_id']) ? $_GET['item_id'] : '0';
+		if ($item_id == '0') {
+			die("没有item_id");
+		}
+	}
 
 	//检查权限
 	
@@ -94,7 +100,7 @@ elseif ($_REQUEST['do'] == 'add' || $_REQUEST['do'] == 'edit' || $_REQUEST['do']
 	else
 	{
 		$item = array();
-		$result = $db->getItem($_GET['item_id']);
+		$result = $db->getItem($item_id);
 		$tem = $result->fetch_assoc();
 		$item = array(
 				'it_sn' => $tem['it_sn'],
@@ -333,6 +339,19 @@ elseif ($_REQUEST['do'] == 'remove')
 elseif ($_REQUEST['do'] == 'delete')
 {
 	echo "目前彻底删除在没完成";
+}
+elseif ($_REQUEST['do'] == 'restore')
+{
+	//获得参数
+	$ret_item_id = isset($_GET['item_id']) ? $_GET['item_id'] : '0';
+	if ($ret_item_id == '0') {
+		die("删除参数错误");
+	}
+	$ret_items = explode(",",$ret_item_id);
+	$db->restoreItem($ret_items);
+
+	$smarty ->assign('message', '您已经将商品还原');
+	$smarty -> display("message.tpl");
 }
 
 

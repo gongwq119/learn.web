@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-08-21 10:50:57
+<?php /* Smarty version Smarty-3.1.13, created on 2013-08-23 03:50:21
          compiled from "./smarty/templates/items_trash_list.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:5393044852147f711e1167-90229856%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '1791db56e52b3d7ed8180e723efc5dde5d709d83' => 
     array (
       0 => './smarty/templates/items_trash_list.tpl',
-      1 => 1375346291,
+      1 => 1377222610,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.13',
+  'unifunc' => 'content_52147f71435118_10956691',
   'variables' => 
   array (
     'title' => 0,
@@ -24,8 +26,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'item' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.13',
-  'unifunc' => 'content_52147f71435118_10956691',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_52147f71435118_10956691')) {function content_52147f71435118_10956691($_smarty_tpl) {?><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -74,10 +74,10 @@ body {
 	text-align: center;
 	line-height:24px;
 }
-#new_item {
+#restore_item {
 	background: url(../image/cred.png) no-repeat 0px -25px;
 }
-#new_item:hover {
+#restore_item:hover {
 	color:#fff;
 	cursor:pointer;
 	background: url(../image/cred.png) no-repeat -54px -25px;
@@ -153,41 +153,24 @@ $(document).ready(function() {
 			});
 		}
 	});
-	$("#edit_item").hide();
-	$("#del_item").hide();
+	$("#restore_item").hide();
 	$(":checkbox").click(function() {
 		switch ($(":checked[name='select']").length) {
 		case 0:
-			$("#edit_item").hide();
-			$("#del_item").hide();
-			break;
-		case 1:
-			$("#edit_item").show();
-			$("#del_item").show();
+			$("#restore_item").hide();
 			break;
 		default:
-			$("#edit_item").hide();
-			$("#del_item").show();
+			$("#restore_item").show();
 			break;
 		}
 	});
-	$("#new_item").click(function() {
-		window.location.href = "items.php?do=add";
-	});
-	$("#edit_item").click(function() {
-		if (1 == $(":checked[name='select']").length)
-		{
-			var edit_link = 'items.php?do=edit&item_id=' + $(":checked[name='select']").val();
-			window.location.href = edit_link;
-		}
-	});
-	$("#del_item").click(function() {
-		var del_id = '';
+	$("#restore_item").click(function() {
+		var ret_id = '';
 		$(":checked[name='select']").each(function() {
-			del_id = del_id + ',' + $(this).val();
+			ret_id = ret_id + ',' + $(this).val();
 		});
-		del_id = del_id.substring(1, del_id.length);
-		window.location.href = 'items.php?do=del&item_id=' + del_id;
+		ret_id = ret_id.substring(1, ret_id.length);
+		window.location.href = 'items.php?do=restore&item_id=' + ret_id;
 	});	
 	//inital page paramter
 	var page = parseInt(<?php echo $_smarty_tpl->tpl_vars['page']->value;?>
@@ -195,24 +178,24 @@ $(document).ready(function() {
 	var max_page = parseInt(<?php echo $_smarty_tpl->tpl_vars['page_count']->value;?>
 );
 	var page_sta = (page+1) + '/' + max_page;
-	$("#next_page").attr('href','items.php?do=list&page=' + (page+1));
-	$("#previous_page").attr('href','items.php?do=list&page=' + (page-1));
+	$("#next_page").attr('href','items.php?do=trash&page=' + (page+1));
+	$("#previous_page").attr('href','items.php?do=trash&page=' + (page-1));
 
 	if (page <= 0) 
 	{
 		$("#previous_page").hide();
-		$("#next_page").attr('href','items.php?do=list&page=' + (page+1));
+		$("#next_page").attr('href','items.php?do=trash&page=' + (page+1));
 	}
 	if (page >= max_page-1) 
 	{
 		$("#next_page").hide();
-		$("#previous_page").attr('href','items.php?do=list&page=' + (page-1));
+		$("#previous_page").attr('href','items.php?do=trash&page=' + (page-1));
 	} 
 	$("#page_sta").text(page_sta);
 	
 	//
 	$(".goto_page").change(function() {
-		$(".goto_page_a").attr('href', 'items.php?do=list&page=' + $(this).val());
+		$(".goto_page_a").attr('href', 'items.php?do=trash&page=' + $(this).val());
 	});
 });
 </script>
@@ -225,9 +208,7 @@ $(document).ready(function() {
 </div>
 <div id="w2">
 <div class="operations">
-	<span id="new_item">新建</span>
-	<span id="del_item">删除</span>
-	<span id="edit_item">编辑</span>
+	<span id="restore_item">还原</span>
 </div>
 </div>
 

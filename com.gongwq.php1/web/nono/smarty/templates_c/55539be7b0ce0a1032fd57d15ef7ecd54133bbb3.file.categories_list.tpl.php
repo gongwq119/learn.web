@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-07-15 14:44:15
+<?php /* Smarty version Smarty-3.1.13, created on 2013-08-23 04:37:15
          compiled from "./smarty/templates/categories_list.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:77211945551de711680f560-24562166%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '55539be7b0ce0a1032fd57d15ef7ecd54133bbb3' => 
     array (
       0 => './smarty/templates/categories_list.tpl',
-      1 => 1373892252,
+      1 => 1377225429,
       2 => 'file',
     ),
   ),
@@ -20,6 +20,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'variables' => 
   array (
     'title' => 0,
+    'page' => 0,
+    'page_count' => 0,
     'cats' => 0,
     'cat' => 0,
   ),
@@ -63,8 +65,38 @@ body {
 	padding: 10px;
 	height: 28px;
 }
-operations button {
-	float: right;
+.operations span {
+	display:block;
+	margin: auto 5px;
+	float:left;
+	width: 52px;
+	height: 24px;
+	text-align: center;
+	line-height:24px;
+}
+#new_item {
+	background: url(../image/cred.png) no-repeat 0px -25px;
+}
+#new_item:hover {
+	color:#fff;
+	cursor:pointer;
+	background: url(../image/cred.png) no-repeat -54px -25px;
+}
+#del_item {
+	background: url(../image/cred.png) no-repeat 0px 0px;
+}
+#del_item:hover {
+	color:#fff;
+	cursor:pointer;
+	background: url(../image/cred.png) no-repeat -54px 0px;
+}
+#edit_item {
+	background: url(../image/cred.png) no-repeat 0px 0px;
+}
+#edit_item:hover {
+	color:#fff;
+	cursor:pointer;
+	background: url(../image/cred.png) no-repeat -54px 0px;
 }
 #item_list
   {
@@ -102,6 +134,8 @@ operations button {
 <script language="JavaScript" src="/js/jquery-1.9.1.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+	
+	//all check function
 	$("input[name='select_all']").click(function() {
 		if ($(this).prop("checked") == true) {
 			$("input[name='select']").each(function() {
@@ -119,14 +153,58 @@ $(document).ready(function() {
 			});
 		}
 	});
+	//opration btns 
+	$("#edit_item").hide();
+	$(":checkbox").click(function() {
+		switch ($(":checked[name='select']").length) {
+		case 0:
+			$("#edit_item").hide();
+			break;
+		case 1:
+			$("#edit_item").show();
+			break;
+		default:
+			$("#edit_item").hide();
+			break;
+		}
+	});
+	$("#new_item").click(function() {
+		window.location.href = "categories.php?do=add";
+	});
+	$("#edit_item").click(function() {
+		if (1 == $(":checked[name='select']").length)
+		{
+			var edit_link = 'categories.php?do=edit&cat_id=' + $(":checked[name='select']").val();
+			window.location.href = edit_link;
+		}
+	});
+	//inital page paramter
+	var page = parseInt(<?php echo $_smarty_tpl->tpl_vars['page']->value;?>
+);
+	var max_page = parseInt(<?php echo $_smarty_tpl->tpl_vars['page_count']->value;?>
+);
+	var page_sta = (page+1) + '/' + max_page;
+	$("#next_page").attr('href','categories.php?do=list&page=' + (page+1));
+	$("#previous_page").attr('href','categories.php?do=list&page=' + (page-1));
+
+	if (page <= 0) 
+	{
+		$("#previous_page").hide();
+		$("#next_page").attr('href','categories.php?do=list&page=' + (page+1));
+	}
+	if (page >= max_page-1) 
+	{
+		$("#next_page").hide();
+		$("#previous_page").attr('href','categories.php?do=list&page=' + (page-1));
+	} 
+	$("#page_sta").text(page_sta);
+	
+	//
+	$(".goto_page").change(function() {
+		$(".goto_page_a").attr('href', 'categories.php?do=list&page=' + $(this).val());
+	});
 });
-function delSelected() {
-	var sel = $("input:checked").parent().parent().attr("id");
-	alert(sel);
-}
-function hideSelected() {
-	$("input:checked").hide();
-}
+
 </script>
 </head>
 <body>
@@ -137,12 +215,10 @@ function hideSelected() {
 </div>
 <div id="w2">
 <div class="operations">
-	<button type="button" id="new_item" onclick="hideSelected()">NEW</button>
-	<button type="button" id="del_item" onclick="delSelected()">DEL</button>
-	<button type="button" id="edit_item" onclick="">EDIT</button>
+	<span id="new_item">新建</span>
+	<span id="edit_item">编辑</span>
 </div>
 </div>
-
 <div id="w3">
 	<form action="" >
 	<table id="item_list">
@@ -157,15 +233,22 @@ foreach ($_from as $_smarty_tpl->tpl_vars['cat']->key => $_smarty_tpl->tpl_vars[
 $_smarty_tpl->tpl_vars['cat']->_loop = true;
 ?>
 	<tr>
-		<td><input type="checkbox" name="select"></td>
+		<td><input type="checkbox" name="select" value="<?php echo $_smarty_tpl->tpl_vars['cat']->value['cat_id'];?>
+"></td>
 		<td class="<?php echo $_smarty_tpl->tpl_vars['cat']->value['cat_id'];?>
 "><?php echo $_smarty_tpl->tpl_vars['cat']->value['cat_name'];?>
 </td>
-		<td>没有</td>
+		<td>未知</td>
 	</tr>
 	<?php } ?>
 	<tr>
-		<td colspan="3">
+		<td colspan="5">
+		<div class="page_navi">	
+			<div>第<input type="text" class="goto_page" maxlength="3">页 <a class="goto_page_a">跳转</a></div>
+			<div><a id="next_page">下一页</a></div>
+			<div><a id="previous_page">上一页</a></div>
+			<div id="page_sta"></div>
+		</div>
 		</td>
 	</tr>
 	</table>

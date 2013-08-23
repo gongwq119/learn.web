@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-08-22 10:11:04
+<?php /* Smarty version Smarty-3.1.13, created on 2013-08-23 05:43:48
          compiled from "./smarty/templates/categories_info.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:202853125051e3f0f2541677-70147779%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '1fcd73d001d49897db586c5b848e0e08e28b72de' => 
     array (
       0 => './smarty/templates/categories_info.tpl',
-      1 => 1377159049,
+      1 => 1377229419,
       2 => 'file',
     ),
   ),
@@ -94,7 +94,12 @@ function validate() {
     <li><a href="#tabs-2">详细描述</a></li>
   </ul>
   <form enctype="multipart/form-data" action="" method="post" name="theForm" >
+  <?php if ($_GET['do']=='edit'){?>
+  <input type="hidden" name="do" value="update">
+  <?php }?>
+   <?php if ($_GET['do']=='add'){?>
   <input type="hidden" name="do" value="insert">
+  <?php }?>
   <div id="tabs-1">
   	<table>
   		<tr>

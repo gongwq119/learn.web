@@ -1,38 +1,8 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-08-23 04:04:00
-         compiled from "./smarty/templates/items_list.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:45590340251de5c0d1d3346-12537241%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
-$_valid = $_smarty_tpl->decodeProperties(array (
-  'file_dependency' => 
-  array (
-    '15b2ee76cca03445bbaee1cfbc1ea7e9ac3cfc93' => 
-    array (
-      0 => './smarty/templates/items_list.tpl',
-      1 => 1377223271,
-      2 => 'file',
-    ),
-  ),
-  'nocache_hash' => '45590340251de5c0d1d3346-12537241',
-  'function' => 
-  array (
-  ),
-  'version' => 'Smarty-3.1.13',
-  'unifunc' => 'content_51de5c0d25be03_95812331',
-  'variables' => 
-  array (
-    'title' => 0,
-    'page' => 0,
-    'page_count' => 0,
-    'items' => 0,
-    'item' => 0,
-  ),
-  'has_nocache_code' => false,
-),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_51de5c0d25be03_95812331')) {function content_51de5c0d25be03_95812331($_smarty_tpl) {?><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title><?php echo $_smarty_tpl->tpl_vars['title']->value;?>
-</title>
+<title><{$title}></title>
 <style type="text/css">
 body {
 	background:#DDEEF2;
@@ -153,69 +123,56 @@ $(document).ready(function() {
 			});
 		}
 	});
+	//opration btns 
 	$("#edit_item").hide();
-	$("#del_item").hide();
 	$(":checkbox").click(function() {
 		switch ($(":checked[name='select']").length) {
 		case 0:
 			$("#edit_item").hide();
-			$("#del_item").hide();
 			break;
 		case 1:
 			$("#edit_item").show();
-			$("#del_item").show();
 			break;
 		default:
 			$("#edit_item").hide();
-			$("#del_item").show();
 			break;
 		}
 	});
-	//opration btns 
 	$("#new_item").click(function() {
-		window.location.href = "items.php?do=add";
+		window.location.href = "brands.php?do=add";
 	});
 	$("#edit_item").click(function() {
 		if (1 == $(":checked[name='select']").length)
 		{
-			var edit_link = 'items.php?do=edit&item_id=' + $(":checked[name='select']").val();
+			var edit_link = 'brands.php?do=edit&brand_id=' + $(":checked[name='select']").val();
 			window.location.href = edit_link;
 		}
 	});
-	$("#del_item").click(function() {
-		var del_id = '';
-		$(":checked[name='select']").each(function() {
-			del_id = del_id + ',' + $(this).val();
-		});
-		del_id = del_id.substring(1, del_id.length);
-		window.location.href = 'items.php?do=remove&item_id=' + del_id;
-	});	
 	//inital page paramter
-	var page = parseInt(<?php echo $_smarty_tpl->tpl_vars['page']->value;?>
-);
-	var max_page = parseInt(<?php echo $_smarty_tpl->tpl_vars['page_count']->value;?>
-);
+	var page = parseInt(<{$page}>);
+	var max_page = parseInt(<{$page_count}>);
 	var page_sta = (page+1) + '/' + max_page;
-	$("#next_page").attr('href','items.php?do=list&page=' + (page+1));
-	$("#previous_page").attr('href','items.php?do=list&page=' + (page-1));
+	$("#next_page").attr('href','brands.php?do=list&page=' + (page+1));
+	$("#previous_page").attr('href','brands.php?do=list&page=' + (page-1));
 
 	if (page <= 0) 
 	{
 		$("#previous_page").hide();
-		$("#next_page").attr('href','items.php?do=list&page=' + (page+1));
+		$("#next_page").attr('href','brands.php?do=list&page=' + (page+1));
 	}
 	if (page >= max_page-1) 
 	{
 		$("#next_page").hide();
-		$("#previous_page").attr('href','items.php?do=list&page=' + (page-1));
+		$("#previous_page").attr('href','brands.php?do=list&page=' + (page-1));
 	} 
 	$("#page_sta").text(page_sta);
 	
 	//
 	$(".goto_page").change(function() {
-		$(".goto_page_a").attr('href', 'items.php?do=list&page=' + $(this).val());
+		$(".goto_page_a").attr('href', 'brands.php?do=list&page=' + $(this).val());
 	});
 });
+
 </script>
 </head>
 <body>
@@ -228,7 +185,6 @@ $(document).ready(function() {
 <div class="operations">
 	<span id="new_item">新建</span>
 	<span id="edit_item">编辑</span>
-	<span id="del_item">删除</span>
 </div>
 </div>
 <div id="w3">
@@ -236,30 +192,14 @@ $(document).ready(function() {
 	<table id="item_list">
 	<tr id="tou">
 		<th><input type="checkbox" name="select_all">全选</th>
-		<th class="c1">商品名称</th>
-		<th>商品序号</th>
-		<th>商品价格</th>
-		<th>商品库存</th>
+		<th class="c1">品牌名称</th>
 	</tr>
-	<?php  $_smarty_tpl->tpl_vars['item'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['item']->_loop = false;
- $_from = $_smarty_tpl->tpl_vars['items']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
-foreach ($_from as $_smarty_tpl->tpl_vars['item']->key => $_smarty_tpl->tpl_vars['item']->value){
-$_smarty_tpl->tpl_vars['item']->_loop = true;
-?>
+	<{foreach $brands as $brand}>
 	<tr>
-		<td><input type="checkbox" name="select" value="<?php echo $_smarty_tpl->tpl_vars['item']->value['it_id'];?>
-" ></td>
-		<td class="<?php echo $_smarty_tpl->tpl_vars['item']->value['it_id'];?>
-"><?php echo $_smarty_tpl->tpl_vars['item']->value['it_name'];?>
-</td>
-		<td><?php echo $_smarty_tpl->tpl_vars['item']->value['it_sn'];?>
-</td>
-		<td><?php echo $_smarty_tpl->tpl_vars['item']->value['it_price'];?>
-</td>
-		<td><?php echo $_smarty_tpl->tpl_vars['item']->value['it_quant'];?>
-</td>
+		<td><input type="checkbox" name="select" value="<{$brand.brand_id}>"></td>
+		<td class="<{$brand.brand_id}>"><{$brand.brand_name}></td>
 	</tr>
-	<?php } ?>
+	<{/foreach}>
 	<tr>
 		<td colspan="5">
 		<div class="page_navi">	
@@ -275,4 +215,4 @@ $_smarty_tpl->tpl_vars['item']->_loop = true;
 </div>
 
 </body>
-</html><?php }} ?>
+</html>

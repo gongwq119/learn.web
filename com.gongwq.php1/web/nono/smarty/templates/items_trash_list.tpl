@@ -44,10 +44,10 @@ body {
 	text-align: center;
 	line-height:24px;
 }
-#new_item {
+#restore_item {
 	background: url(../image/cred.png) no-repeat 0px -25px;
 }
-#new_item:hover {
+#restore_item:hover {
 	color:#fff;
 	cursor:pointer;
 	background: url(../image/cred.png) no-repeat -54px -25px;
@@ -123,64 +123,47 @@ $(document).ready(function() {
 			});
 		}
 	});
-	$("#edit_item").hide();
-	$("#del_item").hide();
+	$("#restore_item").hide();
 	$(":checkbox").click(function() {
 		switch ($(":checked[name='select']").length) {
 		case 0:
-			$("#edit_item").hide();
-			$("#del_item").hide();
-			break;
-		case 1:
-			$("#edit_item").show();
-			$("#del_item").show();
+			$("#restore_item").hide();
 			break;
 		default:
-			$("#edit_item").hide();
-			$("#del_item").show();
+			$("#restore_item").show();
 			break;
 		}
 	});
-	$("#new_item").click(function() {
-		window.location.href = "items.php?do=add";
-	});
-	$("#edit_item").click(function() {
-		if (1 == $(":checked[name='select']").length)
-		{
-			var edit_link = 'items.php?do=edit&item_id=' + $(":checked[name='select']").val();
-			window.location.href = edit_link;
-		}
-	});
-	$("#del_item").click(function() {
-		var del_id = '';
+	$("#restore_item").click(function() {
+		var ret_id = '';
 		$(":checked[name='select']").each(function() {
-			del_id = del_id + ',' + $(this).val();
+			ret_id = ret_id + ',' + $(this).val();
 		});
-		del_id = del_id.substring(1, del_id.length);
-		window.location.href = 'items.php?do=del&item_id=' + del_id;
+		ret_id = ret_id.substring(1, ret_id.length);
+		window.location.href = 'items.php?do=restore&item_id=' + ret_id;
 	});	
 	//inital page paramter
 	var page = parseInt(<{$page}>);
 	var max_page = parseInt(<{$page_count}>);
 	var page_sta = (page+1) + '/' + max_page;
-	$("#next_page").attr('href','items.php?do=list&page=' + (page+1));
-	$("#previous_page").attr('href','items.php?do=list&page=' + (page-1));
+	$("#next_page").attr('href','items.php?do=trash&page=' + (page+1));
+	$("#previous_page").attr('href','items.php?do=trash&page=' + (page-1));
 
 	if (page <= 0) 
 	{
 		$("#previous_page").hide();
-		$("#next_page").attr('href','items.php?do=list&page=' + (page+1));
+		$("#next_page").attr('href','items.php?do=trash&page=' + (page+1));
 	}
 	if (page >= max_page-1) 
 	{
 		$("#next_page").hide();
-		$("#previous_page").attr('href','items.php?do=list&page=' + (page-1));
+		$("#previous_page").attr('href','items.php?do=trash&page=' + (page-1));
 	} 
 	$("#page_sta").text(page_sta);
 	
 	//
 	$(".goto_page").change(function() {
-		$(".goto_page_a").attr('href', 'items.php?do=list&page=' + $(this).val());
+		$(".goto_page_a").attr('href', 'items.php?do=trash&page=' + $(this).val());
 	});
 });
 </script>
@@ -193,9 +176,7 @@ $(document).ready(function() {
 </div>
 <div id="w2">
 <div class="operations">
-	<span id="new_item">新建</span>
-	<span id="del_item">删除</span>
-	<span id="edit_item">编辑</span>
+	<span id="restore_item">还原</span>
 </div>
 </div>
 

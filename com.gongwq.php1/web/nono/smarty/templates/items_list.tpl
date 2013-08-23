@@ -104,9 +104,9 @@ body {
 <script language="JavaScript" src="/js/jquery-1.9.1.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+	
+	//all check function
 	$("input[name='select_all']").click(function() {
-		
-		//all check function
 		if ($(this).prop("checked") == true) {
 			$("input[name='select']").each(function() {
 				if($(this).prop("checked") == false) {
@@ -141,6 +141,7 @@ $(document).ready(function() {
 			break;
 		}
 	});
+	//opration btns 
 	$("#new_item").click(function() {
 		window.location.href = "items.php?do=add";
 	});
@@ -194,11 +195,10 @@ $(document).ready(function() {
 <div id="w2">
 <div class="operations">
 	<span id="new_item">新建</span>
-	<span id="del_item">删除</span>
 	<span id="edit_item">编辑</span>
+	<span id="del_item">删除</span>
 </div>
 </div>
-
 <div id="w3">
 	<form action="" >
 	<table id="item_list">
