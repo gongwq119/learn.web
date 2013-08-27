@@ -24,6 +24,12 @@ elseif (isset($_REQUEST['it_id']))
 }
 //$item_id = isset($_REQUEST['id'])  ? intval($_REQUEST['id']) : 0;
 
+if (!isset($item_id)) {
+	@header("http/1.1 404 not found");
+	@header("status: 404 not found");
+	echo '当前页面不存在，请返回...';//直接输出页面错误信息
+	exit();
+}
 
 //read from db
 $result = $db->getItem($item_id);
@@ -49,10 +55,8 @@ if ($result_image->num_rows == 0)
 $smarty->assign('item', $item);
 $smarty->assign('item_images', $item_images);
 
-
 $smarty->display(ROOT_PATH . '/smarty/templates/items.tpl');
 
-?>
 
 
 

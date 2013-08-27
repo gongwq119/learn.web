@@ -23,7 +23,12 @@ elseif (isset($_REQUEST['cat_id']))
 	$cat_id = intval($_REQUEST['cat_id']);
 }
 
-//没有id的时候，默认为cat_id=1
+if (!isset($cat_id)) {
+	@header("http/1.1 404 not found");
+	@header("status: 404 not found");
+	echo '当前页面不存在，请返回...';//直接输出页面错误信息
+	exit();
+}
 
 
 //默认参数
