@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-08-22 08:12:10
+<?php /* Smarty version Smarty-3.1.13, created on 2013-08-27 16:50:40
          compiled from "/home/gongwq/site/php1/com.gongwq.php1/web/smarty/templates/categories.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:17505272151adb5f0062c55-14954276%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'ac10833537ced480b2d299969938f412e9969be5' => 
     array (
       0 => '/home/gongwq/site/php1/com.gongwq.php1/web/smarty/templates/categories.tpl',
-      1 => 1377151539,
+      1 => 1377614587,
       2 => 'file',
     ),
   ),
@@ -139,16 +139,8 @@ $(document).ready(function() {
 	<div id="w3">
 		<!-- Begin of the container -->
 		<div class="container">
-			<!-- Begin of the breadcurmb -->
-			<div class="breadcurmb">
-				<div class="bd_content">
-					<strong>主板系列</strong>
-					<span>&nbsp;&gt;&nbsp;<a href="http://localhost" >控制主板</a>
-						  &nbsp;&gt;&nbsp;<a href="http://localhost" >蓝光Bl2000</a>
-					</span>
-				</div>
-			</div>
-			<!-- End of the breadcurmb-->
+			<?php echo $_smarty_tpl->getSubTemplate ("./breadcrumb.lib.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array(), 0);?>
+
 			<div id="w_cat_left">
 			<!-- Begin of the category tree -->
 				<div class="cat_tree">

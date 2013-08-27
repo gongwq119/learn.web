@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-08-22 07:58:20
+<?php /* Smarty version Smarty-3.1.13, created on 2013-08-27 16:43:19
          compiled from "/home/gongwq/site/php1/com.gongwq.php1/web/smarty/templates/items.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:99237961751adb9ef2fc6a2-15959580%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'ab6eb6e5e6f0d5d2441ddb27dc0be438755b5910' => 
     array (
       0 => '/home/gongwq/site/php1/com.gongwq.php1/web/smarty/templates/items.tpl',
-      1 => 1377143737,
+      1 => 1377614587,
       2 => 'file',
     ),
   ),
@@ -55,8 +55,6 @@ $_smarty_tpl->tpl_vars['image']->_loop = true;
 	}
 	<?php } ?>
 	//3,初始化,设置ul长度和位置
-	
-	
 });
 
 </script>
@@ -74,16 +72,8 @@ $_smarty_tpl->tpl_vars['image']->_loop = true;
 	<div id="w3">
 		<!-- Begin of the container -->
 		<div class="container">
-			<!-- Begin of the breadcurmb -->
-			<div class="breadcurmb">
-				<div class="bd_content">
-					<strong>主板系列</strong>
-					<span>&nbsp;&gt;&nbsp;<a href="http://localhost" >控制主板</a>
-						  &nbsp;&gt;&nbsp;<a href="http://localhost" >蓝光Bl2000</a>
-					</span>
-				</div>
-			</div>
-			<!-- End of the breadcurmb-->
+			<?php echo $_smarty_tpl->getSubTemplate ("./breadcrumb.lib.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array(), 0);?>
+
 			<!-- Begin of the item introduction -->
 			<div id="item_intro">
 				<div id="item_info">

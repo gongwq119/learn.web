@@ -64,3 +64,7 @@ body {
 #breadcrumb a{
 	text-decoration: none;
 }
+#search_bd {
+	margin: 5px;
+	font-size: 14px;
+}

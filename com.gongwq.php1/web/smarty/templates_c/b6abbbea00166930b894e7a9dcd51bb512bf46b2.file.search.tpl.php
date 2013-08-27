@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-08-22 08:06:14
+<?php /* Smarty version Smarty-3.1.13, created on 2013-08-27 16:53:40
          compiled from "/home/gongwq/site/php1/com.gongwq.php1/web/smarty/templates/search.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:6264395435214242322e369-38086241%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'b6abbbea00166930b894e7a9dcd51bb512bf46b2' => 
     array (
       0 => '/home/gongwq/site/php1/com.gongwq.php1/web/smarty/templates/search.tpl',
-      1 => 1377151552,
+      1 => 1377615210,
       2 => 'file',
     ),
   ),
@@ -140,16 +140,7 @@ $(document).ready(function() {
 	<div id="w3">
 		<!-- Begin of the container -->
 		<div class="container">
-			<!-- Begin of the breadcurmb -->
-			<div class="breadcurmb">
-				<div class="bd_content">
-					<strong>主板系列</strong>
-					<span>&nbsp;&gt;&nbsp;<a href="http://localhost" >控制主板</a>
-						  &nbsp;&gt;&nbsp;<a href="http://localhost" >蓝光Bl2000</a>
-					</span>
-				</div>
-			</div>
-			<!-- End of the breadcurmb-->
+			<div id="search_bd">全部结果</div>
 			<div id="w_serh_rest_left">
 			<!-- Begin of the category tree -->
 				<div class="cat_tree">

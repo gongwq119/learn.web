@@ -57,17 +57,9 @@ for ($i = 0; $i < $result_items->num_rows; $i++) {
 	}
 }
 
-//读取categories
-$result_cats = $db->selectAll("categories",'cat_id', 'cat_name');
-$cats = array();
-for ($i = 0; $i < $result_cats->num_rows; $i++) {
-	$tem = $result_cats->fetch_assoc();
-	$cats[$i] = $tem;
-}
-
 // set breadcurmb
 $breadcrumb = array();
-$result_cat = $db->getCategory($item['cat_id']);
+$result_cat = $db->getCategory($cat_id);
 $cat = $result_cat->fetch_assoc();
 $cat_id = $cat['cat_id'];
 $cat_name = $cat['cat_name'];
@@ -79,10 +71,8 @@ if ($cat['parent_id'] != 0) {
 	$cat_name = $cat['cat_name'];
 }
 $breadcrumb_top = array('name'=>$cat_name, 'url'=>"categories.php?id=$cat_id");
-$breadcrumb[1] = array('name'=>$item['it_name'], 'url'=>'');;
 
-
-// $smarty->assign('cats',$cats);
+//
 $smarty->assign('breadcrumb_top', $breadcrumb_top);
 $smarty->assign('breadcrumb', $breadcrumb);
 $smarty->assign('items',$items);
