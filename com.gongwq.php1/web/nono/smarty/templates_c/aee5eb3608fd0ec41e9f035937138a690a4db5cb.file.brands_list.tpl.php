@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-08-23 04:49:48
+<?php /* Smarty version Smarty-3.1.13, created on 2013-08-27 06:11:19
          compiled from "./smarty/templates/brands_list.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:191725595216cdcc364832-12107178%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'aee5eb3608fd0ec41e9f035937138a690a4db5cb' => 
     array (
       0 => './smarty/templates/brands_list.tpl',
-      1 => 1377226181,
+      1 => 1377440208,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.13',
+  'unifunc' => 'content_5216cdcc3e8a89_50543564',
   'variables' => 
   array (
     'title' => 0,
@@ -24,8 +26,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'brand' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.13',
-  'unifunc' => 'content_5216cdcc3e8a89_50543564',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5216cdcc3e8a89_50543564')) {function content_5216cdcc3e8a89_50543564($_smarty_tpl) {?><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

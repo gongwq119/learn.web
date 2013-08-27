@@ -50,3 +50,17 @@ body {
 .clear{
 	clear:both;
 }
+#breadcrumb {
+	margin: 5px;
+	font-size: 14px;
+}
+#breadcrumb strong:hover {
+	cursor: pointer;
+}
+#breadcrumb span{
+	color: #666;
+	font-size: 10px;
+}
+#breadcrumb a{
+	text-decoration: none;
+}

@@ -65,7 +65,26 @@ for ($i = 0; $i < $result_cats->num_rows; $i++) {
 	$cats[$i] = $tem;
 }
 
+// set breadcurmb
+$breadcrumb = array();
+$result_cat = $db->getCategory($item['cat_id']);
+$cat = $result_cat->fetch_assoc();
+$cat_id = $cat['cat_id'];
+$cat_name = $cat['cat_name'];
+if ($cat['parent_id'] != 0) {
+	$breadcrumb[0] = array('name'=>$cat_name, 'url'=>"categories.php?id=$cat_id");
+	$result_cat = $db->getCategory($cat['parent_id']);
+	$cat = $result_cat->fetch_assoc();
+	$cat_id = $cat['cat_id'];
+	$cat_name = $cat['cat_name'];
+}
+$breadcrumb_top = array('name'=>$cat_name, 'url'=>"categories.php?id=$cat_id");
+$breadcrumb[1] = array('name'=>$item['it_name'], 'url'=>'');;
+
+
 // $smarty->assign('cats',$cats);
+$smarty->assign('breadcrumb_top', $breadcrumb_top);
+$smarty->assign('breadcrumb', $breadcrumb);
 $smarty->assign('items',$items);
 $smarty->display(ROOT_PATH . '/smarty/templates/categories.tpl');
 

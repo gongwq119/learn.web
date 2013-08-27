@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-08-23 05:53:08
+<?php /* Smarty version Smarty-3.1.13, created on 2013-08-27 06:11:35
          compiled from "./smarty/templates/brands_info.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:18967558905216d29039bb78-86418256%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '01dfc9d2e48b2543b24be6090dfa605504d616ac' => 
     array (
       0 => './smarty/templates/brands_info.tpl',
-      1 => 1377229508,
+      1 => 1377440208,
       2 => 'file',
     ),
   ),

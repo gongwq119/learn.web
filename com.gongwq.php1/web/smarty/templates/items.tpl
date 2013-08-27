@@ -19,8 +19,6 @@ $(document).ready(function() {
 	}
 	<{/foreach}>
 	//3,初始化,设置ul长度和位置
-	
-	
 });
 
 </script>
@@ -36,16 +34,7 @@ $(document).ready(function() {
 	<div id="w3">
 		<!-- Begin of the container -->
 		<div class="container">
-			<!-- Begin of the breadcurmb -->
-			<div class="breadcurmb">
-				<div class="bd_content">
-					<strong>主板系列</strong>
-					<span>&nbsp;&gt;&nbsp;<a href="http://localhost" >控制主板</a>
-						  &nbsp;&gt;&nbsp;<a href="http://localhost" >蓝光Bl2000</a>
-					</span>
-				</div>
-			</div>
-			<!-- End of the breadcurmb-->
+			<{include file="./breadcrumb.lib.tpl"}>
 			<!-- Begin of the item introduction -->
 			<div id="item_intro">
 				<div id="item_info">

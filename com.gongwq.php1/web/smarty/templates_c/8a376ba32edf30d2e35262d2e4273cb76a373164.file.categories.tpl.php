@@ -1,4 +1,30 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<?php /* Smarty version Smarty-3.1.13, created on 2013-08-27 10:17:21
+         compiled from "/Users/wenqianggong/git/learn.web/com.gongwq.php1/web/smarty/templates/categories.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:1143727505521c40702173c7-70486331%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '8a376ba32edf30d2e35262d2e4273cb76a373164' => 
+    array (
+      0 => '/Users/wenqianggong/git/learn.web/com.gongwq.php1/web/smarty/templates/categories.tpl',
+      1 => 1377595996,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '1143727505521c40702173c7-70486331',
+  'function' => 
+  array (
+  ),
+  'version' => 'Smarty-3.1.13',
+  'unifunc' => 'content_521c40702c9d82_89597062',
+  'variables' => 
+  array (
+    'items' => 0,
+    'item' => 0,
+  ),
+  'has_nocache_code' => false,
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_521c40702c9d82_89597062')) {function content_521c40702c9d82_89597062($_smarty_tpl) {?><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -103,15 +129,18 @@ $(document).ready(function() {
 <body>
 	<div id="w_all">
 	<div id="w1">
-		<{include file="./header.lib.tpl"}>
+		<?php echo $_smarty_tpl->getSubTemplate ("./header.lib.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array(), 0);?>
+
 	</div>
 	<div id="w2">
-		<{include file="./navi.lib.tpl"}>
+		<?php echo $_smarty_tpl->getSubTemplate ("./navi.lib.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array(), 0);?>
+
 	</div>
 	<div id="w3">
 		<!-- Begin of the container -->
 		<div class="container">
-			<{include file="./breadcrumb.lib.tpl"}>
+			<?php echo $_smarty_tpl->getSubTemplate ("./breadcrumb.lib.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array(), 0);?>
+
 			<div id="w_cat_left">
 			<!-- Begin of the category tree -->
 				<div class="cat_tree">
@@ -158,15 +187,25 @@ $(document).ready(function() {
 				<!-- Begin of the categories list -->
 				<div id="item_list">
 					<ul>
-						<{foreach $items as $item}>
+						<?php  $_smarty_tpl->tpl_vars['item'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['item']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['items']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['item']->key => $_smarty_tpl->tpl_vars['item']->value){
+$_smarty_tpl->tpl_vars['item']->_loop = true;
+?>
 						<li id="item">
-							<div class="image"><a href="items.php?id=<{$item.it_id}>"><img width="220" height="220" src="<{$item.img_stand_url}>"></a></div>
-							<div class="name"><{$item.it_name}></div>
-							<div class="price">嘉海价格&nbsp;&nbsp:&nbsp;&nbsp￥<{$item.it_price}></div>
-							<div class="storage">当前库存&nbsp;&nbsp:&nbsp;&nbsp<{$item.it_quant}></div>
-							<div class="buttons"><a href="items.php?id=<{$item.it_id}>"><button>物品详情</button></a><a><button>立刻购买</button></a></div>
+							<div class="image"><a href="items.php?id=<?php echo $_smarty_tpl->tpl_vars['item']->value['it_id'];?>
+"><img width="220" height="220" src="<?php echo $_smarty_tpl->tpl_vars['item']->value['img_stand_url'];?>
+"></a></div>
+							<div class="name"><?php echo $_smarty_tpl->tpl_vars['item']->value['it_name'];?>
+</div>
+							<div class="price">嘉海价格&nbsp;&nbsp:&nbsp;&nbsp￥<?php echo $_smarty_tpl->tpl_vars['item']->value['it_price'];?>
+</div>
+							<div class="storage">当前库存&nbsp;&nbsp:&nbsp;&nbsp<?php echo $_smarty_tpl->tpl_vars['item']->value['it_quant'];?>
+</div>
+							<div class="buttons"><a href="items.php?id=<?php echo $_smarty_tpl->tpl_vars['item']->value['it_id'];?>
+"><button>物品详情</button></a><a><button>立刻购买</button></a></div>
 						</li>
-						<{/foreach}>
+						<?php } ?>
 					</ul>
 				</div>
 				<!-- End of the categories list -->
@@ -176,11 +215,14 @@ $(document).ready(function() {
 		<!-- End of the container -->
 	</div>
 	<div id="w4">
-		<{include file="./links.lib.tpl"}>
+		<?php echo $_smarty_tpl->getSubTemplate ("./links.lib.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array(), 0);?>
+
 	</div>
 	<div id="w5">
-		<{include file="./footer.lib.tpl"}>
+		<?php echo $_smarty_tpl->getSubTemplate ("./footer.lib.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array(), 0);?>
+
 	</div>
 	</div>
 </body>
 </html>
+<?php }} ?>
