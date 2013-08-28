@@ -138,7 +138,7 @@ $(document).ready(function() {
 			<div id="w_cat_right">
 				<!-- Begin of the category filter -->
 				<div id="cat_filter">
-					<div class="sf_t"><h2>分类筛选</h2></div>
+					<div class="sf_t">分类筛选</div>
 					<div class="sf_c">
 						<div class="filter_left" align="right">品牌:  </div>
 						<div class="filter_right">

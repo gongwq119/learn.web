@@ -70,12 +70,12 @@ $(document).ready(function() {
 			<!-- End of the item introduction -->
 			<div id="main_part">
 				<div id="item_main_right">
-					<div class="sf_t"><h2>详细描述</h2></div>
+					<div class="sf_t">详细描述</div>
 					<div class="sf_c"><{$item.it_desc}></div>
 				</div>
 				<div id="item_main_left">
-					<div class="related_sort">
-						<div class="sf_t"><h2>相关分类</h2></div>
+					<div id="related_sort">
+						<div class="sf_t">相关分类</div>
 						<div class="sf_c">
 							<ul>
 								<li>电梯主板</li>
@@ -87,7 +87,7 @@ $(document).ready(function() {
 						</div>
 					</div>
 					<div class="other_brand">
-						<div class="sf_t"><h2>其他品牌</h2></div>
+						<div class="sf_t">其他品牌</div>
 						<div class="sf_c">
 							<ul>
 								<li>三菱</li>

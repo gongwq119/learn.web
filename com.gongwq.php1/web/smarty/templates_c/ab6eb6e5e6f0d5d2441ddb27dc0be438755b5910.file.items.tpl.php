@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-08-27 16:43:19
+<?php /* Smarty version Smarty-3.1.13, created on 2013-08-28 04:48:52
          compiled from "/home/gongwq/site/php1/com.gongwq.php1/web/smarty/templates/items.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:99237961751adb9ef2fc6a2-15959580%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'ab6eb6e5e6f0d5d2441ddb27dc0be438755b5910' => 
     array (
       0 => '/home/gongwq/site/php1/com.gongwq.php1/web/smarty/templates/items.tpl',
-      1 => 1377614587,
+      1 => 1377658130,
       2 => 'file',
     ),
   ),
@@ -119,13 +119,13 @@ $_smarty_tpl->tpl_vars['image']->_loop = true;
 			<!-- End of the item introduction -->
 			<div id="main_part">
 				<div id="item_main_right">
-					<div class="sf_t"><h2>详细描述</h2></div>
+					<div class="sf_t">详细描述</div>
 					<div class="sf_c"><?php echo $_smarty_tpl->tpl_vars['item']->value['it_desc'];?>
 </div>
 				</div>
 				<div id="item_main_left">
-					<div class="related_sort">
-						<div class="sf_t"><h2>相关分类</h2></div>
+					<div id="related_sort">
+						<div class="sf_t">相关分类</div>
 						<div class="sf_c">
 							<ul>
 								<li>电梯主板</li>
@@ -137,7 +137,7 @@ $_smarty_tpl->tpl_vars['image']->_loop = true;
 						</div>
 					</div>
 					<div class="other_brand">
-						<div class="sf_t"><h2>其他品牌</h2></div>
+						<div class="sf_t">其他品牌</div>
 						<div class="sf_c">
 							<ul>
 								<li>三菱</li>
