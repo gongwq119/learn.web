@@ -13,92 +13,18 @@ $(document).ready(function() {
 	$(".image").mouseleave(function() {
 		$(this).css("border", "solid 1px #fff");
 	});
-	$(".explode").click(function() {
-		$(this).parent().find(".son").toggle();
+	$(".exp_btn").click(function() {
+		var son_ul = $(this).parent().parent().find(".son_ul");
+		if (son_ul.is(":visible")) {
+			son_ul.hide();
+			$(this).css("background", "url(/image/s_btn.png) no-repeat -21px 0");
+		} else {
+			son_ul.show();
+			$(this).css("background", "url(/image/s_btn.png) no-repeat -37px 0");
+		}
 	});
 });
 </script>
-<style type="text/css">
-#w_cat_left{
-	float: left;
-}
-#w_cat_right{
-	float:right;
-}
-.filter_left{
-	float: left;
-	width: 199px;
-	height:40px;
-	line-height:40px;
-}
-.filter_right{
-	float: right;
-	width: 539px;
-	line-height:40px;
-}
-#farther_ul{
-	margin:0px;
-	padding:0px;
-}
-#farther_ul li{
-	text-align: left;
-}
-#farther_ul li:hover{
-	cursor: pointer;
-}
-.farther_li {
-	background-color: #f7f7f7;
-	border: 1px solid #ddd;
-	line-height: 30px;
-	font-size: 15px;
-}
-.farther_li ul{
-	background-color: #fff;
-	border: 0px;
-}
-.clear{
-	clear:both;
-}
-.filter_ops{
-	width: 80px;
-	height:40px;
-	float:left;
-}
-.filter_ops a:hover{
-	cursor: pointer;
-}
-
-.cat_tree {
-	margin: 10px 0px 0px 0px;
-	height: 500px;
-	width: 200px;
-	float:left;
-}
-#cat_filter {
-	margin: 10px 0px 0px 0px;
-	width: 740px;
-}
-#cat_list_menu {
-	margin: 10px 0px 0px 0px;
-	width: 740px;
-	background-color: #f7f7f7;
-	border: 1px solid #ddd;
-}
-#item_list {
-	margin: 10px 0px 0px 0px;
-	width: 740px;
-}
-#item{
-	float: left;
-	margin: 10px;
-}
-#item_list ul{
-	padding: 0px;
-}
-.image {
-	border: solid 1px #ffffff;
-}
-</style>
 </head>
 <body>
 	<div id="w_all">
@@ -114,23 +40,22 @@ $(document).ready(function() {
 			<{include file="./breadcrumb.lib.tpl"}>
 			<div id="w_cat_left">
 			<!-- Begin of the category tree -->
-				<div class="cat_tree">
-					<ul id="farther_ul">
-						<li class="farther_li">
-						<span class="explode">父级菜单一</span>
-						<ul>
-							<li class="son"><a href="http://localhost/items.php">子菜单一</a></li>
-							<li class="son"><a href="">子菜单一</a></li>
+				<div id="cat_tree">
+					<div class="cat_tree_item first_c_t_i">
+						<div class="father"><div class="exp_btn"></div>父级菜单一</div>
+						<ul class="son_ul">
+							<li class="son_li"><a href="">子菜单一</a></li>
+							<li class="son_li"><a href="">子菜单一</a></li>
 						</ul>
-						</li>
-						<li class="farther_li">
-						<span class="explode">父级菜单一</span>
-						<ul>
-							<li class="son"><a href="http://localhost/items.php">子菜单一</a></li>
-							<li class="son"><a href="">子菜单一</a></li>
+					</div>
+					<div class="cat_tree_item">
+						<div class="father"><div class="exp_btn"></div>父级菜单一</div>
+						<ul class="son_ul">
+							<li class="son_li"><a href="">子菜单一</a></li>
+							<li class="son_li"><a href="">子菜单一</a></li>
 						</ul>
-						</li>
-					</ul>
+					</div>
+					
 				</div>
 			<!-- End of the category tree -->
 			</div>
@@ -140,10 +65,10 @@ $(document).ready(function() {
 				<div id="cat_filter">
 					<div class="sf_t">分类筛选</div>
 					<div class="sf_c">
-						<div class="filter_left" align="right">品牌:  </div>
-						<div class="filter_right">
-							<div class="filter_ops"><a>abc</a></div>
-							<div class="filter_ops"><a>abc</a></div>
+						<div id="filter_left" align="right">品牌:&nbsp&nbsp&nbsp&nbsp</div>
+						<div id="filter_right">
+							<div id="filter_ops"><a>abc</a></div>
+							<div id="filter_ops"><a>abc</a></div>
 							<div class="clear"></div>
 						</div>
 						<div class="clear"></div>
@@ -152,7 +77,14 @@ $(document).ready(function() {
 				<!-- End of the category filter -->
 				<!-- Begin of the category list menu -->
 				<div id="cat_list_menu">
-					list menu
+					<div id="sort_opt">排序：
+						<span id="cl_qt">点击量</span>
+						<span id="pc">价格</span>
+					</div>
+					<div id="sk_pg">库存：
+						<span id="all_sk">显示全部</span>
+						<span id="only_in_sk">仅显示有现货</span>
+					</div>
 				</div>
 				<!-- End of the category list menu -->
 				<!-- Begin of the categories list -->

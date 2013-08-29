@@ -6,6 +6,7 @@
 @IMPORT url("./links.css");
 @IMPORT url("./footer.css");
 @IMPORT url("./item_intro.css");
+@IMPORT url("./categories.css");
 body {
 	padding: 0;
 	margin: 0;
