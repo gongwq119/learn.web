@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-08-29 10:20:34
+<?php /* Smarty version Smarty-3.1.13, created on 2013-08-29 17:05:41
          compiled from "/home/gongwq/site/php1/com.gongwq.php1/web/smarty/templates/categories.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:17505272151adb5f0062c55-14954276%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'ac10833537ced480b2d299969938f412e9969be5' => 
     array (
       0 => '/home/gongwq/site/php1/com.gongwq.php1/web/smarty/templates/categories.tpl',
-      1 => 1377764430,
+      1 => 1377788739,
       2 => 'file',
     ),
   ),
@@ -19,6 +19,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'unifunc' => 'content_51adb5f00be614_80945455',
   'variables' => 
   array (
+    'current_cat' => 0,
+    'cat_tree' => 0,
+    'cat_single' => 0,
+    's' => 0,
     'items' => 0,
     'item' => 0,
   ),
@@ -40,15 +44,19 @@ $(document).ready(function() {
 		$(this).css("border", "solid 1px #fff");
 	});
 	$(".exp_btn").click(function() {
-		var son_ul = $(this).parent().parent().find(".son_ul");
-		if (son_ul.is(":visible")) {
-			son_ul.hide();
+		var son = $(this).parent().parent().find(".son");
+		if (son.is(":visible")) {
+			son.hide();
 			$(this).css("background", "url(/image/s_btn.png) no-repeat -21px 0");
 		} else {
-			son_ul.show();
+			son.show();
 			$(this).css("background", "url(/image/s_btn.png) no-repeat -37px 0");
 		}
 	});
+	// hide all and show current cat 
+	$(".exp_btn").click();
+	$("a[name='<?php echo $_smarty_tpl->tpl_vars['current_cat']->value;?>
+']").parent().find(".exp_btn").click();
 });
 </script>
 </head>
@@ -70,21 +78,27 @@ $(document).ready(function() {
 			<div id="w_cat_left">
 			<!-- Begin of the category tree -->
 				<div id="cat_tree">
-					<div class="cat_tree_item first_c_t_i">
-						<div class="father"><div class="exp_btn"></div>父级菜单一</div>
-						<ul class="son_ul">
-							<li class="son_li"><a href="">子菜单一</a></li>
-							<li class="son_li"><a href="">子菜单一</a></li>
-						</ul>
-					</div>
+					<?php  $_smarty_tpl->tpl_vars['cat_single'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['cat_single']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['cat_tree']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['cat_single']->key => $_smarty_tpl->tpl_vars['cat_single']->value){
+$_smarty_tpl->tpl_vars['cat_single']->_loop = true;
+?>
 					<div class="cat_tree_item">
-						<div class="father"><div class="exp_btn"></div>父级菜单一</div>
-						<ul class="son_ul">
-							<li class="son_li"><a href="">子菜单一</a></li>
-							<li class="son_li"><a href="">子菜单一</a></li>
-						</ul>
+						<div class="father"><div class="exp_btn"></div><a name="<?php echo $_smarty_tpl->tpl_vars['cat_single']->value['f']['name'];?>
+" href="<?php echo $_smarty_tpl->tpl_vars['cat_single']->value['f']['url'];?>
+"><?php echo $_smarty_tpl->tpl_vars['cat_single']->value['f']['name'];?>
+</a></div>
+						<?php  $_smarty_tpl->tpl_vars['s'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['s']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['cat_single']->value['s']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['s']->key => $_smarty_tpl->tpl_vars['s']->value){
+$_smarty_tpl->tpl_vars['s']->_loop = true;
+?>
+						<div class="son"><a href="<?php echo $_smarty_tpl->tpl_vars['s']->value['url'];?>
+"><?php echo $_smarty_tpl->tpl_vars['s']->value['name'];?>
+</a></div>
+						<?php } ?>
 					</div>
-					
+					<?php } ?>
 				</div>
 			<!-- End of the category tree -->
 			</div>

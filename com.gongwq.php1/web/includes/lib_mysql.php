@@ -209,6 +209,15 @@ class lib_mysql {
 		return $this->execute($sql);
 	}
 	
+	/**
+	 * 
+	 * @param unknown $parent_cat_id
+	 */
+	function getAllSonCategory($parent_cat_id) {
+		$sql = "SELECT * FROM mydb.categories WHERE parent_id=$parent_cat_id ";
+		return $this->execute($sql);
+	}
+	
 	/******************************
 	 * brands
 	******************************/

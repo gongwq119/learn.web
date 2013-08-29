@@ -14,15 +14,18 @@ $(document).ready(function() {
 		$(this).css("border", "solid 1px #fff");
 	});
 	$(".exp_btn").click(function() {
-		var son_ul = $(this).parent().parent().find(".son_ul");
-		if (son_ul.is(":visible")) {
-			son_ul.hide();
+		var son = $(this).parent().parent().find(".son");
+		if (son.is(":visible")) {
+			son.hide();
 			$(this).css("background", "url(/image/s_btn.png) no-repeat -21px 0");
 		} else {
-			son_ul.show();
+			son.show();
 			$(this).css("background", "url(/image/s_btn.png) no-repeat -37px 0");
 		}
 	});
+	// hide all and show current cat 
+	$(".exp_btn").click();
+	$("a[name='<{$current_cat}>']").parent().find(".exp_btn").click();
 });
 </script>
 </head>
@@ -41,21 +44,14 @@ $(document).ready(function() {
 			<div id="w_cat_left">
 			<!-- Begin of the category tree -->
 				<div id="cat_tree">
-					<div class="cat_tree_item first_c_t_i">
-						<div class="father"><div class="exp_btn"></div>父级菜单一</div>
-						<ul class="son_ul">
-							<li class="son_li"><a href="">子菜单一</a></li>
-							<li class="son_li"><a href="">子菜单一</a></li>
-						</ul>
-					</div>
+					<{foreach $cat_tree as $cat_single}>
 					<div class="cat_tree_item">
-						<div class="father"><div class="exp_btn"></div>父级菜单一</div>
-						<ul class="son_ul">
-							<li class="son_li"><a href="">子菜单一</a></li>
-							<li class="son_li"><a href="">子菜单一</a></li>
-						</ul>
+						<div class="father"><div class="exp_btn"></div><a name="<{$cat_single.f.name}>" href="<{$cat_single.f.url}>"><{$cat_single.f.name}></a></div>
+						<{foreach $cat_single.s as $s}>
+						<div class="son"><a href="<{$s.url}>"><{$s.name}></a></div>
+						<{/foreach}>
 					</div>
-					
+					<{/foreach}>
 				</div>
 			<!-- End of the category tree -->
 			</div>

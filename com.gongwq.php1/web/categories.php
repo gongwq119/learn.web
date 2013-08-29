@@ -30,7 +30,6 @@ if (!isset($cat_id)) {
 	exit();
 }
 
-
 //默认参数
 $page = 0;
 $amount = 12;
@@ -72,11 +71,39 @@ if ($cat['parent_id'] != 0) {
 }
 $breadcrumb_top = array('name'=>$cat_name, 'url'=>"categories.php?id=$cat_id");
 
+// set cat tree
+$cat_tree = array();// key(number)=> val(f:xxx,s:xxx); xxx is array(name:'',url:'')
+$idx_cat = 0;
+$result_cats = $db->getAllParentCategory();
+$cats = array();
+for ($i = 0; $i < $result_cats->num_rows; $i++) {
+	$cats[$i] = $result_cats->fetch_assoc();
+	$tem_cat = array();
+	$tem_cat['name'] = $cats[$i]['cat_name'];
+	$tem_cat['url'] = 'categories.php?id=' . $cats[$i]['cat_id'];
+	$father_cat = $tem_cat;
+	// get son cat
+	$result_son_cats = $db->getAllSonCategory($cats[$i]['cat_id']);
+	$son_cat = array();
+	if (isset($result_son_cats)) {
+		for ($j = 0; $j < $result_son_cats->num_rows; $j++) {
+			$son_cat[$j] = $result_son_cats->fetch_assoc();
+			$tem_son_cat = array();
+			$tem_son_cat['name'] = $son_cat[$j]['cat_name'];
+			$tem_son_cat['url'] = 'categories.php?id=' . $son_cat[$j]['cat_id'];
+			$son_cat[$j] = $tem_son_cat;
+		}
+	}
+	$cat_tree[$idx_cat] = array("f"=>$father_cat, "s"=>$son_cat);
+	$idx_cat ++;
+}
+
 //
 $smarty->assign('breadcrumb_top', $breadcrumb_top);
 $smarty->assign('breadcrumb', $breadcrumb);
+$smarty->assign('cat_tree', $cat_tree);
+$smarty->assign('current_cat', $cat_name);
 $smarty->assign('items',$items);
 $smarty->display(ROOT_PATH . '/smarty/templates/categories.tpl');
 
 
-?>
