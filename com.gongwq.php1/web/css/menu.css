@@ -25,6 +25,7 @@ ul.menu {
 	height: 45px;
 	text-align: center;
 	vertical-align: middle;
+	text-decoration:none;
 }
 .menu a:hover { 
 	text-decoration:none;

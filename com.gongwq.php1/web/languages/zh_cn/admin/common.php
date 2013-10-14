@@ -131,7 +131,8 @@ $_LANG['kilogram'] = '千克';
 /* 菜单分类部分 */
 $_LANG['02_goods'] = '商品管理';
 $_LANG['03_cats_brands'] = '分类和品牌管理';
-$_LANG['04_order'] = '订单管理';
+//$_LANG['04_order'] = '订单管理';
+$_LANG['04_mainpage'] = '主页管理';
 $_LANG['05_banner'] = '广告管理';
 $_LANG['06_stats'] = '报表统计';
 $_LANG['07_content'] = '文章管理';
@@ -173,6 +174,10 @@ $_LANG['52_virtual_card_change'] = '更改加密串';
 $_LANG['goods_auto'] = '商品自动上下架';
 $_LANG['article_auto'] = '文章自动发布';
 $_LANG['navigator'] = '自定义导航栏';
+
+/* 主页管理 */
+$_LANG['01_mainpage_menu_list'] = '菜单项目列表';
+$_LANG['02_mainpage_menu_add'] = '添加菜单项目';
 
 /* 促销管理 */
 $_LANG['02_snatch_list'] = '夺宝奇兵';

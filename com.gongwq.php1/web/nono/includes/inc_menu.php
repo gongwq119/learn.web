@@ -13,6 +13,9 @@ $modules['03_cats_brands']['04_category_add']    = 'categories.php?do=add';
 $modules['03_cats_brands']['05_brand_list']    = 'brands.php?do=list';
 $modules['03_cats_brands']['06_brand_add']    = 'brands.php?do=add';
 
+$modules['04_mainpage']['01_mainpage_menu_list']    = 'mainpage.php?do=list';
+$modules['04_mainpage']['02_mainpage_menu_add']    = 'mainpage.php?do=add';
+
 // $modules['02_cat_and_goods']['05_comment_manage']   = 'comment_manage.php?act=list';
 // $modules['02_cat_and_goods']['06_goods_brand_list'] = 'brand.php?act=list';
 // $modules['02_cat_and_goods']['08_goods_type']       = 'goods_type.php?act=manage';

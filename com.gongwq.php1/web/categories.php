@@ -101,7 +101,18 @@ for ($i = 0; $i < $result_cats->num_rows; $i++) {
 	$idx_cat ++;
 }
 
-//
+//读取菜单项目
+$result = $db->selectAll('navis');
+$navis = array();
+for ($i = 0; $i < $result->num_rows; $i++) {
+	$tem = $result->fetch_assoc();
+	$cat_res = 	$db->getCategory($tem['cat_id']);
+	$cat_res_tem = $cat_res->fetch_assoc();
+	$navis[$i]['name'] = $cat_res_tem['cat_name'];
+	$navis[$i]['link'] = 'categories.php?id=' . $cat_res_tem['cat_id'];
+}
+
+$smarty->assign('navis', $navis);
 $smarty->assign('breadcrumb_top', $breadcrumb_top);
 $smarty->assign('breadcrumb', $breadcrumb);
 $smarty->assign('cat_tree', $cat_tree);
