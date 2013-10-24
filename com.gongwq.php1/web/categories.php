@@ -34,11 +34,13 @@ if (!isset($cat_id)) {
 $page = 0;
 $amount = 12;
 
-//filter 参数
-$brand = isset($_REQUEST['bd_id']) ? intval($_REQUEST['bd_id']) : '0';
+//读取brand参数
+$brand_id = isset($_REQUEST['bd']) ? intval($_REQUEST['bd']) : '0';
 
 //读取items
-$sql_items = 'SELECT i.it_id, i.it_name, i.it_sn, i.it_price, i.it_quant, i.img_id FROM mydb.items AS i WHERE cat_id=' . $cat_id . ' ';
+$sql_items = 'SELECT i.it_id, i.it_name, i.it_sn, i.it_price, i.it_quant, i.img_id FROM mydb.items AS i 
+			  WHERE cat_id=' . $cat_id . ' ' .
+			  'AND brand_id=' . $brand_id . ' ';
 $result_items = $db->selectLimit($sql_items, $amount, $page);
 $items = array();
 for ($i = 0; $i < $result_items->num_rows; $i++) {

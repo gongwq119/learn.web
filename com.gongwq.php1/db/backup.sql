@@ -132,7 +132,7 @@ CREATE TABLE `items` (
   `is_on_sale` tinyint(3) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`it_id`),
   UNIQUE KEY `id_UNIQUE` (`it_id`,`it_name`)
-) ENGINE=MyISAM AUTO_INCREMENT=123 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=125 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -141,6 +141,7 @@ CREATE TABLE `items` (
 
 LOCK TABLES `items` WRITE;
 /*!40000 ALTER TABLE `items` DISABLE KEYS */;
+INSERT INTO `items` VALUES (124,'000002','内招按钮',120,'<p>请编辑商品描述</p>\r\n',57,3,0,100,0,'',0,1),(123,'000001','外招按钮',12,'<p>请编辑商品描述</p>\r\n',57,1,0,100,64,'',0,1);
 /*!40000 ALTER TABLE `items` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -158,7 +159,7 @@ CREATE TABLE `items_images` (
   `thumb_url` varchar(255) NOT NULL DEFAULT '',
   `large_url` varchar(255) NOT NULL,
   PRIMARY KEY (`img_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=65 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -167,7 +168,7 @@ CREATE TABLE `items_images` (
 
 LOCK TABLES `items_images` WRITE;
 /*!40000 ALTER TABLE `items_images` DISABLE KEYS */;
-INSERT INTO `items_images` VALUES (60,80,'/upload/201307/stand/1374467683800549716.jpg','/upload/201307/thumb/1374467683285674089.jpg','/upload/201307/large/1374467683232423320.jpg'),(59,80,'/upload/201307/stand/1374467667507070614.jpg','/upload/201307/thumb/1374467667329674125.jpg','/upload/201307/large/1374467668133814030.jpg'),(61,82,'/upload/201308/stand/1377148938621220246.jpg','/upload/201308/thumb/1377148938976117910.jpg','/upload/201308/large/1377148938899810325.jpg'),(62,2,'/upload/201308/stand/1377151252899018795.jpg','/upload/201308/thumb/1377151252653575490.jpg','/upload/201308/large/1377151252711218018.jpg'),(63,2,'/upload/201308/stand/1377151252872261033.jpg','/upload/201308/thumb/1377151252991654860.jpg','/upload/201308/large/1377151252805646964.jpg');
+INSERT INTO `items_images` VALUES (60,80,'/upload/201307/stand/1374467683800549716.jpg','/upload/201307/thumb/1374467683285674089.jpg','/upload/201307/large/1374467683232423320.jpg'),(59,80,'/upload/201307/stand/1374467667507070614.jpg','/upload/201307/thumb/1374467667329674125.jpg','/upload/201307/large/1374467668133814030.jpg'),(61,82,'/upload/201308/stand/1377148938621220246.jpg','/upload/201308/thumb/1377148938976117910.jpg','/upload/201308/large/1377148938899810325.jpg'),(62,2,'/upload/201308/stand/1377151252899018795.jpg','/upload/201308/thumb/1377151252653575490.jpg','/upload/201308/large/1377151252711218018.jpg'),(63,2,'/upload/201308/stand/1377151252872261033.jpg','/upload/201308/thumb/1377151252991654860.jpg','/upload/201308/large/1377151252805646964.jpg'),(64,123,'/upload/201310/stand/1381707832364703344.jpg','/upload/201310/thumb/1381707832247063356.jpg','/upload/201310/large/1381707832555743062.jpg');
 /*!40000 ALTER TABLE `items_images` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -179,10 +180,10 @@ DROP TABLE IF EXISTS `navis`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `navis` (
-  `navi_id` int(11) NOT NULL,
+  `navi_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `cat_id` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`navi_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -191,6 +192,7 @@ CREATE TABLE `navis` (
 
 LOCK TABLES `navis` WRITE;
 /*!40000 ALTER TABLE `navis` DISABLE KEYS */;
+INSERT INTO `navis` VALUES (1,58),(2,56),(3,57),(4,55);
 /*!40000 ALTER TABLE `navis` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -203,4 +205,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-09-05 17:02:24
+-- Dump completed on 2013-10-24 18:14:30

@@ -12,7 +12,7 @@ if ($_REQUEST['do'] == 'list')
 	$amount = 15;
 
 	//读取数据库
-	$sql = 'SELECT c.cat_id, c.cat_name, c.parent_id FROM mydb.categories AS c ';
+	$sql = 'SELECT c.cat_id, c.cat_name, c.parent_id FROM mydb.categories AS c';
 	$page_count = floor($db->getRowNumber($sql)/$amount) + 1;
 	$result = $db->selectLimit($sql, $amount, $page);
 	$cats = array();
