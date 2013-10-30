@@ -25,7 +25,14 @@ $(document).ready(function() {
 	});
 	// hide all and show current cat 
 	$(".exp_btn").click();
-	$("a[name='<{$current_cat}>']").parent().find(".exp_btn").click();
+	$("a[name='<{$current_cat.name}>']").parent().find(".exp_btn").click();
+	// color the current brand tag
+	if (<{$current_brand}> == 0) {
+		$("#default_bd").css({"background-color":"blue", "color":"#fff"});
+	} else {
+		var bd_id = "bd_" + <{$current_brand}>;
+		$("#bd_<{$current_brand}>").css({"background-color":"blue", "color":"#fff"});
+	}
 });
 </script>
 </head>
@@ -63,8 +70,10 @@ $(document).ready(function() {
 					<div class="sf_c">
 						<div id="filter_left" align="right">品牌:&nbsp&nbsp&nbsp&nbsp</div>
 						<div id="filter_right">
-							<div id="filter_ops"><a>abc</a></div>
-							<div id="filter_ops"><a>abc</a></div>
+							<div id="filter_ops"><a id="default_bd" href="categories.php?id=<{$current_cat.id}>">不限</a></div>
+							<{foreach $brands as $brand}>
+							<div id="filter_ops"><a id="bd_<{$brand.id}>" href="categories.php?id=<{$current_cat.id}>&bd=<{$brand.id}>"><{$brand.name}></a></div>
+							<{/foreach}>
 							<div class="clear"></div>
 						</div>
 						<div class="clear"></div>

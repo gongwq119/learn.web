@@ -39,8 +39,13 @@ $brand_id = isset($_REQUEST['bd']) ? intval($_REQUEST['bd']) : '0';
 
 //读取items
 $sql_items = 'SELECT i.it_id, i.it_name, i.it_sn, i.it_price, i.it_quant, i.img_id FROM mydb.items AS i 
-			  WHERE cat_id=' . $cat_id . ' ' .
-			  'AND brand_id=' . $brand_id . ' ';
+			  WHERE cat_id=' . $cat_id . ' ';
+			  
+if ($brand_id != 0) 
+{
+	$sql_items = $sql_items . 'AND brand_id=' . $brand_id . ' ';
+}
+
 $result_items = $db->selectLimit($sql_items, $amount, $page);
 $items = array();
 for ($i = 0; $i < $result_items->num_rows; $i++) {
@@ -75,6 +80,7 @@ if ($cat['parent_id'] != 0) {
 	$cat_name = $cat['cat_name'];
 }
 $breadcrumb_top = array('name'=>$cat_name, 'url'=>"categories.php?id=$cat_id");
+$current_cat = array('id'=>$cat_id, 'name'=>$cat_name);
 
 // set cat tree
 $cat_tree = array();// key(number)=> val(f:xxx,s:xxx); xxx is array(name:'',url:'')
@@ -114,11 +120,22 @@ for ($i = 0; $i < $result->num_rows; $i++) {
 	$navis[$i]['link'] = 'categories.php?id=' . $cat_res_tem['cat_id'];
 }
 
+// 读取brand
+$result_bd = $db->selectAll('brands');
+$brands = array();
+for ($i = 0; $i < $result_bd->num_rows; $i++) {
+	$tem = $result_bd->fetch_assoc();
+	$brands[$i]['id'] = $tem['brand_id'];
+	$brands[$i]['name'] = $tem['brand_name'];
+}
+
 $smarty->assign('navis', $navis);
 $smarty->assign('breadcrumb_top', $breadcrumb_top);
 $smarty->assign('breadcrumb', $breadcrumb);
 $smarty->assign('cat_tree', $cat_tree);
-$smarty->assign('current_cat', $cat_name);
+$smarty->assign('current_cat', $current_cat);
+$smarty->assign('brands', $brands);
+$smarty->assign('current_brand', $brand_id);
 $smarty->assign('items',$items);
 $smarty->display(ROOT_PATH . '/smarty/templates/categories.tpl');
 
